@@ -6,6 +6,10 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="CarRentalProject" />
+          <element id="jpa-descriptors" facet="CarRentalProject/jpa/JPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="application" name="hibernate-core-5.4.11.Final" />
         </element>
       </element>
     </root>
