@@ -1,0 +1,72 @@
+@import url('global.css');
+
+h1{
+    font-family: 'Archivo Black', sans-serif;
+}
+
+a{
+    color: #eee;
+}
+.header{
+   background-color: #121212;
+    height: 100vh;
+    background-position: center;
+}
+
+.header-h1{
+    color: #FF4C16;
+}
+
+.header-h2{
+    color: #eee;
+    font-weight: bolder;
+}
+
+.red-btn{
+    background-color: #FF4C16;
+    color: #eee;
+    border: 0 !important;
+    padding: 1em 3em;
+}
+
+.header-container{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+}
+.red-container{
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 5%;
+    background-color: #FF4C16;
+}
+
+.reg-btn{
+    width: 100%;
+    -webkit-box-shadow: 16px 31px 37px -20px rgba(0,0,0,0.75) !important;
+    -moz-box-shadow: 16px 31px 37px -20px rgba(0,0,0,0.75) !important;
+    box-shadow: 16px 31px 37px -20px rgba(0,0,0,0.75) !important;
+    border: 2px solid #eeeeee !important;
+    border-radius: 8px;
+    background-color: #FF4C16;
+
+}
+
+.header-row{
+    padding-top: 5em;
+
+}
+
+h6{
+    font-size: 30px;
+    color: #FF4C16;
+    font-family: 'Muli', sans-serif !important;
+    letter-spacing: 1px;
+}
+
+.big-h1{
+    color: #eeeeee;
+    font-size: 70px;
+    line-height: 50px;
+
+}
