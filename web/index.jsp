@@ -53,7 +53,11 @@
             <div class="col">
                 <h1 class="header-h1">Lorem Ipsum</h1>
                 <h2 class="header-h2">30% SALE</h2>
-                <button class="red-btn">MORE</button>
+                <div class="row">
+                        <button class="red-btn" onclick="location.href='${pageContext.request.contextPath}/pages/login.jsp'">LOGIN</button>
+                        <button class="white-btn" style="margin-left: 1em" onclick="location.href='${pageContext.request.contextPath}/pages/registration.jsp'">REGISTER</button>
+
+                </div>
             </div>
         </div>
     </div>

@@ -29,6 +29,13 @@ a{
     padding: 1em 3em;
 }
 
+.white-btn{
+    background-color: #eee;
+    color: #FF4C16;
+    border: 0 !important;
+    padding: 1em 3em;
+}
+
 .header-container{
     padding-left: 10%;
     padding-right: 10%;

@@ -1,1 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Muli&display=swap');
+::-webkit-scrollbar {
+    height: 1em;
+    background-color: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffe600;
+    border-radius: 10px;
+}
