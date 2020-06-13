@@ -10,9 +10,8 @@
     <title>Car Rental Company | Welcome</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
@@ -121,8 +120,8 @@
     <div class="red-container">
         <div class="row">
             <div class="col">
-                <form action="index.jsp" method="get">
-                    <select name="carBrandId" class="form-control form-control-lg" onchange="this.form.submit()">
+                <form action="index.jsp"  method="get">
+                    <select name="carBrandId" id="carBrandId" class="form-control form-control-lg" onclick="selectCarBrand();"  onchange="this.form.submit()">
                         <% for (int i = 0; i < carBrandList.size(); i += 1) { %>
 
                         <option value="<%= carBrandList.get(i).getId() %>"><%=carBrandList.get(i).getTitle()%>
@@ -135,7 +134,7 @@
                 </form>
             </div>
             <div class="col">
-                <select name="carModel" id="carModel" class="form-control form-control-lg" onchange="f()">
+                <select name="carModel" id="carModel" class="form-control form-control-lg">
                     <% for (int i = 0; i < filtered.size(); i += 1) { %>
 
                     <option value="<%= filtered.get(i).getId() %>"><%=filtered.get(i).getTitle()%>
