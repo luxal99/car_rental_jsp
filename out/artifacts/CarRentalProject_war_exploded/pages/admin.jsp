@@ -5,6 +5,14 @@
 <%@ page import="app.entity.CarModel" %>
 <%@ page import="app.dao.VehicleDAO" %>
 <%@ page import="app.entity.Vehicle" %>
+<%@ page import="app.dao.AdminDAO" %>
+<%@ page import="app.entity.Admin" %>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="app.dto.CountCarModelDTO" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -29,6 +37,7 @@
     CarBrandDAO carBrandDAO = new CarBrandDAO(CarBrand.class);
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
+    AdminDAO adminDAO = new AdminDAO(Admin.class);
 
     List<CarBrand> carBrandList = carBrandDAO.getAll();
     List<CarModel> carModelList = carModelDAO.getAll();
@@ -36,14 +45,51 @@
     Integer numberOfCarModels = carBrandDAO.getAll().size();
     Integer numberOfRegisteredCar = vehicleDAO.getAll().size();
 
+    String company = adminDAO.findById(1).getFullName();
 
+    request.setAttribute("company", company);
     request.setAttribute("carBrandList", carBrandList);
     request.setAttribute("numberOfCarModels", numberOfCarModels);
+    request.setAttribute("numberOfRegisteredCar", numberOfRegisteredCar);
+
+%>
+
+<%
+
+    Gson gsonObj = new Gson();
+    Map<Object, Object> map = null;
+    List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
+    List<CountCarModelDTO> data = vehicleDAO.countVehicleByCarModel();
+
+    for (CountCarModelDTO dto :
+            data) {
+        map = new HashMap<Object, Object>();
+        map.put("label", dto.getCarModelTitle());
+        map.put("y", dto.getValue());
+        list.add(map);
+    }
+
+
+    String dataPoints = gsonObj.toJson(list);
+
 
 %>
 <div class="row">
     <div class="col-3 menu">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <div style="padding-top: 2em">
+            <div class="row">
+                <div class="col text-right">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/soy-smile-249718.appspot.com/o/Avis-Logo.png?alt=media&token=3bad39c3-4e72-4de1-a4fa-c39dc175b7e7"
+                         class="img-fluid" width="150px">
+                </div>
+                <div class="col text-left">
+                    <h4><%=company%>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="nav flex-column nav-pills" style="padding-top: 2em" id="v-pills-tab" role="tablist"
+             aria-orientation="vertical">
             <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
                aria-controls="v-pills-home" aria-selected="true">Clients</a>
             <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
@@ -96,6 +142,14 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row text-center" style="padding-top: 2em">
+                    <div class="col-sm chart-container text-left">
+                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                    </div>
+                    <div class="col-sm chart-container text-left">
+                        <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
                     </div>
                 </div>
             </div>
@@ -205,5 +259,44 @@
     </div>
 </div>
 </div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2", // "light1", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Count vehicle by car model"
+            },
+            data: [{
+                type: "pie",
+                toolTipContent: "<b>{label}</b>: {y}%",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: <%out.print(dataPoints);%>
+            }]
+        });
+        var chart2 = new CanvasJS.Chart("chartContainer1", {
+            theme: "light2", // "light1", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Typical Day"
+            },
+            data: [{
+                type: "pie",
+                toolTipContent: "<b>{label}</b>: {y}%",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: <%out.print(dataPoints);%>
+            }]
+        });
+        chart.render();
+        chart2.render();
+
+    }
+</script>
 </body>
 </html>

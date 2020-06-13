@@ -48,9 +48,9 @@ public class Vehicle implements Serializable {
     private Double power;
     @Column(name = "mileage")
     private Integer mileage;
-    @Column(name = "price_per_day")
-    private String regNum;
     @Column(name = "reg_num")
+    private String regNum;
+    @Column(name = "price_per_day")
     private Double pricePerDay;
     @OneToMany(mappedBy = "idVehicle")
     private List<Reservation> reservationList;
