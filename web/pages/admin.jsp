@@ -135,10 +135,13 @@
                     <div class="col">
                         <div type="button" class="btn car-brand-div" data-toggle="modal" data-target="#exampleModal">
                             <div class="row">
-                                <div class="col"></div>
                                 <div class="col">
-                                    <img src="http://localhost:8080/home/assets/img/car-icon.png" class="img-fluid"
-                                         width="50px">
+                                    <h4>Number of registered cars</h4>
+                                    <h3>${numberOfRegisteredCar}</h3>
+                                </div>
+                                <div class="col" style="padding-top: 1em">
+                                    <img src="http://localhost:8080/home/assets/img/client.png" class="img-fluid"
+                                         width="80px">
                                 </div>
                             </div>
                         </div>
