@@ -1,6 +1,10 @@
 <%@ page import="app.entity.CarBrand" %>
 <%@ page import="app.dao.CarBrandDAO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="app.dao.CarModelDAO" %>
+<%@ page import="app.entity.CarModel" %>
+<%@ page import="app.dao.VehicleDAO" %>
+<%@ page import="app.entity.Vehicle" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -25,6 +29,15 @@
     CarBrandDAO carBrandDAO = new CarBrandDAO(CarBrand.class);
     List<CarBrand> carBrandList = carBrandDAO.getAll();
     request.setAttribute("carBrandList", carBrandList);
+
+    CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
+    Integer numberOfCarModels = carBrandDAO.getAll().size();
+
+    VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
+    Integer numberOfRegisteredCar = vehicleDAO.getAll().size();
+
+    request.setAttribute("numberOfCarModels", numberOfCarModels);
+
 %>
 <div class="row">
     <div class="col-3 menu">
@@ -46,10 +59,13 @@
                     <div class="col">
                         <div type="button" class="btn car-brand-div" data-toggle="modal" data-target="#exampleModal">
                             <div class="row">
-                                <div class="col"></div>
-                                <div class="col">
-                                    <img src="http://localhost:8080/home/assets/img/car-icon.png" class="img-fluid"
-                                         width="50px">
+                                <div class="col car">
+                                    <h4>Number of car models</h4>
+                                    <h3>${numberOfCarModels}</h3>
+                                </div>
+                                <div class="col" style="padding-top: 1em">
+                                    <img src="http://localhost:8080/home/assets/img/caricon.png" class="img-fluid"
+                                         width="80px">
                                 </div>
                             </div>
                         </div>
@@ -57,10 +73,13 @@
                     <div class="col">
                         <div type="button" class="btn car-brand-div" data-toggle="modal" data-target="#exampleModal">
                             <div class="row">
-                                <div class="col"></div>
                                 <div class="col">
-                                    <img src="http://localhost:8080/home/assets/img/car-icon.png" class="img-fluid"
-                                         width="50px">
+                                    <h4>Number of registered cars</h4>
+                                    <h3>${numberOfRegisteredCar}</h3>
+                                </div>
+                                <div class="col" style="padding-top: 1em">
+                                    <img src="http://localhost:8080/home/assets/img/registration.png" class="img-fluid"
+                                         width="80px">
                                 </div>
                             </div>
                         </div>
@@ -102,7 +121,7 @@
                                 <select name="carBrand" class="form-control form-control-lg">
                                     <% for (int i = 0; i < carBrandList.size(); i += 1) { %>
 
-                                    <option value="<%= carBrandList.get(i) %>"><%=carBrandList.get(i).getTitle()%>
+                                    <option value="<%= carBrandList.get(i).getId() %>"><%=carBrandList.get(i).getTitle()%>
                                     </option>
 
                                     <% }
@@ -111,19 +130,60 @@
                                 </select>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Car Model</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                    <input type="text" class="form-control" name="title" id="exampleInputPassword1"
                                            placeholder="Model">
                                 </div>
                             </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div></form>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="${pageContext.request.contextPath}/vehicle">
+                        <div class="form-group">
+                            <select name="carBrand" class="form-control form-control-lg">
+                                <% for (int i = 0; i < carBrandList.size(); i += 1) { %>
+
+                                <option value="<%= carBrandList.get(i).getId() %>"><%=carBrandList.get(i).getTitle()%>
+                                </option>
+
+                                <% }
+
+                                %>
+                            </select>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Car Model</label>
+                                <input type="text" class="form-control" name="title"
+                                       placeholder="Model">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 </html>

@@ -27,7 +27,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="CarRentalProject" />
+          <factory-entry name="CarRentalProject" value="fa78022b-afb8-4eee-9f2d-09e422fcb1bc" />
           <factory-entry name="Entities" value="c1bcb48d-62d3-4555-88fe-f673584f66aa" />
         </datasource-mapping>
         <naming-strategy-map />

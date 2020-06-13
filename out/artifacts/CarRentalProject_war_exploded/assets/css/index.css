@@ -29,6 +29,13 @@ a{
     padding: 1em 3em;
 }
 
+.white-btn{
+    background-color: #eee;
+    color: #FF4C16;
+    border: 0 !important;
+    padding: 1em 3em;
+}
+
 .header-container{
     padding-left: 10%;
     padding-right: 10%;
@@ -69,4 +76,15 @@ h6{
     font-size: 70px;
     line-height: 50px;
 
+}
+
+
+::-webkit-scrollbar {
+    height: 1em;
+    background-color: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffe600;
+    border-radius: 10px;
 }
