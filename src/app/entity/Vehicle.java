@@ -49,6 +49,8 @@ public class Vehicle implements Serializable {
     @Column(name = "mileage")
     private Integer mileage;
     @Column(name = "price_per_day")
+    private String regNum;
+    @Column(name = "reg_num")
     private Double pricePerDay;
     @OneToMany(mappedBy = "idVehicle")
     private List<Reservation> reservationList;
@@ -81,6 +83,14 @@ public class Vehicle implements Serializable {
 
     public Integer getMileage() {
         return mileage;
+    }
+
+    public String getRegNum() {
+        return regNum;
+    }
+
+    public void setRegNum(String regNum) {
+        this.regNum = regNum;
     }
 
     public void setMileage(Integer mileage) {

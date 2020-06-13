@@ -27,15 +27,17 @@
 
 <%
     CarBrandDAO carBrandDAO = new CarBrandDAO(CarBrand.class);
-    List<CarBrand> carBrandList = carBrandDAO.getAll();
-    request.setAttribute("carBrandList", carBrandList);
-
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
-    Integer numberOfCarModels = carBrandDAO.getAll().size();
-
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
+
+    List<CarBrand> carBrandList = carBrandDAO.getAll();
+    List<CarModel> carModelList = carModelDAO.getAll();
+
+    Integer numberOfCarModels = carBrandDAO.getAll().size();
     Integer numberOfRegisteredCar = vehicleDAO.getAll().size();
 
+
+    request.setAttribute("carBrandList", carBrandList);
     request.setAttribute("numberOfCarModels", numberOfCarModels);
 
 %>
@@ -71,7 +73,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div type="button" class="btn car-brand-div" data-toggle="modal" data-target="#exampleModal">
+                        <div type="button" class="btn car-brand-div" data-toggle="modal" data-target="#vehicleModal">
                             <div class="row">
                                 <div class="col">
                                     <h4>Number of registered cars</h4>
@@ -137,13 +139,71 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn red-btn">Save changes</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="${pageContext.request.contextPath}/vehicle">
+                        <div class="form-group">
+                            <select name="idCarModel" class="form-control form-control-lg">
+                                <% for (int i = 0; i < carModelList.size(); i += 1) { %>
+
+                                <option value="<%= carModelList.get(i).getId() %>"><%= carModelList.get(i).getIdCarBrand().getTitle() + " " + carModelList.get(i).getTitle()%>
+                                </option>
+
+                                <% }
+
+                                %>
+                            </select>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Power</label>
+                                <input type="text" class="form-control" name="vehiclePower"
+                                       placeholder="Model">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Vehicle Mileage</label>
+                                <input type="text" class="form-control" name="vehicleMileage"
+                                       placeholder="Model">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Reg No.</label>
+                                <input type="text" class="form-control" name="vehicleReg"
+                                       placeholder="Model">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Price per day</label>
+                                <input type="text" class="form-control" name="vehiclePrice"
+                                       placeholder="Model">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn red-btn">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 </html>
