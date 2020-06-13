@@ -44,6 +44,9 @@ public class Role implements Serializable {
     @OneToMany(mappedBy = "role")
     private List<User> userList;
 
+    public Role() {
+    }
+
     public Role(Class<Role> roleClass) {
     }
 

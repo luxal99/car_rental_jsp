@@ -1,6 +1,8 @@
 package app.dao;
 
+import app.config.DBConfig;
 import app.entity.User;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -27,5 +29,13 @@ public class UserDAO extends AbstractDAOImpl<User> {
     @Override
     public String update(User entity) {
         return super.update(entity);
+    }
+
+    public User findByUsername(String username) {
+        Session session = DBConfig.getSessionFactory().openSession();
+        org.hibernate.query.Query query = session.createNamedQuery("User.findByUsername");
+        query.setString("username", username);
+        User user = (User) query.getResultList().get(0);
+        return user;
     }
 }
