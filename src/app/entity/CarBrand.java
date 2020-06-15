@@ -98,7 +98,7 @@ public class CarBrand implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.mavenproject3.CarBrand[ id=" + id + " ]";
+        return "com.mycompany.mavenproject5.CarBrand[ id=" + id + " ]";
     }
     
 }

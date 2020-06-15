@@ -54,6 +54,7 @@
 
 
         List<CarModel> carModelList = carModelDAO.getAll();
+        filtered.clear();
         for (CarModel carModel :
                 carModelList) {
             if (carModel.getIdCarBrand().getId() == id) {

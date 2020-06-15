@@ -21,6 +21,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
+    <script src="../assets/js/upload.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
@@ -215,7 +216,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="${pageContext.request.contextPath}/vehicle">
+                    <form method="POST" enctype="multipart/form-data" action="http://localhost:3000/upload">
                         <div class="form-group">
                             <select name="idCarModel" class="form-control form-control-lg">
                                 <% for (int i = 0; i < carModelList.size(); i += 1) { %>
@@ -252,10 +253,15 @@
                             </div>
                         </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn red-btn">Save changes</button>
                 </div>
+
+                    <input type="file" name="image">
+                    <br/><br/>
+                    <input type="submit" value="Submit">
                 </form>
             </div>
         </div>

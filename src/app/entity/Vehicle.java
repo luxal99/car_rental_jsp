@@ -6,7 +6,6 @@
 package app.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,13 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "vehicle")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Vehicle.findAll", query = "SELECT v FROM Vehicle v"),
-    @NamedQuery(name = "Vehicle.findById", query = "SELECT v FROM Vehicle v WHERE v.id = :id"),
-    @NamedQuery(name = "Vehicle.findByPower", query = "SELECT v FROM Vehicle v WHERE v.power = :power"),
-    @NamedQuery(name = "Vehicle.findByMileage", query = "SELECT v FROM Vehicle v WHERE v.mileage = :mileage"),
-    @NamedQuery(name = "Vehicle.findByPricePerDay", query = "SELECT v FROM Vehicle v WHERE v.pricePerDay = :pricePerDay")})
 public class Vehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,12 +38,12 @@ public class Vehicle implements Serializable {
     private Double power;
     @Column(name = "mileage")
     private Integer mileage;
-    @Column(name = "reg_num")
-    private String regNum;
     @Column(name = "price_per_day")
     private Double pricePerDay;
-    @OneToMany(mappedBy = "idVehicle")
-    private List<Reservation> reservationList;
+    @Column(name = "reg_num")
+    private String regNum;
+    @Column(name = "image")
+    private String image;
     @JoinColumn(name = "id_car_model", referencedColumnName = "id")
     @ManyToOne
     private CarModel idCarModel;
@@ -85,14 +75,6 @@ public class Vehicle implements Serializable {
         return mileage;
     }
 
-    public String getRegNum() {
-        return regNum;
-    }
-
-    public void setRegNum(String regNum) {
-        this.regNum = regNum;
-    }
-
     public void setMileage(Integer mileage) {
         this.mileage = mileage;
     }
@@ -105,13 +87,20 @@ public class Vehicle implements Serializable {
         this.pricePerDay = pricePerDay;
     }
 
-    @XmlTransient
-    public List<Reservation> getReservationList() {
-        return reservationList;
+    public String getRegNum() {
+        return regNum;
     }
 
-    public void setReservationList(List<Reservation> reservationList) {
-        this.reservationList = reservationList;
+    public void setRegNum(String regNum) {
+        this.regNum = regNum;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public CarModel getIdCarModel() {
@@ -144,7 +133,7 @@ public class Vehicle implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.mavenproject3.Vehicle[ id=" + id + " ]";
+        return "com.mycompany.mavenproject5.Vehicle[ id=" + id + " ]";
     }
     
 }

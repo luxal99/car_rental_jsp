@@ -116,7 +116,7 @@ public class CarModel implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.mavenproject3.CarModel[ id=" + id + " ]";
+        return "com.mycompany.mavenproject5.CarModel[ id=" + id + " ]";
     }
     
 }
