@@ -41,6 +41,11 @@
         carModelFilterSearch(carBrandId);
     }
 
+    if (request.getParameter("idCarModel") != null) {
+        Integer idCarModel = Integer.valueOf(request.getParameter("idCarModel"));
+        request.setAttribute("idCarModel", idCarModel);
+    }
+
 
 %>
 
@@ -119,10 +124,13 @@
         </div>
     </div>
     <div class="red-container">
-        <div class="row">
-            <div class="col">
-                <form action="index.jsp"  method="get">
-                    <select name="carBrandId" id="carBrandId" class="form-control form-control-lg" onclick="selectCarBrand();"  onchange="this.form.submit()">
+        <form id="redirectForm" method="post" action="${pageContext.request.contextPath}/pages/reservation.jsp"></form>
+        <form name="vehicleForm" action="index.jsp" method="get">
+            <div class="row">
+
+                <div class="col">
+                    <select name="carBrandId" id="carBrandId" class="form-control form-control-lg"
+                            onclick="selectCarBrand();" onchange="this.form.submit()">
                         <% for (int i = 0; i < carBrandList.size(); i += 1) { %>
 
                         <option value="<%= carBrandList.get(i).getId() %>"><%=carBrandList.get(i).getTitle()%>
@@ -133,35 +141,39 @@
                         %>
                     </select>
 
-            </div>
-            <div class="col">
-                <select name="carModel" id="carModel" class="form-control form-control-lg">
-                    <% for (int i = 0; i < filtered.size(); i += 1) { %>
+                </div>
+                <div class="col">
+                    <select name="idCarModel" id="carModel" onchange="this.form.submit()"
+                            class="form-control form-control-lg">
+                        <% for (int i = 0; i < filtered.size(); i += 1) { %>
 
-                    <option value="<%= filtered.get(i).getId() %>"><%=filtered.get(i).getTitle()%>
-                    </option>
+                        <option value="<%= filtered.get(i).getId() %>"><%=filtered.get(i).getTitle()%>
+                        </option>
 
-                    <% }
+                        <% }
 
-                    %>
-                </select>
+                        %>
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="date" name="startDate" form="redirectForm" class="form-control">
+                </div>
+                <div class="col">
+                    <input type="date" form="redirectForm" name="endDate" class="form-control">
+                </div>
+                <div class="col">
+                    <input type="hidden" name="idCarModel" value="${idCarModel}" form="redirectForm">
+                    <button class="reg-btn btn" form="redirectForm" type="submit">MORE</button>
+                </div>
+
             </div>
-            <div class="col">
-                <input type="date" class="form-control">
-            </div>
-            <div class="col">
-                <input type="date" class="form-control">
-            </div>
-            <div class="col">
-                <button class="reg-btn btn">MORE</button>
-            </div>
-            </form>
-        </div>
+
+        </form>
     </div>
 </div>
 
 <%
-    
+
 
 %>
 </body>

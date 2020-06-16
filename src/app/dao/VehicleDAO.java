@@ -60,12 +60,13 @@ public class VehicleDAO extends AbstractDAOImpl<Vehicle> {
         return countCarModelDTOList;
     }
 
-    public List<Vehicle> getListOfVehicleByCar(Integer id) {
+    public List<Vehicle> findAllVehicleByCarModel(Integer idCarModel) {
 
-        List<Vehicle> vehicleList = new ArrayList<>();
-        for (Vehicle vehicle :
-                getAll()) {
-            if (vehicle.getIdCarModel().getId() == id) {
+      List<Vehicle> vehicleList = new ArrayList<>();
+        for (Vehicle vehicle
+                :getAll()
+             ) {
+            if (vehicle.getIdCarModel().getId() == idCarModel){
                 vehicleList.add(vehicle);
             }
         }
