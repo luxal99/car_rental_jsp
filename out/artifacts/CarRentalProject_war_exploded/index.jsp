@@ -57,7 +57,6 @@
 
     public List<CarModel> carModelFilterSearch(Integer id) {
 
-
         List<CarModel> carModelList = carModelDAO.getAll();
         filtered.clear();
         for (CarModel carModel :
