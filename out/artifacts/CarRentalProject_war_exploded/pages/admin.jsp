@@ -216,7 +216,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data" action="http://localhost:3000/upload">
+                    <form method="post" enctype="multipart/form-data" action="http://localhost:3000/upload">
                         <div class="form-group">
                             <select name="idCarModel" class="form-control form-control-lg">
                                 <% for (int i = 0; i < carModelList.size(); i += 1) { %>
@@ -252,17 +252,11 @@
                                        placeholder="Model">
                             </div>
                         </div>
+                        <input type="file" name="image">
+                        <br/><br/>
+                        <input type="submit" class="red-btn" value="Submit">
+                    </form>
                 </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn red-btn">Save changes</button>
-                </div>
-
-                    <input type="file" name="image">
-                    <br/><br/>
-                    <input type="submit" value="Submit">
-                </form>
             </div>
         </div>
     </div>

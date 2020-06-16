@@ -132,7 +132,7 @@
 
                         %>
                     </select>
-                </form>
+
             </div>
             <div class="col">
                 <select name="carModel" id="carModel" class="form-control form-control-lg">
@@ -155,9 +155,14 @@
             <div class="col">
                 <button class="reg-btn btn">MORE</button>
             </div>
-
+            </form>
         </div>
     </div>
 </div>
+
+<%
+    
+
+%>
 </body>
 </html>
