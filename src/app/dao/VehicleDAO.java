@@ -62,15 +62,40 @@ public class VehicleDAO extends AbstractDAOImpl<Vehicle> {
 
     public List<Vehicle> findAllVehicleByCarModel(Integer idCarModel) {
 
-      List<Vehicle> vehicleList = new ArrayList<>();
+        List<Vehicle> vehicleList = new ArrayList<>();
         for (Vehicle vehicle
-                :getAll()
-             ) {
-            if (vehicle.getIdCarModel().getId() == idCarModel){
+                : getAll()
+        ) {
+            if (vehicle.getIdCarModel().getId() == idCarModel) {
                 vehicleList.add(vehicle);
             }
         }
         return vehicleList;
+    }
+
+    public List<CountCarModelDTO> countAllVehicleByCarBrand() {
+
+        Session session = DBConfig.getSessionFactory().openSession();
+        String sql = "select count(cb.id),cb.title\n" +
+                "from vehicle\n" +
+                "         join car_model cm on vehicle.id_car_model = cm.id\n" +
+                "         join car_brand cb on cm.id_car_brand = cb.id\n" +
+                "group by cb.title;";
+
+        Query query = session.createSQLQuery(sql);
+
+        List<Object[]> objects = query.list();
+
+        List<CountCarModelDTO> countCarModelDTOList = new ArrayList<>();
+        for (Object[] row :
+                objects) {
+            CountCarModelDTO countCarModelDTO = new CountCarModelDTO();
+            countCarModelDTO.setValue(Integer.valueOf(row[0].toString()));
+            countCarModelDTO.setCarModelTitle(row[1].toString());
+
+            countCarModelDTOList.add(countCarModelDTO);
+        }
+        return countCarModelDTOList;
     }
 
 }

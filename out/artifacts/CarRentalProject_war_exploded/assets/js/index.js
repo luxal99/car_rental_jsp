@@ -6,4 +6,5 @@ function selectCarBrand() {
 
 window.onload = function () {
     document.getElementById('carBrandId').value = localStorage.getItem('carBrand');
+    document.getElementById('carModel').value = localStorage.getItem('carModel');
 }

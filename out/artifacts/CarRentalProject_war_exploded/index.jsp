@@ -18,7 +18,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
-    <script src="assets/js/index.js"></script>
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
@@ -129,7 +128,7 @@
 
                 <div class="col">
                     <select name="carBrandId" id="carBrandId" class="form-control form-control-lg"
-                            onclick="selectCarBrand();" onchange="this.form.submit()">
+                            onclick="this.form.submit()" onchange="selectCarBrand()">
                         <% for (int i = 0; i < carBrandList.size(); i += 1) { %>
 
                         <option value="<%= carBrandList.get(i).getId() %>"><%=carBrandList.get(i).getTitle()%>
@@ -142,8 +141,8 @@
 
                 </div>
                 <div class="col">
-                    <select name="idCarModel" id="carModel" onchange="this.form.submit()"
-                            class="form-control form-control-lg">
+                    <select name="idCarModel" id="carModel" class="form-control form-control-lg"
+                            onclick="this.form.submit()" onchange="carModelSelect()">
                         <% for (int i = 0; i < filtered.size(); i += 1) { %>
 
                         <option value="<%= filtered.get(i).getId() %>"><%=filtered.get(i).getTitle()%>
@@ -171,9 +170,25 @@
     </div>
 </div>
 
-<%
+<script>
+    function carModelSelect() {
+        const carModelList = document.getElementById("carModel");
+        const va = carModelList.options[carModelList.selectedIndex].value;
+        localStorage.setItem("carModel", va);
+    }
+
+    function selectCarBrand() {
+        const carBrandList = document.getElementById("carBrandId");
+        const value = carBrandList.options[carBrandList.selectedIndex].value;
+        localStorage.setItem("carBrand", value);
+    }
+
+    window.onload = function () {
+        document.getElementById('carBrandId').value = localStorage.getItem('carBrand');
+        document.getElementById('carModel').value = localStorage.getItem('carModel');
+    }
+</script>
 
 
-%>
 </body>
 </html>

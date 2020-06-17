@@ -73,6 +73,24 @@
 
     String dataPoints = gsonObj.toJson(list);
 
+    Gson carBrandGson = new Gson();
+    Map<Object, Object> carBrandMap = null;
+    List<Map<Object, Object>> mapArrayList = new ArrayList<Map<Object, Object>>();
+    List<CountCarModelDTO> carBrandData = vehicleDAO.countAllVehicleByCarBrand();
+
+    for (CountCarModelDTO dto :
+            carBrandData) {
+        carBrandMap = new HashMap<Object, Object>();
+        carBrandMap.put("label", dto.getCarModelTitle());
+        carBrandMap.put("y", dto.getValue());
+        mapArrayList.add(carBrandMap);
+    }
+
+
+    String carBrandDataPoint = carBrandGson.toJson(mapArrayList);
+
+
+
 
 %>
 <div class="row">
@@ -282,7 +300,7 @@
             }]
         });
         var chart2 = new CanvasJS.Chart("chartContainer1", {
-            theme: "light2", // "light1", "dark1", "dark2"
+            theme: "light1", // "light1", "dark1", "dark2"
             exportEnabled: true,
             animationEnabled: true,
             title: {
@@ -293,7 +311,7 @@
                 toolTipContent: "<b>{label}</b>: {y}%",
                 indexLabelFontSize: 16,
                 indexLabel: "{label} - {y}%",
-                dataPoints: <%out.print(dataPoints);%>
+                dataPoints: <%out.print(carBrandDataPoint);%>
             }]
         });
         chart.render();
@@ -301,5 +319,6 @@
 
     }
 </script>
+
 </body>
 </html>
