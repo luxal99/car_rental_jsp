@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
             assert password != null;
             if (user.getIdAdmin() != null && password.equals(req.getParameter("password"))) {
 
-                Cookie cookie = new Cookie("idBank", HashPassword.encrypt(String.valueOf(user.getIdAdmin().getId())));
+                Cookie cookie = new Cookie("idAdmin", HashPassword.encrypt(String.valueOf(user.getIdAdmin().getId())));
                 cookie.setPath(req.getContextPath() + "/pages/admin.jsp");
                 resp.addCookie(cookie);
                 resp.sendRedirect(req.getContextPath() + "/pages/admin.jsp");

@@ -30,7 +30,6 @@ public class VehicleServlet extends HttpServlet {
 
             VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
 
-
             if (req.getParameter("idVehicle").isEmpty()) {
                 CarModel carModel = carModelDAO.findById(Integer.valueOf(req.getParameter("idCarModel")));
                 vehicle.setIdCarModel(carModel);
@@ -40,6 +39,7 @@ public class VehicleServlet extends HttpServlet {
                 vehicle.setIdCarModel(vehicleDAO.findById(vehicle.getId()).getIdCarModel());
                 vehicleDAO.update(vehicle);
             }
+
             resp.sendRedirect(req.getContextPath() + "/pages/admin.jsp");
         } catch (Exception exception) {
             resp.sendRedirect(req.getContextPath() + "/pages/err.jsp");

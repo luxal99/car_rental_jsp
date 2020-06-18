@@ -21148,7 +21148,7 @@ KeyIdentifier [
 java.lang.NoClassDefFoundError: org/hibernate/cfg/Configuration
 	at app.config.DBConfig.getSessionFactory(DBConfig.java:15)
 	at app.dao.AbstractDAOImpl.save(AbstractDAOImpl.java:22)
-	at app.dao.ClienDAO.save(ClienDAO.java:15)
+	at app.dao.ClientDAO.save(ClienDAO.java:15)
 	at app.servlet.RegistrationServlet.doPost(RegistrationServlet.java:32)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:706)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:791)
@@ -22634,7 +22634,7 @@ KeyIdentifier [
 java.lang.NoClassDefFoundError: org/hibernate/cfg/Configuration
 	at app.config.DBConfig.getSessionFactory(DBConfig.java:15)
 	at app.dao.AbstractDAOImpl.save(AbstractDAOImpl.java:22)
-	at app.dao.ClienDAO.save(ClienDAO.java:15)
+	at app.dao.ClientDAO.save(ClienDAO.java:15)
 	at app.servlet.RegistrationServlet.doPost(RegistrationServlet.java:32)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:706)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:791)
@@ -24146,7 +24146,7 @@ java.lang.NoClassDefFoundError: net/bytebuddy/NamingStrategy$SuffixingRandom$Bas
 	at org.hibernate.cfg.Configuration.<init>(Configuration.java:118)
 	at app.config.DBConfig.getSessionFactory(DBConfig.java:15)
 	at app.dao.AbstractDAOImpl.save(AbstractDAOImpl.java:22)
-	at app.dao.ClienDAO.save(ClienDAO.java:15)
+	at app.dao.ClientDAO.save(ClienDAO.java:15)
 	at app.servlet.RegistrationServlet.doPost(RegistrationServlet.java:32)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:706)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:791)

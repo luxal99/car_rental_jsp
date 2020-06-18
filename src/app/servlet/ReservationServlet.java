@@ -1,6 +1,6 @@
 package app.servlet;
 
-import app.dao.ClienDAO;
+import app.dao.ClientDAO;
 import app.dao.ReservationDAO;
 import app.dao.VehicleDAO;
 import app.entity.Client;
@@ -19,7 +19,7 @@ public class ReservationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            ClienDAO clienDAO = new ClienDAO(Client.class);
+            ClientDAO clienDAO = new ClientDAO(Client.class);
             VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
             ReservationDAO reservationDAO = new ReservationDAO(Reservation.class);
 

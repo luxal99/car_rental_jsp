@@ -4,9 +4,9 @@ import app.entity.Client;
 
 import java.util.List;
 
-public class ClienDAO extends AbstractDAOImpl<Client> {
+public class ClientDAO extends AbstractDAOImpl<Client> {
 
-    public ClienDAO(Class<Client> entityClass) {
+    public ClientDAO(Class<Client> entityClass) {
         super(entityClass);
     }
 
