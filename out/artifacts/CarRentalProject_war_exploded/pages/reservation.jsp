@@ -34,11 +34,25 @@
             new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("startDate")).toInstant(),
             new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("endDate")).toInstant());
 
-    request.setAttribute("duration",duration);
+    request.setAttribute("duration", duration);
+    ;
 
     String image = null;
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
+
+    try {
+        ChronoUnit.DAYS.between(
+                new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("startDate")).toInstant(),
+                new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("endDate")).toInstant());
+    } catch (Exception e) {
+        response.sendRedirect(request.getContextPath());
+    }
+
+    if (duration < 0) {
+        response.sendRedirect(request.getContextPath());
+    }
+    request.setAttribute("duration", duration);
 
     CarModel carModel = carModelDAO.findById(Integer.valueOf(request.getParameter("idCarModel")));
 
@@ -98,7 +112,8 @@
                 </div>
                 <%} %>
 
-                <h2 style="padding-top: 1em">Total: <span style="color: #FF4C16">${duration * vehicle.pricePerDay}</span></h2>
+                <h2 style="padding-top: 1em">Total: <span
+                        style="color: #FF4C16">${duration * vehicle.pricePerDay}</span></h2>
                 <div>
                     <button class="red-btn" type="submit">Reserve</button>
                 </div>
