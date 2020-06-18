@@ -15,6 +15,7 @@
 <%@ page import="java.time.temporal.Temporal" %>
 <%@ page import="app.dao.ReservationDAO" %>
 <%@ page import="app.entity.Reservation" %>
+<%@ page import="app.dto.MostReservedVehicleDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -47,6 +48,9 @@
     ClientDAO clientDAO = new ClientDAO(Client.class);
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
+    ReservationDAO reservationDAO = new ReservationDAO(Reservation.class);
+
+    List<MostReservedVehicleDTO> mostReservedVehicleDTOList = reservationDAO.countMostReservedVehicles();
 
     Client loggedClient = new Client();
 
@@ -170,7 +174,7 @@
             <div class="col-sm text-right">
                 <img src="${image}" class="img-fluid">
             </div>
-            <div class="col-sm">
+            <div style="border-left: 1px solid #eee" class="col-sm">
 
                 <div class="row">
                     <div class="col">
@@ -215,7 +219,32 @@
                 </div>
             </div>
         </div>
+        <div class="vehicle-div" style="padding: 2em">
+            <div class="most-used-container">
+                <h2>Most popular cars
+                </h2>
+                <div style="height: 1px;background-color: #eee"></div>
+                <div class="row">
+                    <% for (MostReservedVehicleDTO mostReservedVehicleDTO :
+                            reservationDAO.countMostReservedVehicles()) { %>
+                    <div class="col">
+                        <div class="text-center">
+                            <img class="img-fluid" src="<%=mostReservedVehicleDTO.getImage()%>">
+                            <h3 class="h3-brand"><%=mostReservedVehicleDTO.getCarBrandTitle()%>
+                            </h3>
+                            <h3 class="h3-model"><%=mostReservedVehicleDTO.getCarModelTitle()%>
+                            </h3>
+                            <button class="red-btn">Choose</button>
+                        </div>
+                    </div>
+
+                    <%} %>
+
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <%--MODAL--%>

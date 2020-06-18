@@ -1,17 +1,11 @@
-<%@ page import="app.entity.CarBrand" %>
-<%@ page import="app.dao.CarBrandDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="app.dao.CarModelDAO" %>
-<%@ page import="app.entity.CarModel" %>
-<%@ page import="app.dao.VehicleDAO" %>
-<%@ page import="app.entity.Vehicle" %>
-<%@ page import="app.dao.AdminDAO" %>
-<%@ page import="app.entity.Admin" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="app.dto.CountCarModelDTO" %>
+<%@ page import="app.dao.*" %>
+<%@ page import="app.entity.*" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -35,6 +29,7 @@
 
 <%
     CarBrandDAO carBrandDAO = new CarBrandDAO(CarBrand.class);
+    ReservationDAO reservationDAO = new ReservationDAO(Reservation.class);
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
     AdminDAO adminDAO = new AdminDAO(Admin.class);
@@ -42,6 +37,7 @@
     List<CarBrand> carBrandList = carBrandDAO.getAll();
     List<CarModel> carModelList = carModelDAO.getAll();
     List<Vehicle> vehicleList = vehicleDAO.getAll();
+    List<Reservation> reservationList = reservationDAO.getAll();
 
     Integer numberOfCarModels = carBrandDAO.getAll().size();
     Integer numberOfRegisteredCar = vehicleDAO.getAll().size();
@@ -176,6 +172,41 @@
                     <div class="col-sm chart-container text-left">
                         <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
                     </div>
+                </div>
+                <div class="table-div" >
+                    <table class="table text-right" >
+                        <thead >
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Account Number</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        <% for (int i = reservationList.size() - 1; i > reservationList.size() - 5; i--) { %>
+
+                        <tr>
+                            <td><%= reservationList.get(i).getIdClient().getFullName() %>
+                            </td>
+                            <td><%= reservationList.get(i).getIdClient().getEmail()%>
+                            </td>
+                            <td><%= reservationList.get(i).getStartDate()%>
+                            </td>
+                            <td><%= reservationList.get(i).getEndDate() %>
+                            </td>
+                            <td><%= reservationList.get(i).getIdVehicle().getIdCarModel().getIdCarBrand().getTitle() + " " + reservationList.get(i).getIdVehicle().getIdCarModel().getTitle() + " " + reservationList.get(i).getIdVehicle().getPower()%>
+                            </td>
+                            <td><%=  reservationList.get(i).getTotal() %>
+                            </td>
+
+                        </tr>
+                        <% }
+                        %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -338,7 +369,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <form name="editForm" method="post" enctype="multipart/form-data" action="http://localhost:3000/upload">
+                    <form name="editForm" method="post" enctype="multipart/form-data"
+                          action="http://localhost:3000/upload">
                         <div class="form-group">
                             <div class="form-group">
 

@@ -55,10 +55,18 @@ h3 {
     border: 1px solid #eee;
 }
 
-.delete-btn{
+.delete-btn {
     background-color: red;
     padding: .5em;
     border-radius: 5px;
     border: 1px solid #eee;
     color: #eee;
+}
+
+.table-div {
+    padding: 1em;
+    margin-top: 5em;
+    -webkit-box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
 }
