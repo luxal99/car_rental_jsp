@@ -63,8 +63,9 @@ public class AbstractDAOImpl<T> implements AbstractDAO<T> {
     public String update(T entity) {
         Session session = DBConfig.getSessionFactory().openSession();
         org.hibernate.Transaction sessionTransaction = session.beginTransaction();
-        sessionTransaction.commit();
         session.update(entity);
+        session.flush();
+        sessionTransaction.commit();
         session.close();
         return "Updated";
     }

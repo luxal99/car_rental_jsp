@@ -4,6 +4,7 @@ import app.dao.CarModelDAO;
 import app.dao.VehicleDAO;
 import app.entity.CarModel;
 import app.entity.Vehicle;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +20,8 @@ public class VehicleServlet extends HttpServlet {
 
         try {
             CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
-            CarModel carModel = carModelDAO.findById(Integer.valueOf(req.getParameter("idCarModel")));
 
             Vehicle vehicle = new Vehicle();
-            vehicle.setIdCarModel(carModel);
             vehicle.setPower(Double.valueOf(req.getParameter("vehiclePower")));
             vehicle.setMileage(Integer.valueOf(req.getParameter("vehicleMileage")));
             vehicle.setPricePerDay(Double.valueOf(req.getParameter("vehiclePrice")));
@@ -31,9 +30,16 @@ public class VehicleServlet extends HttpServlet {
 
             VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
 
-            vehicleDAO.save(vehicle);
 
-
+            if (req.getParameter("idVehicle").isEmpty()) {
+                CarModel carModel = carModelDAO.findById(Integer.valueOf(req.getParameter("idCarModel")));
+                vehicle.setIdCarModel(carModel);
+                vehicleDAO.save(vehicle);
+            } else {
+                vehicle.setId(Integer.valueOf(req.getParameter("idVehicle")));
+                vehicle.setIdCarModel(vehicleDAO.findById(vehicle.getId()).getIdCarModel());
+                vehicleDAO.update(vehicle);
+            }
             resp.sendRedirect(req.getContextPath() + "/pages/admin.jsp");
         } catch (Exception exception) {
             resp.sendRedirect(req.getContextPath() + "/pages/err.jsp");
