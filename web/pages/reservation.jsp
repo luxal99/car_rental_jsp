@@ -13,6 +13,8 @@
 <%@ page import="app.dao.ClientDAO" %>
 <%@ page import="app.util.HashPassword" %>
 <%@ page import="java.time.temporal.Temporal" %>
+<%@ page import="app.dao.ReservationDAO" %>
+<%@ page import="app.entity.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -41,64 +43,85 @@
     Integer idCarModel = 0;
 
     String image = null;
+
+    ClientDAO clientDAO = new ClientDAO(Client.class);
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
 
-    if (request.getParameter("idCarModel") == null) {
-        Cookie[] cookies = request.getCookies();
-        Temporal t1 = null;
-        Temporal t2 = null;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("id")) {
-                carModel = carModelDAO.findById(Integer.valueOf(cookie.getValue()));
-                idCarModel = carModel.getId();
-            } else if (cookie.getName().equals("startDate")) {
+    Client loggedClient = new Client();
 
+    Cookie[] cookies = request.getCookies();
+
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("client")) {
+            loggedClient = clientDAO.findById(Integer.valueOf(HashPassword.decrypt(cookie.getValue())));
+        }
+    }
+
+    try {
+        if (request.getParameter("idCarModel") == null) {
+
+            Temporal t1 = null;
+            Temporal t2 = null;
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    carModel = carModelDAO.findById(Integer.valueOf(cookie.getValue()));
+                    idCarModel = carModel.getId();
+                } else if (cookie.getName().equals("startDate")) {
+                    request.setAttribute("startDate", cookie.getValue());
                     t1 = startDate.parse(cookie.getValue()).toInstant();
 
-            } else if (cookie.getName().equals("endDate")) {
-                t2 = endDate.parse(cookie.getValue()).toInstant();
+                } else if (cookie.getName().equals("endDate")) {
+                    t2 = endDate.parse(cookie.getValue()).toInstant();
+                    request.setAttribute("endDate", cookie.getValue());
+                }
+            }
+
+            duration = ChronoUnit.DAYS.between(t1, t2);
+            request.setAttribute("duration", duration);
+
+        } else {
+            carModel = carModelDAO.findById(Integer.valueOf(request.getParameter("idCarModel")));
+            idCarModel = carModel.getId();
+            Cookie cookie = new Cookie("id", carModel.getId().toString());
+            Cookie startDateCookie = new Cookie("startDate", request.getParameter("startDate"));
+            Cookie endDateCookie = new Cookie("endDate", request.getParameter("endDate"));
+
+            cookie.setPath(request.getContextPath() + "/pages/reservation.jsp");
+            startDateCookie.setPath(request.getContextPath() + "/pages/reservation.jsp");
+            endDateCookie.setPath(request.getContextPath() + "/pages/reservation.jsp");
+
+
+            duration = ChronoUnit.DAYS.between(
+                    startDate.parse(request.getParameter("startDate")).toInstant(),
+                    endDate.parse(request.getParameter("endDate")).toInstant());
+
+            request.setAttribute("duration", duration);
+            request.setAttribute("startDate", request.getParameter("startDate"));
+            request.setAttribute("endDate", request.getParameter("endDate"));
+
+            response.addCookie(cookie);
+            response.addCookie(startDateCookie);
+            response.addCookie(endDateCookie);
+
+
+        }
+
+        if (duration < 0) {
+            response.sendRedirect(request.getContextPath());
+        }
+
+        for (Vehicle vehicle :
+                vehicleDAO.getAll()) {
+            if (vehicle.getIdCarModel().getId() == carModel.getId()) {
+                image = vehicle.getImage();
+                request.setAttribute("image", image);
+                request.setAttribute("vehicle", vehicle);
+                break;
             }
         }
-
-        duration = ChronoUnit.DAYS.between(t1, t2);
-        request.setAttribute("duration", duration);
-
-    } else {
-        carModel = carModelDAO.findById(Integer.valueOf(request.getParameter("idCarModel")));
-        idCarModel = carModel.getId();
-        Cookie cookie = new Cookie("id", carModel.getId().toString());
-        Cookie startDateCookie = new Cookie("startDate", request.getParameter("startDate"));
-        Cookie endDateCookie = new Cookie("endDate", request.getParameter("endDate"));
-
-        cookie.setPath(request.getContextPath() + "/pages/reservation.jsp");
-        startDateCookie.setPath(request.getContextPath() + "/pages/reservation.jsp");
-        endDateCookie.setPath(request.getContextPath() + "/pages/reservation.jsp");
-
-
-        duration = ChronoUnit.DAYS.between(
-                startDate.parse(request.getParameter("startDate")).toInstant(),
-                endDate.parse(request.getParameter("endDate")).toInstant());
-
-        request.setAttribute("duration", duration);
-        response.addCookie(cookie);
-        response.addCookie(startDateCookie);
-        response.addCookie(endDateCookie);
-
-    }
-
-    if (duration < 0) {
+    } catch (Exception exception) {
         response.sendRedirect(request.getContextPath());
-    }
-
-    for (Vehicle vehicle :
-            vehicleDAO.getAll()) {
-        if (vehicle.getIdCarModel().getId() == carModel.getId()) {
-            image = vehicle.getImage();
-            request.setAttribute("image", image);
-            request.setAttribute("vehicle", vehicle);
-            break;
-        }
     }
 
 
@@ -106,12 +129,14 @@
 
 
 <%
+    Vehicle selectedVehicle = new Vehicle();
     if (request.getParameter("idVehicle") != null) {
-        Vehicle selectedVehicle = vehicleDAO.findById(Integer.valueOf(request.getParameter("idVehicle")));
+        selectedVehicle = vehicleDAO.findById(Integer.valueOf(request.getParameter("idVehicle")));
         request.setAttribute("selectedVehicle", selectedVehicle);
     }
 
 %>
+
 
 <div class="header">
     <nav class="navbar navbar-expand-lg ">
@@ -147,29 +172,72 @@
             </div>
             <div class="col-sm">
 
-                <h2>${vehicle.idCarModel.idCarBrand.title} ${vehicle.idCarModel.title}</h2>
+                <div class="row">
+                    <div class="col">
+                        <h2>${vehicle.idCarModel.idCarBrand.title} ${vehicle.idCarModel.title}</h2>
+                    </div>
+                    <div class="col text-right">
+                        <h4>Star date: ${startDate}</h4>
+                        <h4>End date: ${endDate}</h4>
+                    </div>
+                </div>
                 <h4>Price per day: ${vehicle.pricePerDay}</h4>
                 <% for (Vehicle vehicle :
                         vehicleDAO.findAllVehicleByCarModel(idCarModel)) { %>
                 <form action="reservation.jsp" method="post">
                     <input type="hidden" name="idVehicle" value="<%=vehicle.getId()%>">
+                    <input type="hidden" name="idClient" value="<%=loggedClient.getId()%>">
+                    <input type="hidden" name="startDate" value="${startDate}">
+                    <input type="hidden" name="endDate" value="${endDate}">
+                    <input type="hidden" name="total" value="${duration * vehicle.pricePerDay}">
                     <button class="type-div" type="submit" style="width: 100%">
                         <h2><%=vehicle.getPower()%>
                         </h2>
                     </button>
 
                 </form>
+
                 <%} %>
 
                 <h2 style="padding-top: 1em">Total: <span
                         style="color: #FF4C16">${duration * vehicle.pricePerDay}</span></h2>
                 <div>
-                    <button class="red-btn" type="submit">Reserve</button>
+
+                    <form method="post" action="${pageContext.request.contextPath}/reservation">
+                        <input type="hidden" name="idVehicle" value="<%=selectedVehicle.getId()%>">
+                        <input type="hidden" name="idClient" value="<%=loggedClient.getId()%>">
+                        <input type="hidden" name="startDate" value="${startDate}">
+                        <input type="hidden" name="endDate" value="${endDate}">
+                        <input type="hidden" name="total" value="${duration * vehicle.pricePerDay}">
+                        <button class="red-btn" type="submit">Reserve
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<%--MODAL--%>
+
+
+<div class="modal fade" id="reserveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="${pageContext.request.contextPath}/model">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -31,11 +31,24 @@ public class LoginServlet extends HttpServlet {
 
             } else if (user.getIdClient() != null && password.equals(req.getParameter("password"))) {
 
-                Cookie cookie = new Cookie("id", HashPassword.encrypt(String.valueOf(user.getIdClient().getId())));
-                cookie.setPath(req.getContextPath() + "/pages/client.jsp");
+                Cookie cookie = new Cookie("client", HashPassword.encrypt(String.valueOf(user.getIdClient().getId())));
+                cookie.setPath("/");
                 resp.addCookie(cookie);
 
-                resp.sendRedirect(req.getContextPath() + "/pages/client.jsp");
+                Cookie[] cookies = req.getCookies();
+
+                boolean hasError = false;
+
+                for (int i = 0; i < cookies.length; i++) {
+                    if (cookies[i].getName().equals("fail")) {
+                        hasError = true;
+                    }
+                }
+
+                if (hasError) resp.sendRedirect(req.getContextPath() + "/pages/reservation.jsp");
+                else resp.sendRedirect(req.getContextPath() + "/pages/client.jsp");
+
+
             } else {
                 resp.sendRedirect(req.getContextPath());
             }
