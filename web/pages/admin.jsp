@@ -42,11 +42,17 @@
 
     List<CarBrand> carBrandList = carBrandDAO.getAll();
     List<CarModel> carModelList = carModelDAO.getAll();
+    List<Vehicle> vehicleList = vehicleDAO.getAll();
 
     Integer numberOfCarModels = carBrandDAO.getAll().size();
     Integer numberOfRegisteredCar = vehicleDAO.getAll().size();
-
+    Vehicle selectedVehicle = new Vehicle();
     String company = adminDAO.findById(1).getFullName();
+    if (request.getParameter("idVehicle") != null) {
+        selectedVehicle = vehicleDAO.findById(Integer.valueOf(request.getParameter("idVehicle")));
+        request.setAttribute("selectedVehicle", selectedVehicle);
+
+    }
 
     request.setAttribute("company", company);
     request.setAttribute("carBrandList", carBrandList);
@@ -90,8 +96,6 @@
     String carBrandDataPoint = carBrandGson.toJson(mapArrayList);
 
 
-
-
 %>
 <div class="row">
     <div class="col-3 menu">
@@ -110,9 +114,9 @@
         <div class="nav flex-column nav-pills" style="padding-top: 2em" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
             <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-               aria-controls="v-pills-home" aria-selected="true">Clients</a>
+               aria-controls="v-pills-home" aria-selected="true">Dashboard</a>
             <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-               aria-controls="v-pills-profile" aria-selected="false">Accounts</a>
+               aria-controls="v-pills-profile" aria-selected="false">Vehicle</a>
 
         </div>
     </div>
@@ -176,7 +180,52 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <h1>Aleksa</h1>
+                <table class="table text-right">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Account Number</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    <% for (Vehicle vehicle : vehicleList) { %>
+
+                    <tr>
+                        <td><%= vehicle.getIdCarModel().getIdCarBrand().getTitle() %>
+                        </td>
+                        <td><%= vehicle.getIdCarModel().getTitle() %>
+                        </td>
+                        <td><%= vehicle.getPower() %>
+                        </td>
+                        <td><%= vehicle.getMileage() %>
+                        </td>
+                        <td><%= vehicle.getRegNum() %>
+                        </td>
+                        <td><%= vehicle.getPricePerDay() %>
+                        </td>
+                        <td>
+                            <button type="button" class="btn " data-toggle="modal" data-target="#vehicleEditModal">
+                                Edit
+                            </button>
+                            <form method="get" action="">
+                                <button class="edit-btn" type="submit">Select vehiclesk
+                                </button>
+                                <button class="delete-btn" type="submit">Change account
+                                </button>
+                                <input type="hidden" name="idVehicle" value="<%=vehicle.getId()%>"/>
+                            </form>
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    <% }
+                    %>
+                    </tbody>
+                </table>
             </div>
         </div>
         <!-- Button trigger modal -->
@@ -275,6 +324,66 @@
                         <input type="submit" class="red-btn" value="Submit">
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="vehicleEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form method="post" action="http://localhost:3000/upload">
+                        <div class="form-group">
+                            <div class="form-group">
+
+                                <label for="exampleInputPassword1">Power</label>
+                                <input type="text" value="<%=selectedVehicle.getPower()%>" class="form-control"
+                                       name="vehiclePower"
+                                       placeholder="Model">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Vehicle Mileage</label>
+                                <input type="text" value="<%=selectedVehicle.getMileage()%>" class="form-control"
+                                       name="vehicleMileage"
+                                       placeholder="Model">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Reg No.</label>
+                                <input type="text" value="<%=selectedVehicle.getRegNum()%>" class="form-control"
+                                       name="vehicleReg"
+                                       placeholder="Model">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Price per day</label>
+                                <input type="text" value="<%=selectedVehicle.getPricePerDay()%>" class="form-control"
+                                       name="vehiclePrice"
+                                       placeholder="Model">
+                            </div>
+
+                            <div class="text-center" style="padding-top: 1em;padding-bottom: 1em">
+                                <img class="img-fluid" src="<%=selectedVehicle.getImage()%>">
+                            </div>
+
+                            <div class="text-center" style="padding-top: 1em;padding-bottom: 1em">
+                                <input type="hidden" name="idVehicle" value="<%=selectedVehicle.getId()%>">
+                            </div>
+                        </div>
+                        <input type="file" name="image">
+                        <br/><br/>
+                        <input type="submit" class="red-btn" value="Submit">
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

@@ -1,45 +1,64 @@
-.car-brand-div{
+.car-brand-div {
     background-color: #121212 !important;
     width: 100%;
-    -webkit-box-shadow: 10px 10px 50px -6px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 50px -6px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 50px -6px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 50px -6px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 50px -6px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 50px -6px rgba(0, 0, 0, 0.75);
 }
 
-.menu{
+.menu {
     background-color: #121212;
     height: 100vh;
 }
 
-.row{
+.row {
     margin: 0 !important;
 }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background-color: #FF4C16;
     color: #eee;
 }
 
-a{color: #FF4C16}
+a {
+    color: #FF4C16
+}
 
-h4{
+h4 {
     font-family: 'Quicksand', sans-serif;
     color: #eee;
 }
 
-h3{
+h3 {
     font-family: 'Quicksand', sans-serif;
     color: #FF4C16;
     font-weight: bolder;
 }
 
-.red-btn{
+.red-btn {
     background-color: #FF4C16;
     color: #eee;
     border: 0 !important;
     padding: .5em 3em;
 }
+
 .chart-container {
-    -webkit-box-shadow: 10px 10px 49px -35px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 49px -35px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 49px -35px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
+}
+
+.edit-btn {
+    background-color: #eee;
+    padding: .5em;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.delete-btn{
+    background-color: red;
+    padding: .5em;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    color: #eee;
 }

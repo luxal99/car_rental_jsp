@@ -30,41 +30,39 @@
 <body>
 
 <%
-    Long duration = ChronoUnit.DAYS.between(
-            new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("startDate")).toInstant(),
-            new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("endDate")).toInstant());
-
-    request.setAttribute("duration", duration);
-    ;
+    Long duration = null;
 
     String image = null;
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
 
     try {
-        ChronoUnit.DAYS.between(
+        duration = ChronoUnit.DAYS.between(
                 new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("startDate")).toInstant(),
                 new SimpleDateFormat("yyyy-mm-dd").parse(request.getParameter("endDate")).toInstant());
+
+        request.setAttribute("duration", duration);
+
+        if (duration < 0 ) {
+            response.sendRedirect(request.getContextPath());
+        }
+        request.setAttribute("duration", duration);
+
+        CarModel carModel = carModelDAO.findById(Integer.valueOf(request.getParameter("idCarModel")));
+
+        for (Vehicle vehicle :
+                vehicleDAO.getAll()) {
+            if (vehicle.getIdCarModel().getId() == carModel.getId()) {
+                image = vehicle.getImage();
+                request.setAttribute("image", image);
+                request.setAttribute("vehicle", vehicle);
+                break;
+            }
+        }
     } catch (Exception e) {
         response.sendRedirect(request.getContextPath());
     }
 
-    if (duration < 0) {
-        response.sendRedirect(request.getContextPath());
-    }
-    request.setAttribute("duration", duration);
-
-    CarModel carModel = carModelDAO.findById(Integer.valueOf(request.getParameter("idCarModel")));
-
-    for (Vehicle vehicle :
-            vehicleDAO.getAll()) {
-        if (vehicle.getIdCarModel().getId() == carModel.getId()) {
-            image = vehicle.getImage();
-            request.setAttribute("image", image);
-            request.setAttribute("vehicle", vehicle);
-            break;
-        }
-    }
 
 %>
 
