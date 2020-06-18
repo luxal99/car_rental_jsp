@@ -112,6 +112,9 @@
                aria-controls="v-pills-home" aria-selected="true">Dashboard</a>
             <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
                aria-controls="v-pills-profile" aria-selected="false">Vehicle</a>
+            <a class="nav-link" id="v-pills-profile-reservation-tab" data-toggle="pill"
+               href="#v-pills-profile-reservation" role="tab"
+               aria-controls="v-pills-profile" aria-selected="false">Reservation</a>
 
         </div>
     </div>
@@ -173,9 +176,9 @@
                         <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
                     </div>
                 </div>
-                <div class="table-div" >
-                    <table class="table text-right" >
-                        <thead >
+                <div class="table-div">
+                    <table class="table text-right">
+                        <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Account Number</th>
@@ -247,6 +250,55 @@
                                 <button class="delete-btn" type="submit">Change account
                                 </button>
                                 <input type="hidden" name="idVehicle" value="<%=vehicle.getId()%>"/>
+                            </form>
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    <% }
+                    %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-profile-reservation" role="tabpanel"
+                 aria-labelledby="v-pills-profile-tab">
+                <table class="table text-right">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Account Number</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    <% for (Reservation reservation : reservationList) { %>
+
+                    <tr>
+                        <td><%= reservation.getIdClient().getFullName() %>
+                        </td>
+                        <td><%= reservation.getIdClient().getEmail() %>
+                        </td>
+                        <td><%= reservation.getStartDate()%>
+                        </td>
+                        <td><%= reservation.getEndDate() %>
+                        </td>
+                        <td><%= reservation.getIdVehicle().getIdCarModel().getIdCarBrand().getTitle() + " " + reservation.getIdVehicle().getIdCarModel().getTitle() + " " + reservation.getIdVehicle().getPower() %>
+                        </td>
+                        <td><%= reservation.getTotal() %>
+                        </td>
+                        <td>
+                            <button type="button" class="btn " data-toggle="modal" data-target="#vehicleEditModal">
+                                Edit
+                            </button>
+                            <form method="get" action="">
+                                <button class="edit-btn" type="submit">Select vehiclesk
+                                </button>
+                                <button class="delete-btn" type="submit">Change account
+                                </button>
+                                <input type="hidden" name="idVehicle" value="<%=reservation.getId()%>"/>
                             </form>
                         </td>
                         <td></td>
