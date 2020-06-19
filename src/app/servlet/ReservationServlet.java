@@ -42,6 +42,7 @@ public class ReservationServlet extends HttpServlet {
             Cookie cookie = new Cookie("fail", "");
 
             cookie.setPath("/");
+            cookie.setMaxAge(10);
             resp.addCookie(cookie);
             resp.sendRedirect(req.getContextPath() + "/pages/login.jsp");
         }

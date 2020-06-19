@@ -6,6 +6,8 @@
 <%@ page import="app.dto.CountCarModelDTO" %>
 <%@ page import="app.dao.*" %>
 <%@ page import="app.entity.*" %>
+<%@ page import="app.dto.MostReservedVehicleDTO" %>
+<%@ page import="app.dto.ClientDTO" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -42,6 +44,7 @@
 
 <%
     CarBrandDAO carBrandDAO = new CarBrandDAO(CarBrand.class);
+    ClientDAO clientDAO = new ClientDAO(Client.class);
     ReservationDAO reservationDAO = new ReservationDAO(Reservation.class);
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);
     VehicleDAO vehicleDAO = new VehicleDAO(Vehicle.class);
@@ -51,9 +54,12 @@
     List<CarModel> carModelList = carModelDAO.getAll();
     List<Vehicle> vehicleList = vehicleDAO.getAll();
     List<Reservation> reservationList = reservationDAO.getAll();
+    List<Client> clientList = clientDAO.getAll();
 
     Integer numberOfCarModels = carBrandDAO.getAll().size();
     Integer numberOfRegisteredCar = vehicleDAO.getAll().size();
+    Integer numberOfClients = clientDAO.getAll().size();
+
     Vehicle selectedVehicle = new Vehicle();
     String company = adminDAO.findById(1).getFullName();
     if (request.getParameter("idVehicle") != null) {
@@ -66,6 +72,7 @@
     request.setAttribute("carBrandList", carBrandList);
     request.setAttribute("numberOfCarModels", numberOfCarModels);
     request.setAttribute("numberOfRegisteredCar", numberOfRegisteredCar);
+    request.setAttribute("numberOfClients", numberOfClients);
 
 %>
 
@@ -102,6 +109,38 @@
 
 
     String carBrandDataPoint = carBrandGson.toJson(mapArrayList);
+
+    Gson mostPopularGson = new Gson();
+    Map<Object, Object> mostPopularMap = null;
+    List<Map<Object, Object>> mostPopularList = new ArrayList<Map<Object, Object>>();
+    List<MostReservedVehicleDTO> mostPopularData = reservationDAO.countMostReservedVehicles();
+
+    for (MostReservedVehicleDTO dto :
+            mostPopularData) {
+        mostPopularMap = new HashMap<Object, Object>();
+        mostPopularMap.put("label", dto.getCarModelTitle());
+        mostPopularMap.put("y", dto.getAmount());
+        mostPopularList.add(mostPopularMap);
+    }
+
+
+    String mostPopularDataPoint = mostPopularGson.toJson(mostPopularList);
+
+    Gson mostLoyaltyClientGson = new Gson();
+    Map<Object, Object> mostLoyaltyClientMap = null;
+    List<Map<Object, Object>> mostLoyaltyClientList = new ArrayList<Map<Object, Object>>();
+    List<ClientDTO> mostLoyaltyClientListData = clientDAO.countMostLoyaltyClients();
+
+    for (ClientDTO dto :
+            mostLoyaltyClientListData) {
+        mostLoyaltyClientMap = new HashMap<Object, Object>();
+        mostLoyaltyClientMap.put("label", dto.getFullName());
+        mostLoyaltyClientMap.put("y", dto.getAmount());
+        mostLoyaltyClientList.add(mostLoyaltyClientMap);
+    }
+
+
+    String mostLoyaltyClientsDataPoint = mostLoyaltyClientGson.toJson(mostLoyaltyClientList);
 
 
 %>
@@ -167,11 +206,11 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div type="button" class="btn car-brand-div" data-toggle="modal" data-target="#exampleModal">
+                        <div type="button" class="btn car-brand-div" data-toggle="modal" data-target="#clientModal">
                             <div class="row">
                                 <div class="col">
-                                    <h4>Number of registered cars</h4>
-                                    <h3>${numberOfRegisteredCar}</h3>
+                                    <h4>Number of clients</h4>
+                                    <h3>${numberOfClients}</h3>
                                 </div>
                                 <div class="col" style="padding-top: 1em">
                                     <img src="http://localhost:8080/home/assets/img/client.png" class="img-fluid"
@@ -223,6 +262,11 @@
                         %>
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    <div class="col-sm chart-container text-left">
+                        <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -483,7 +527,54 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Account Number</th>
+                            <th scope="col">Client</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        <% for (Client client : clientList) { %>
+
+                        <tr>
+                            <td><%= client.getFullName()%>
+                            </td>
+                            <td><%= client.getEmail()%>
+                            </td>
+                            <td><%= client.getTelephone()%>
+                            </td>
+
+                        </tr>
+                        <% }
+                        %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="chart-container text-left">
+                    <div id="chartContainer4" style="height: 370px;width: 90%"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
@@ -513,17 +604,51 @@
             },
             data: [{
                 type: "pie",
-                toolTipContent: "<b>{label}</b>: {y}%",
+                toolTipContent: "<b>{label}</b>: {y}",
                 indexLabelFontSize: 16,
                 indexLabel: "{label} - {y}%",
                 dataPoints: <%out.print(carBrandDataPoint);%>
             }]
         });
+        var chart4 = new CanvasJS.Chart("chartContainer4", {
+            theme: "light1", // "light1", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Typical Day"
+            },
+            data: [{
+                type: "pie",
+                toolTipContent: "<b>{label}</b>: {y}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}",
+                dataPoints: <%out.print(mostLoyaltyClientsDataPoint);%>
+            }]
+        });
+
+        var chart3 = new CanvasJS.Chart("chartContainer3", {
+            theme: "light1", // "light1", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Typical Day"
+            },
+            data: [{
+                type: "bar",
+                toolTipContent: "<b>{label}</b>: {y}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: <%out.print(mostPopularDataPoint);%>
+            }]
+        });
+
         chart.render();
         chart2.render();
-
+        chart3.render();
+        chart4.render();
     }
 </script>
 
+</div>
 </body>
 </html>

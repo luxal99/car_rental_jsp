@@ -8,7 +8,7 @@
 
 .menu {
     background-color: #121212;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .row {
@@ -69,4 +69,14 @@ h3 {
     -webkit-box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 49px -35px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar {
+    height: 1em;
+    background-color: #222;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FF4C16;
+    border-radius: 10px;
 }

@@ -124,9 +124,6 @@
          */
         if (duration <= 0) {
             response.sendRedirect(request.getContextPath());
-        } else if (ChronoUnit.DAYS.between(new SimpleDateFormat("yyyy-mm-dd").parse(LocalDate.now().toString()).toInstant(),
-                startDate.parse(request.getParameter("startDate")).toInstant()) > 0) {
-            response.sendRedirect(request.getContextPath());
         }
 
 //        Search for all vehicle by @idCarModel
@@ -232,14 +229,15 @@
                         <input type="hidden" name="idVehicle" value="<%=selectedVehicle.getId()%>">
                         <input type="hidden" name="idClient" value="<%=loggedClient.getId()%>">
                         <input type="hidden" name="total" value="${duration * vehicle.pricePerDay}">
-
-                        <div id="date-div" style="display: none;padding-top: 2em;padding-bottom: 1em">
+                        <input type="hidden" name="startDate" value="${startDate}">
+                        <input type="hidden" name="endDate" value="${endDate}">
+                        <div id="date-div" style="display: none;padding-top: 1em;padding-bottom: 1em">
                             <div class="row">
 
                                 <input type="hidden" name="idCarModel" form="dateForm" value="<%=carModel.getId()%>">
                                 <div class="col">
                                     <input type="date" value="${startDate}" form="dateForm" name="startDate"
-                                           class="form-control" >
+                                           class="form-control">
                                 </div>
                                 <div class="col">
                                     <input type="date" name="endDate" form="dateForm" value="${endDate}"

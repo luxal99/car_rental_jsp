@@ -1,11 +1,9 @@
 package app.dao;
 
 import app.config.DBConfig;
-import app.dto.CountCarModelDTO;
 import app.dto.MostReservedVehicleDTO;
 import app.entity.Reservation;
 import org.hibernate.Session;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
@@ -59,6 +57,7 @@ public class ReservationDAO extends AbstractDAOImpl<Reservation> {
 
             mostReservedVehicleDTOList.add(countCarModelDTO);
         }
+        session.close();
         return mostReservedVehicleDTOList;
     }
 }
