@@ -28,6 +28,19 @@
 <body>
 
 <%
+    Cookie[] cookies = request.getCookies();
+    boolean hasCookie = false;
+
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("idAdmin")) {
+            hasCookie = true;
+        }
+    }
+
+    if (!hasCookie) response.sendRedirect(request.getContextPath());
+%>
+
+<%
     CarBrandDAO carBrandDAO = new CarBrandDAO(CarBrand.class);
     ReservationDAO reservationDAO = new ReservationDAO(Reservation.class);
     CarModelDAO carModelDAO = new CarModelDAO(CarModel.class);

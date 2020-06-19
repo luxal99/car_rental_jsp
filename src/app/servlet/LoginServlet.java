@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
                 for (int i = 0; i < cookies.length; i++) {
                     if (cookies[i].getName().equals("fail")) {
                         hasError = true;
+                        cookies[i].setMaxAge(0);
                     }
                 }
 

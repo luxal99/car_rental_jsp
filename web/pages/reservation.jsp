@@ -28,7 +28,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
-    <script src="assets/js/index.js"></script>
     <link rel="stylesheet" href="../assets/css/global.css">
 </head>
 <body>
@@ -125,8 +124,8 @@
          */
         if (duration <= 0) {
             response.sendRedirect(request.getContextPath());
-        } else if (ChronoUnit.DAYS.between(new SimpleDateFormat("").parse(LocalDate.now().toString()).toInstant(),
-                startDate.parse(request.getParameter("startDate")).toInstant()) >= 0) {
+        } else if (ChronoUnit.DAYS.between(new SimpleDateFormat("yyyy-mm-dd").parse(LocalDate.now().toString()).toInstant(),
+                startDate.parse(request.getParameter("startDate")).toInstant()) > 0) {
             response.sendRedirect(request.getContextPath());
         }
 
@@ -224,35 +223,42 @@
 
                 <%} %>
 
-                <h2 style="padding-top: 1em">Total: <span
+                <h2 style="padding-top: 1em;padding-left: 1em">Total: <span
                         style="color: #FF4C16">${duration * vehicle.pricePerDay}</span></h2>
                 <div>
-
+                    <form action="reservation.jsp" method="post" id="dateForm">
+                    </form>
                     <form method="post" action="${pageContext.request.contextPath}/reservation">
                         <input type="hidden" name="idVehicle" value="<%=selectedVehicle.getId()%>">
                         <input type="hidden" name="idClient" value="<%=loggedClient.getId()%>">
                         <input type="hidden" name="total" value="${duration * vehicle.pricePerDay}">
-                        <div id="date-div" style="display: none">
+
+                        <div id="date-div" style="display: none;padding-top: 2em;padding-bottom: 1em">
+                            <div class="row">
+
+                                <input type="hidden" name="idCarModel" form="dateForm" value="<%=carModel.getId()%>">
+                                <div class="col">
+                                    <input type="date" value="${startDate}" form="dateForm" name="startDate"
+                                           class="form-control" >
+                                </div>
+                                <div class="col">
+                                    <input type="date" name="endDate" form="dateForm" value="${endDate}"
+                                           class="form-control"
+                                           onchange="this.form.submit()">
+                                </div>
+                            </div>
                         </div>
 
-                        <button class="red-btn" type="submit">Reserve
-                        </button>
-
-                    </form>
-                    <form action="reservation.jsp" method="post">
                         <div class="row">
-                            <input type="hidden" name="idCarModel" value="<%=carModel.getId()%>">
-                            <div class="col">
-                                <input type="date" value="${startDate}" name="startDate" class="form-control">
-                            </div>
-                            <div class="col">
-                                <input type="date" name="endDate" value="${endDate}" class="form-control"
-                                       onchange="this.form.submit()">
-                            </div>
+                            <button class="red-btn" type="submit">Reserve
+                            </button>
+                            <button class="white-btn" type="button" onclick="editDate()">Edit date
+                            </button>
                         </div>
-                        <button class="white-btn" type="button" onclick="editDate()">Edit date
-                        </button>
+
                     </form>
+
+
                 </div>
             </div>
         </div>
