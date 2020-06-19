@@ -1,13 +1,10 @@
-<%@ page import="java.util.List" %>
 <%@ page import="com.google.gson.Gson" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="app.dto.CountCarModelDTO" %>
 <%@ page import="app.dao.*" %>
 <%@ page import="app.entity.*" %>
 <%@ page import="app.dto.MostReservedVehicleDTO" %>
 <%@ page import="app.dto.ClientDTO" %>
+<%@ page import="java.util.*" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

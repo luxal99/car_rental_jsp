@@ -38,6 +38,8 @@
     SimpleDateFormat endDate = new SimpleDateFormat("yyyy-mm-dd");
     CarModel carModel = new CarModel();
     Integer idCarModel = 0;
+    Integer counter = 0;
+
 
     String image = null;
 
@@ -262,12 +264,47 @@
         </div>
         <div class="vehicle-div" style="padding: 2em">
             <div class="most-used-container">
+                <h2>Similar brand
+                </h2>
+                <div style="height: 1px;background-color: #eee"></div>
+                <div class="row">
+                    <% for (Vehicle vehicle :
+                            vehicleDAO.findByCarBrand(carModel.getIdCarBrand().getId())) {
+                        if (counter == 2) break;
+                        counter++;
+                    %>
+                    <div class="col car-col">
+                        <div class="text-center">
+                            <img class="img-fluid" src="<%=vehicle.getImage()%>">
+                            <h3 class="h3-brand"><%=vehicle.getIdCarModel().getIdCarBrand().getTitle()%>
+                            </h3>
+                            <h3 class="h3-model"><%=vehicle.getIdCarModel().getTitle()%>
+                            </h3>
+                            <form method="post" action="reservation.jsp">
+                                <input type="hidden" name="idCarModel" value="<%=vehicle.getIdCarModel().getId()%>">
+                                <input type="hidden" name="startDate" value="${startDate}">
+                                <input type="hidden" name="endDate" value="${endDate}">
+                                <button class="red-btn">Choose</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <%
+                        }
+
+                    %>
+
+                </div>
                 <h2>Most popular cars
                 </h2>
                 <div style="height: 1px;background-color: #eee"></div>
                 <div class="row">
                     <% for (MostReservedVehicleDTO mostReservedVehicleDTO :
-                            reservationDAO.countMostReservedVehicles()) { %>
+                            reservationDAO.countMostReservedVehicles()) {
+                        if (counter == 5) break;
+                        counter++;
+                    %>
                     <div class="col car-col">
                         <div class="text-center">
                             <img class="img-fluid" src="<%=mostReservedVehicleDTO.getImage()%>">
@@ -284,7 +321,11 @@
                         </div>
                     </div>
 
-                    <%} %>
+
+                    <%
+                        }
+
+                    %>
 
                 </div>
             </div>
