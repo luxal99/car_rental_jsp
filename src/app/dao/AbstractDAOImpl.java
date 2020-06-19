@@ -38,9 +38,11 @@ public class AbstractDAOImpl<T> implements AbstractDAO<T> {
             tCriteriaQuery.select(tCriteriaQuery.from(this.entityClass));
             tList = session.createQuery(tCriteriaQuery).getResultList();
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return tList;
     }
 

@@ -514,6 +514,10 @@
                             <div class="text-center" style="padding-top: 1em;padding-bottom: 1em">
                                 <input type="hidden" name="idVehicle" value="<%=selectedVehicle.getId()%>">
                             </div>
+
+                            <div class="text-center" style="padding-top: 1em;padding-bottom: 1em">
+                                <input type="hidden" name="idCarModel" value="<%=selectedVehicle.getIdCarModel()%>">
+                            </div>
                         </div>
                         <input type="file" name="image">
                         <br/><br/>
