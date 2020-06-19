@@ -48,6 +48,7 @@ a {
     background-color: #FF4C16;
     color: #eee;
     border: 0 !important;
+    margin-top: 1em;
     padding: 1em 3em;
     -webkit-box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
     -moz-box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
@@ -67,4 +68,25 @@ a {
 ::-webkit-scrollbar-thumb {
     background: #FF4C16;
     border-radius: 10px;
+}
+.car-col{
+    padding: 1em;
+    -webkit-box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
+    -moz-box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
+    box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
+}
+
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.white-btn{
+    width: 100%;
+    -webkit-box-shadow: 16px 31px 37px -20px rgba(0,0,0,0.75) !important;
+    -moz-box-shadow: 16px 31px 37px -20px rgba(0,0,0,0.75) !important;
+    box-shadow: 16px 31px 37px -20px rgba(0,0,0,0.75) !important;
+    border: 2px solid #eeeeee !important;
+    border-radius: 8px;
+    background-color: #FF4C16;
 }

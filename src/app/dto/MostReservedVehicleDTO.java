@@ -1,12 +1,21 @@
 package app.dto;
 
 public class MostReservedVehicleDTO {
+    private Integer id;
     private String carBrandTitle;
     private String carModelTitle;
     private Integer amount;
     private String image;
 
     public MostReservedVehicleDTO() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCarBrandTitle() {

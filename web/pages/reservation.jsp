@@ -3,11 +3,7 @@
 <%@ page import="app.dao.VehicleDAO" %>
 <%@ page import="app.entity.Vehicle" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.text.ParseException" %>
-<%@ page import="java.time.Duration" %>
 <%@ page import="java.time.temporal.ChronoUnit" %>
 <%@ page import="app.entity.Client" %>
 <%@ page import="app.dao.ClientDAO" %>
@@ -16,11 +12,12 @@
 <%@ page import="app.dao.ReservationDAO" %>
 <%@ page import="app.entity.Reservation" %>
 <%@ page import="app.dto.MostReservedVehicleDTO" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Reservation</title>
-    <link rel="stylesheet" href="../assets/css/reservation.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/reservation.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -63,6 +60,11 @@
     }
 
     try {
+
+        /**
+         * If we don't have parameter @idCarModel in request
+         * then we read last inputed from cookie
+         */
         if (request.getParameter("idCarModel") == null) {
 
             Temporal t1 = null;
@@ -85,6 +87,11 @@
             request.setAttribute("duration", duration);
 
         } else {
+            /**
+             * When we have parameter @idCarModel
+             * then we read that parameter and find all vehicle by that parameter
+             * and put last read parameter to cookie
+             */
             carModel = carModelDAO.findById(Integer.valueOf(request.getParameter("idCarModel")));
             idCarModel = carModel.getId();
             Cookie cookie = new Cookie("id", carModel.getId().toString());
@@ -111,10 +118,19 @@
 
         }
 
-        if (duration < 0) {
+        /**
+         * Check input date
+         * @endDate greater then @startDate function would redirect to /home
+         * @startDate lower then current date function would redirect to /home
+         */
+        if (duration <= 0) {
+            response.sendRedirect(request.getContextPath());
+        } else if (ChronoUnit.DAYS.between(new SimpleDateFormat("").parse(LocalDate.now().toString()).toInstant(),
+                startDate.parse(request.getParameter("startDate")).toInstant()) >= 0) {
             response.sendRedirect(request.getContextPath());
         }
 
+//        Search for all vehicle by @idCarModel
         for (Vehicle vehicle :
                 vehicleDAO.getAll()) {
             if (vehicle.getIdCarModel().getId() == carModel.getId()) {
@@ -133,6 +149,10 @@
 
 
 <%
+    /*
+    Run when we select type of vehicle.Ex -> if we can vehicle
+    with power of 140ks and power of 120ks
+     */
     Vehicle selectedVehicle = new Vehicle();
     if (request.getParameter("idVehicle") != null) {
         selectedVehicle = vehicleDAO.findById(Integer.valueOf(request.getParameter("idVehicle")));
@@ -155,7 +175,8 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}">Home <span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Features</a>
@@ -181,7 +202,7 @@
                         <h2>${vehicle.idCarModel.idCarBrand.title} ${vehicle.idCarModel.title}</h2>
                     </div>
                     <div class="col text-right">
-                        <h4>Star date: ${startDate}</h4>
+                        <h4>Start date: ${startDate}</h4>
                         <h4>End date: ${endDate}</h4>
                     </div>
                 </div>
@@ -210,10 +231,26 @@
                     <form method="post" action="${pageContext.request.contextPath}/reservation">
                         <input type="hidden" name="idVehicle" value="<%=selectedVehicle.getId()%>">
                         <input type="hidden" name="idClient" value="<%=loggedClient.getId()%>">
-                        <input type="hidden" name="startDate" value="${startDate}">
-                        <input type="hidden" name="endDate" value="${endDate}">
                         <input type="hidden" name="total" value="${duration * vehicle.pricePerDay}">
+                        <div id="date-div" style="display: none">
+                        </div>
+
                         <button class="red-btn" type="submit">Reserve
+                        </button>
+
+                    </form>
+                    <form action="reservation.jsp" method="post">
+                        <div class="row">
+                            <input type="hidden" name="idCarModel" value="<%=carModel.getId()%>">
+                            <div class="col">
+                                <input type="date" value="${startDate}" name="startDate" class="form-control">
+                            </div>
+                            <div class="col">
+                                <input type="date" name="endDate" value="${endDate}" class="form-control"
+                                       onchange="this.form.submit()">
+                            </div>
+                        </div>
+                        <button class="white-btn" type="button" onclick="editDate()">Edit date
                         </button>
                     </form>
                 </div>
@@ -227,14 +264,19 @@
                 <div class="row">
                     <% for (MostReservedVehicleDTO mostReservedVehicleDTO :
                             reservationDAO.countMostReservedVehicles()) { %>
-                    <div class="col">
+                    <div class="col car-col">
                         <div class="text-center">
                             <img class="img-fluid" src="<%=mostReservedVehicleDTO.getImage()%>">
                             <h3 class="h3-brand"><%=mostReservedVehicleDTO.getCarBrandTitle()%>
                             </h3>
                             <h3 class="h3-model"><%=mostReservedVehicleDTO.getCarModelTitle()%>
                             </h3>
-                            <button class="red-btn">Choose</button>
+                            <form method="post" action="reservation.jsp">
+                                <input type="hidden" name="idCarModel" value="<%=mostReservedVehicleDTO.getId()%>">
+                                <input type="hidden" name="startDate" value="${startDate}">
+                                <input type="hidden" name="endDate" value="${endDate}">
+                                <button class="red-btn">Choose</button>
+                            </form>
                         </div>
                     </div>
 
@@ -268,5 +310,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    function editDate() {
+        const x = document.getElementById("date-div");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
