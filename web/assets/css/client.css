@@ -1,0 +1,29 @@
+
+.menu {
+    background-color: #121212;
+    min-height: 100vh;
+}
+
+.row {
+    margin: 0 !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #FF4C16;
+    color: #eee;
+}
+
+a {
+    color: #FF4C16
+}
+
+h4 {
+    font-family: 'Quicksand', sans-serif;
+    color: #eee;
+}
+
+h3 {
+    font-family: 'Quicksand', sans-serif;
+    color: #FF4C16;
+    font-weight: bolder;
+}

@@ -5,6 +5,7 @@ import app.dto.MostReservedVehicleDTO;
 import app.entity.Reservation;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.hibernate.type.IntegerType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,5 +60,26 @@ public class ReservationDAO extends AbstractDAOImpl<Reservation> {
         }
         session.close();
         return mostReservedVehicleDTOList;
+    }
+
+    public List<Reservation> findAllReservationByClientId(Integer integer) {
+
+        List<Reservation> reservationList = new ArrayList<>();
+        for (Reservation reservation : getAll()) {
+            if (reservation.getIdClient().getId() == integer) {
+                reservationList.add(reservation);
+            }
+        }
+        return reservationList;
+    }
+
+    public Double countTotalSpentByUser(Integer id) {
+        Double total = 0.0;
+        for (Reservation reservation : getAll()) {
+            if (reservation.getIdClient().getId() == id) {
+                total += reservation.getTotal();
+            }
+        }
+        return total;
     }
 }
