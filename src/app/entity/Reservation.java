@@ -5,6 +5,8 @@
  */
 package app.entity;
 
+import app.dao.ReservationStatusDAO;
+
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,18 +22,17 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author luxal
  */
 @Entity
 @Table(name = "reservation")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Reservation.findAll", query = "SELECT r FROM Reservation r"),
-    @NamedQuery(name = "Reservation.findById", query = "SELECT r FROM Reservation r WHERE r.id = :id"),
-    @NamedQuery(name = "Reservation.findByStartDate", query = "SELECT r FROM Reservation r WHERE r.startDate = :startDate"),
-    @NamedQuery(name = "Reservation.findByEndDate", query = "SELECT r FROM Reservation r WHERE r.endDate = :endDate"),
-    @NamedQuery(name = "Reservation.findByTotal", query = "SELECT r FROM Reservation r WHERE r.total = :total")})
+        @NamedQuery(name = "Reservation.findAll", query = "SELECT r FROM Reservation r"),
+        @NamedQuery(name = "Reservation.findById", query = "SELECT r FROM Reservation r WHERE r.id = :id"),
+        @NamedQuery(name = "Reservation.findByStartDate", query = "SELECT r FROM Reservation r WHERE r.startDate = :startDate"),
+        @NamedQuery(name = "Reservation.findByEndDate", query = "SELECT r FROM Reservation r WHERE r.endDate = :endDate"),
+        @NamedQuery(name = "Reservation.findByTotal", query = "SELECT r FROM Reservation r WHERE r.total = :total")})
 public class Reservation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,11 +51,15 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "id_client", referencedColumnName = "id")
     @ManyToOne
     private Client idClient;
+    @JoinColumn(name = "status", referencedColumnName = "id")
+    @ManyToOne
+    private ReservationStatus status;
     @JoinColumn(name = "id_vehicle", referencedColumnName = "id")
     @ManyToOne
     private Vehicle idVehicle;
 
     public Reservation() {
+        this.status = new ReservationStatus(1);
     }
 
     public Reservation(Integer id) {
@@ -101,6 +106,14 @@ public class Reservation implements Serializable {
         this.idClient = idClient;
     }
 
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
+    }
+
     public Vehicle getIdVehicle() {
         return idVehicle;
     }
@@ -131,7 +144,7 @@ public class Reservation implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.mavenproject3.Reservation[ id=" + id + " ]";
+        return "com.mycompany.mavenproject5.Reservation[ id=" + id + " ]";
     }
-    
+
 }

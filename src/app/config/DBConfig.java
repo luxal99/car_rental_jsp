@@ -30,6 +30,7 @@ public class DBConfig {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Reservation.class);
         configuration.addAnnotatedClass(Vehicle.class);
+        configuration.addAnnotatedClass(ReservationStatus.class);
         sessionFactory = configuration.buildSessionFactory();
 
         return sessionFactory;

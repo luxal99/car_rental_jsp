@@ -5,8 +5,9 @@ import app.dto.MostReservedVehicleDTO;
 import app.entity.Reservation;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.hibernate.type.IntegerType;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,5 +82,33 @@ public class ReservationDAO extends AbstractDAOImpl<Reservation> {
             }
         }
         return total;
+    }
+
+    public List<Reservation> getAllReservationByVehicleId(Integer id) {
+        List<Reservation> reservationList = new ArrayList<>();
+
+        for (Reservation reservation : getAll()) {
+            if (reservation.getIdVehicle().getId() == id) {
+                reservationList.add(reservation);
+            }
+        }
+        return reservationList;
+    }
+
+    public Boolean checkRentalDate(Integer idVehicle, String date) {
+
+        Long duration = null;
+        boolean isValid = true;
+        for (Reservation reservation : getAllReservationByVehicleId(idVehicle)) {
+            try {
+                duration = ChronoUnit.DAYS.between(new SimpleDateFormat("yyyy-mm-dd").parse(date).toInstant(), new SimpleDateFormat("yyyy-mm-dd").parse(reservation.getEndDate()).toInstant());
+                if (duration >= 0)
+                    isValid = false;
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return isValid;
     }
 }

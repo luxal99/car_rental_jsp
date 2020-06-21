@@ -55,6 +55,7 @@ public class AbstractDAOImpl<T> implements AbstractDAO<T> {
             transaction = session.beginTransaction();
             t = session.find(this.entityClass, id);
             transaction.commit();
+            session.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

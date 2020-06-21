@@ -343,14 +343,19 @@
                         </td>
                         <td><%= reservation.getTotal() %>
                         </td>
+                        <td><%= reservation.getStatus().getTitle() %>
+                        </td>
                         <td>
                             <button type="button" class="btn " data-toggle="modal" data-target="#vehicleEditModal">
                                 Edit
                             </button>
+                            <form id="approve-form" method="post"
+                                  action="${pageContext.request.contextPath}/approve"></form>
                             <form method="get" action="">
-                                <button class="edit-btn" type="submit">Select vehiclesk
+                                <button class="edit-btn" type="submit">Select vehicle
                                 </button>
-                                <button class="delete-btn" type="submit">Change account
+                                <input type="hidden" name="idReservation" value="<%=reservation.getId()%>" form="approve-form">
+                                <button class="delete-btn" type="submit" form="approve-form">Approve
                                 </button>
                                 <input type="hidden" name="idVehicle" value="<%=reservation.getId()%>"/>
                             </form>

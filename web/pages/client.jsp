@@ -71,6 +71,7 @@
                aria-controls="v-pills-home" aria-selected="true">Dashboard</a><br>
             <a class="nav-link active" id="v-pills-home-profile" data-toggle="pill" href="#v-pills-profile" role="tab"
                aria-controls="v-pills-home" aria-selected="true">Profile</a>
+            <a class="nav-link active" href="reservation.jsp">Reservation</a>
 
         </div>
     </div>
@@ -104,6 +105,8 @@
                             <td><%= reservation.getIdVehicle().getIdCarModel().getIdCarBrand().getTitle() + " " + reservation.getIdVehicle().getIdCarModel().getTitle() + " " + reservation.getIdVehicle().getPower()%>
                             </td>
                             <td><%=  reservation.getTotal() %>
+                            </td>
+                            <td><%=  reservation.getStatus().getTitle() %>
                             </td>
 
                         </tr>
