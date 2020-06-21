@@ -4,7 +4,9 @@
 <!-- ##	Copyright (c) 2002-2003 BEA Systems, Inc. All Rights Reserved   ## -->
 <!-- ##                                                                 ## -->
 <!-- ##################################################################### -->
-<xs:schema targetNamespace="http://www.bea.com/servers/weblogic/url-template-config/8.0" xmlns="http://www.bea.com/servers/weblogic/url-template-config/8.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:schema targetNamespace="http://www.bea.com/servers/weblogic/url-template-config/8.0"
+           xmlns="http://www.bea.com/servers/weblogic/url-template-config/8.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <!-- Portal Application -->
     <xs:element name="url-template-config">
         <xs:annotation>

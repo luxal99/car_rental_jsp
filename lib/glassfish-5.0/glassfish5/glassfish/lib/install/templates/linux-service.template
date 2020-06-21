@@ -39,7 +39,6 @@
 # holder.
 #
 
-
 # Linux Platform Services for GlassFish
 # See this blog for more details:
 # http://blogs.sun.com/foo/entry/run_glassfish_v3_as_a
@@ -52,16 +51,20 @@ ASADMIN="%%%AS_ADMIN_PATH%%%"
 
 case "$1" in
 start)
-    %%%SERVICEUSER_START%%%$ASADMIN %%%START_COMMAND%%% %%%CREDENTIALS%%% %%%LOCATION_ARGS_START%%% %%%ENTITY_NAME%%% &%%%SERVICEUSER_STOP%%%
-    ;;
+  %%%SERVICEUSER_START%%%$ASADMIN %%%START_COMMAND%%% %%%CREDENTIALS%%% %%%LOCATION_ARGS_START%%% %%%ENTITY_NAME%%% &
+  %%%SERVICEUSER_STOP%%%
+  ;;
 stop)
-    %%%SERVICEUSER_START%%%$ASADMIN %%%STOP_COMMAND%%%  %%%LOCATION_ARGS_STOP%%% %%%ENTITY_NAME%%% &%%%SERVICEUSER_STOP%%%
-    ;;
+  %%%SERVICEUSER_START%%%$ASADMIN %%%STOP_COMMAND%%% %%%LOCATION_ARGS_STOP%%% %%%ENTITY_NAME%%% &
+  %%%SERVICEUSER_STOP%%%
+  ;;
 restart)
-    %%%SERVICEUSER_START%%%$ASADMIN %%%RESTART_COMMAND%%%  %%%LOCATION_ARGS_RESTART%%% %%%ENTITY_NAME%%% &%%%SERVICEUSER_STOP%%%
-    ;;
+  %%%SERVICEUSER_START%%%$ASADMIN %%%RESTART_COMMAND%%% %%%LOCATION_ARGS_RESTART%%% %%%ENTITY_NAME%%% &
+  %%%SERVICEUSER_STOP%%%
+  ;;
 *)
-    echo "usage: $0 (start|stop|restart|help)"
+  echo "usage: $0 (start|stop|restart|help)"
+  ;;
 esac
 
 #
@@ -69,4 +72,3 @@ esac
 #
 # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
 # iptables -t nat -A PREROUTING -p udp -m udp --dport 80 -j REDIRECT --to-ports 8080
-

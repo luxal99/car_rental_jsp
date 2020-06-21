@@ -20,7 +20,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author luxal
  */
 @Entity
@@ -135,5 +134,5 @@ public class Vehicle implements Serializable {
     public String toString() {
         return "com.mycompany.mavenproject5.Vehicle[ id=" + id + " ]";
     }
-    
+
 }

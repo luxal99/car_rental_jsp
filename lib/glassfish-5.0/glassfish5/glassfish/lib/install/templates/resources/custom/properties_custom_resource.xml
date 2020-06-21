@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN" "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
+<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN"
+        "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
 <!--
 
     DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
@@ -126,9 +127,9 @@
 -->
 
 <resources>
-    <custom-resource res-type="java.util.Properties" jndi-name="<RESOURCE_NAME>" 
-     factory-class="org.glassfish.resources.custom.factory.PropertiesFactory">
-      <property name="PROPERTY_1" value="<VALUE_1>" />
-      <property name="PROPERTY_2" value="<VALUE_2>" />
+    <custom-resource res-type="java.util.Properties" jndi-name="<RESOURCE_NAME>"
+                     factory-class="org.glassfish.resources.custom.factory.PropertiesFactory">
+        <property name="PROPERTY_1" value="<VALUE_1>"/>
+        <property name="PROPERTY_2" value="<VALUE_2>"/>
     </custom-resource>
 </resources>

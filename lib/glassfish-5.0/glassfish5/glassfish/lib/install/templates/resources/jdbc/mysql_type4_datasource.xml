@@ -41,7 +41,8 @@
 
 -->
 
-<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN" "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
+<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN"
+        "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
 
 <!--
     MySQL Type 4 Driver
@@ -65,18 +66,18 @@
 -->
 
 <resources>
-    <jdbc-connection-pool 
-        name="mysql-pool" 
-        datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
-        res-type="javax.sql.DataSource">
+    <jdbc-connection-pool
+            name="mysql-pool"
+            datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"
+            res-type="javax.sql.DataSource">
         <property name="user" value="DB_USER"/>
         <property name="password" value="DB_PASSWORD"/>
         <property name="url" value="jdbc:mysql://DB_HOSTNAME:3306/DATABASE_NAME"/>
     </jdbc-connection-pool>
 
-    <jdbc-resource 
-        enabled="true" 
-        jndi-name="jdbc/mysql-resource" 
-        object-type="user" 
-        pool-name="mysql-pool"/>
+    <jdbc-resource
+            enabled="true"
+            jndi-name="jdbc/mysql-resource"
+            object-type="user"
+            pool-name="mysql-pool"/>
 </resources> 

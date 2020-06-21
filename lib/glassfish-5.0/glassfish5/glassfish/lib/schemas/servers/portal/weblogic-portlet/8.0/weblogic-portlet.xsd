@@ -6,7 +6,9 @@
 <!-- ## WebLogic Portal - Portlet Container                             ## -->
 <!-- ##                                                                 ## -->
 <!-- ##################################################################### -->
-<xs:schema targetNamespace="http://www.bea.com/servers/portal/weblogic-portlet/8.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bea.com/servers/portal/weblogic-portlet/8.0" elementFormDefault="qualified">
+<xs:schema targetNamespace="http://www.bea.com/servers/portal/weblogic-portlet/8.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.bea.com/servers/portal/weblogic-portlet/8.0"
+           elementFormDefault="qualified">
     <!-- Portal Application -->
     <xs:element name="weblogic-portlet-app">
         <xs:annotation>
@@ -30,7 +32,8 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="propagate-preferences-on-deploy" type="propagate-preferences-on-deployType" minOccurs="0"/>
+            <xs:element name="propagate-preferences-on-deploy" type="propagate-preferences-on-deployType"
+                        minOccurs="0"/>
             <xs:element name="user-property-set" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
@@ -79,7 +82,9 @@
             <xs:element name="skeleton-uri" type="xs:string" minOccurs="0"/>
             <xs:element name="properties" type="xs:string" minOccurs="0">
                 <xs:annotation>
-                    <xs:documentation>A semicolon-delimited list of properties compatible with the java.util.Properties parser.</xs:documentation>
+                    <xs:documentation>A semicolon-delimited list of properties compatible with the java.util.Properties
+                        parser.
+                    </xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>

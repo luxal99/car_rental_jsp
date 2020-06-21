@@ -24,7 +24,8 @@
             <form method="post" action="${pageContext.request.contextPath}/admin/registration">
                 <div class="form-group text-left">
                     <label>Full name</label>
-                    <input type="text" class="form-control" name="fullname" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="text" class="form-control" name="fullname" id="exampleInputEmail1"
+                           aria-describedby="emailHelp"
                            placeholder="Full name">
                 </div>
                 <div class="form-group text-left">

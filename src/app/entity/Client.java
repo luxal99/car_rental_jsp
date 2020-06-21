@@ -21,18 +21,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author luxal
  */
 @Entity
 @Table(name = "client")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
-    @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id"),
-    @NamedQuery(name = "Client.findByFullName", query = "SELECT c FROM Client c WHERE c.fullName = :fullName"),
-    @NamedQuery(name = "Client.findByEmail", query = "SELECT c FROM Client c WHERE c.email = :email"),
-    @NamedQuery(name = "Client.findByTelephone", query = "SELECT c FROM Client c WHERE c.telephone = :telephone")})
+        @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
+        @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id"),
+        @NamedQuery(name = "Client.findByFullName", query = "SELECT c FROM Client c WHERE c.fullName = :fullName"),
+        @NamedQuery(name = "Client.findByEmail", query = "SELECT c FROM Client c WHERE c.email = :email"),
+        @NamedQuery(name = "Client.findByTelephone", query = "SELECT c FROM Client c WHERE c.telephone = :telephone")})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -133,5 +132,5 @@ public class Client implements Serializable {
     public String toString() {
         return "com.mycompany.mavenproject3.Client[ id=" + id + " ]";
     }
-    
+
 }

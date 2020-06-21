@@ -2,32 +2,34 @@
 <!--This schema describes the weblogic-extension schema.  This includes
   unsupported features that may be removed without notice in future
   WebLogic Server releases.-->
-<schema targetNamespace="http://www.bea.com/ns/weblogic/90" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:wls="http://www.bea.com/ns/weblogic/90" xmlns="http://www.w3.org/2001/XMLSchema">
-  <include schemaLocation="http://www.bea.com/ns/weblogic/90/weblogic-j2ee.xsd"/>
-  <element name="weblogic-extension" type="wls:weblogic-extensionType"/>
-  <complexType name="weblogic-extensionType">
-    <sequence>
-      <element name="module-provider" minOccurs="0" maxOccurs="unbounded" type="wls:module-providerType"/>
-      <element name="custom-module" type="wls:custom-moduleType" minOccurs="0" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <complexType name="custom-moduleType">
-    <sequence>
-      <element name="uri" type="string" minOccurs="1"/>
-      <element name="provider-name" type="string" minOccurs="1"/>
-      <element name="configuration-support" type="wls:configuration-supportType" minOccurs="0"/>
-    </sequence>
-  </complexType>
-  <complexType name="module-providerType">
-    <sequence>
-      <element name="name" type="string" minOccurs="1"/>
-      <element name="module-factory-class-name" type="string" minOccurs="1"/>
-      <element name="binding-jar-uri" type="string" minOccurs="0"/>
-    </sequence>
-  </complexType>
-  <complexType name="configuration-supportType">
-    <annotation>
-      <documentation><![CDATA[If the custom module supports configuration descriptors, 
+<schema targetNamespace="http://www.bea.com/ns/weblogic/90" elementFormDefault="qualified"
+        attributeFormDefault="unqualified" xmlns:wls="http://www.bea.com/ns/weblogic/90"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+    <include schemaLocation="http://www.bea.com/ns/weblogic/90/weblogic-j2ee.xsd"/>
+    <element name="weblogic-extension" type="wls:weblogic-extensionType"/>
+    <complexType name="weblogic-extensionType">
+        <sequence>
+            <element name="module-provider" minOccurs="0" maxOccurs="unbounded" type="wls:module-providerType"/>
+            <element name="custom-module" type="wls:custom-moduleType" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="custom-moduleType">
+        <sequence>
+            <element name="uri" type="string" minOccurs="1"/>
+            <element name="provider-name" type="string" minOccurs="1"/>
+            <element name="configuration-support" type="wls:configuration-supportType" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="module-providerType">
+        <sequence>
+            <element name="name" type="string" minOccurs="1"/>
+            <element name="module-factory-class-name" type="string" minOccurs="1"/>
+            <element name="binding-jar-uri" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="configuration-supportType">
+        <annotation>
+            <documentation><![CDATA[If the custom module supports configuration descriptors,
 	then a configuration-support element is required. This element specifies
 	- base-root-element   - the root element name of the descriptor being configured.
  	- config-root-element - (optional) the root element of the configuring descriptor.
@@ -59,16 +61,16 @@
              </configuration-support>
 	   </custom-module>
         </weblogic-extension>]]></documentation>
-    </annotation>
-    <sequence>
-      <element name="base-root-element" type="string"/>
-      <element name="config-root-element" type="string" minOccurs="0"/>
-      <element name="base-namespace" type="string"/>
-      <element name="config-namespace" type="string" minOccurs="0"/>
-      <element name="base-uri" type="string"/>
-      <element name="config-uri" type="string" minOccurs="0"/>
-      <element name="base-package-name" type="string"/>
-      <element name="config-package-name" type="string" minOccurs="0"/>
-    </sequence>
-  </complexType>
+        </annotation>
+        <sequence>
+            <element name="base-root-element" type="string"/>
+            <element name="config-root-element" type="string" minOccurs="0"/>
+            <element name="base-namespace" type="string"/>
+            <element name="config-namespace" type="string" minOccurs="0"/>
+            <element name="base-uri" type="string"/>
+            <element name="config-uri" type="string" minOccurs="0"/>
+            <element name="base-package-name" type="string"/>
+            <element name="config-package-name" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
 </schema>

@@ -82,38 +82,46 @@
   10. The property "dynamic.username.password" when set during module initialization to "true" will signal the provider runtime to collect the username and password from the CallbackHandler for each request. When this property is set to "false" or if the property is not set then the username and password for  wsse:UsernameToken(s) is collected once during Module Initialization.
 -->
 
-<xwss:SecurityConfiguration xmlns:xwss="http://java.sun.com/xml/ns/xwss/config" 
-                            dumpMessages="false">                           
+<xwss:SecurityConfiguration xmlns:xwss="http://java.sun.com/xml/ns/xwss/config"
+                            dumpMessages="false">
     <xwss:Timestamp/>
-    <xwss:RequireUsernameToken nonceRequired="false" passwordDigestRequired="false"/>   
+    <xwss:RequireUsernameToken nonceRequired="false" passwordDigestRequired="false"/>
     <xwss:RequireEncryption>
         <xwss:Target type="qname">SOAP-BODY</xwss:Target>
     </xwss:RequireEncryption>
     <xwss:RequireEncryption>
-        <xwss:Target type="qname">{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken</xwss:Target>
+        <xwss:Target type="qname">
+            {http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken
+        </xwss:Target>
         <xwss:Target type="qname">SOAP-BODY</xwss:Target>
     </xwss:RequireEncryption>
     <xwss:RequireEncryption>
         <xwss:Target type="qname">SOAP-BODY</xwss:Target>
-        <xwss:Target type="qname">{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken</xwss:Target>
+        <xwss:Target type="qname">
+            {http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken
+        </xwss:Target>
     </xwss:RequireEncryption>
     <xwss:RequireSignature>
         <xwss:Target type="qname">SOAP-BODY</xwss:Target>
-    </xwss:RequireSignature>     
+    </xwss:RequireSignature>
     <xwss:Encrypt>
         <xwss:X509Token certificateAlias="s1as"/>
-    </xwss:Encrypt>    
-     <xwss:Encrypt>
+    </xwss:Encrypt>
+    <xwss:Encrypt>
         <xwss:X509Token certificateAlias="s1as"/>
         <xwss:KeyEncryptionMethod algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
-        <xwss:Target type="qname">{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken</xwss:Target>
+        <xwss:Target type="qname">
+            {http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken
+        </xwss:Target>
         <xwss:Target type="qname">SOAP-BODY</xwss:Target>
     </xwss:Encrypt>
     <xwss:Encrypt>
         <xwss:X509Token certificateAlias="s1as"/>
         <xwss:KeyEncryptionMethod algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
         <xwss:Target type="qname">SOAP-BODY</xwss:Target>
-        <xwss:Target type="qname">{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken</xwss:Target>
+        <xwss:Target type="qname">
+            {http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd}UsernameToken
+        </xwss:Target>
     </xwss:Encrypt>
     <xwss:Sign>
         <xwss:X509Token certificateAlias="s1as"/>

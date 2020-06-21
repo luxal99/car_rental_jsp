@@ -107,6 +107,7 @@ body.yui-layout {
     width: 100%;
     /*overflow: hidden;*/
 }
+
 .yui-layout div.yui-layout-bd {
     position: absolute;
     top: 0;
@@ -115,12 +116,15 @@ body.yui-layout {
     width: 100%;
     /*overflow: hidden;*/
 }
+
 .yui-layout .yui-layout-noscroll div.yui-layout-bd {
     overflow: hidden;
 }
+
 .yui-layout .yui-layout-scroll div.yui-layout-bd {
     overflow: auto;
 }
+
 .yui-layout div.yui-layout-ft {
     position: absolute;
     bottom: 0;
@@ -153,6 +157,7 @@ body.yui-layout {
     width: 17px;
     font-size: 0;
 }
+
 .yui-layout .yui-layout-unit div.yui-layout-hd .collapse-close {
     right: 25px;
 }

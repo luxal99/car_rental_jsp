@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE connector PUBLIC '-//Sun Microsystems, Inc.//DTD Connector 1.0//EN' 'http://java.sun.com/dtd/connector_1_0.dtd'>
+<!DOCTYPE connector PUBLIC '-//Sun Microsystems, Inc.//DTD Connector 1.0//EN'
+        'http://java.sun.com/dtd/connector_1_0.dtd'>
 
 <connector>
     <display-name>JAXR NoTX</display-name>
@@ -9,7 +10,8 @@
     <eis-type>JAXR Provider</eis-type>
     <version>1.0</version>
     <resourceadapter>
-        <managedconnectionfactory-class>com.sun.connector.jaxr.NoTxManagedConnectionFactory</managedconnectionfactory-class>
+        <managedconnectionfactory-class>com.sun.connector.jaxr.NoTxManagedConnectionFactory
+        </managedconnectionfactory-class>
         <connectionfactory-interface>com.sun.connector.jaxr.JaxrConnectionFactory</connectionfactory-interface>
         <connectionfactory-impl-class>com.sun.connector.jaxr.JaxrConnectionFactory</connectionfactory-impl-class>
         <connection-interface>javax.xml.registry.Connection</connection-interface>

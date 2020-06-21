@@ -23,7 +23,7 @@ public class FileUploadServlet extends HttpServlet {
         //get the InputStream to store the file somewhere
         InputStream fileInputStream = filePart.getInputStream();
 
-        File fileToSave = new File("/home/"+filePart.getSubmittedFileName());
+        File fileToSave = new File("/home/" + filePart.getSubmittedFileName());
         Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
         //get the URL of the uploaded file

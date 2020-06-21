@@ -17,7 +17,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-if [ -z "$DERBY_HOME" ] ; then
+if [ -z "$DERBY_HOME" ]; then
   echo "Error: DERBY_HOME is not set. Please set the DERBY_HOME environment variable"
   echo "to the location of your Derby installation."
   return 1

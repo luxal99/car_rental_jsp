@@ -28,7 +28,7 @@ public class ReservationServlet extends HttpServlet {
 
         try {
             if (!reservationDAO.checkRentalDate(Integer.valueOf(req.getParameter("idVehicle")), req.getParameter("startDate"))) {
-                resp.sendRedirect(req.getContextPath()+"/pages/reservation.jsp");
+                resp.sendRedirect(req.getContextPath() + "/pages/reservation.jsp");
             } else {
                 Reservation reservation = new Reservation();
                 reservation.setStartDate(req.getParameter("startDate"));

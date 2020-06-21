@@ -41,7 +41,8 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.glassfish.main</groupId>
@@ -70,8 +71,15 @@
                         <configuration>
                             <archive>
                                 <manifestEntries>
-                                    <Glassfish-require-services>org.glassfish.api.admingui.ConsoleProvider</Glassfish-require-services>
-                                    <HK2-Import-Bundles>org.glassfish.main.admingui.console-common,org.glassfish.hk2.hk2,org.glassfish.main.admingui.console-plugin-service, org.glassfish.main.deployment.deployment-client,org.glassfish.main.registration.registration-api,org.glassfish.main.registration.registration-impl, javax.servlet-api, javax.servlet.jsp-api, com.sun.el.javax.el, com.sun.jsftemplating, org.glassfish.main.admingui.dataprovider, com.sun.pkg.client  </HK2-Import-Bundles>
+                                    <Glassfish-require-services>org.glassfish.api.admingui.ConsoleProvider
+                                    </Glassfish-require-services>
+                                    <HK2-Import-Bundles>
+                                        org.glassfish.main.admingui.console-common,org.glassfish.hk2.hk2,org.glassfish.main.admingui.console-plugin-service,
+                                        org.glassfish.main.deployment.deployment-client,org.glassfish.main.registration.registration-api,org.glassfish.main.registration.registration-impl,
+                                        javax.servlet-api, javax.servlet.jsp-api, com.sun.el.javax.el,
+                                        com.sun.jsftemplating, org.glassfish.main.admingui.dataprovider,
+                                        com.sun.pkg.client
+                                    </HK2-Import-Bundles>
                                 </manifestEntries>
                             </archive>
                         </configuration>
@@ -86,22 +94,26 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <unzip src="target/admingui.war" dest="target/temp" />
-                                <delete file="target/admingui.war" />
-                                <mkdir dir="target/temp/WEB-INF/extra" />
+                                <unzip src="target/admingui.war" dest="target/temp"/>
+                                <delete file="target/admingui.war"/>
+                                <mkdir dir="target/temp/WEB-INF/extra"/>
                                 <move todir="target/temp/WEB-INF/extra">
-                                    <fileset dir="target/admingui/WEB-INF/lib" includes="**/*.jar" excludes="console-core*.jar" />
+                                    <fileset dir="target/admingui/WEB-INF/lib" includes="**/*.jar"
+                                             excludes="console-core*.jar"/>
                                 </move>
                                 <delete>
-                                    <fileset dir="target/temp/WEB-INF/lib" includes="**/*.jar" excludes="console-core*.jar" />
+                                    <fileset dir="target/temp/WEB-INF/lib" includes="**/*.jar"
+                                             excludes="console-core*.jar"/>
                                 </delete>
-                               <jar jarfile="target/admingui.war" basedir="target/temp">
+                                <jar jarfile="target/admingui.war" basedir="target/temp">
                                     <manifest>
-                                      <attribute name="Glassfish-require-services" value="org.glassfish.api.admingui.ConsoleProvider" />
-                                      <attribute name="HK2-Import-Bundles" value="org.glassfish.main.admingui.console-common,org.glassfish.hk2.hk2,org.glassfish.main.admingui.console-plugin-service, org.glassfish.main.deployment.deployment-client,org.glassfish.main.registration.registration-api,org.glassfish.main.registration.registration-impl, javax.servlet-api, javax.servlet.jsp-api, com.sun.el.javax.el, com.sun.jsftemplating, org.glassfish.main.admingui.dataprovider, com.sun.pkg.client " />
+                                        <attribute name="Glassfish-require-services"
+                                                   value="org.glassfish.api.admingui.ConsoleProvider"/>
+                                        <attribute name="HK2-Import-Bundles"
+                                                   value="org.glassfish.main.admingui.console-common,org.glassfish.hk2.hk2,org.glassfish.main.admingui.console-plugin-service, org.glassfish.main.deployment.deployment-client,org.glassfish.main.registration.registration-api,org.glassfish.main.registration.registration-impl, javax.servlet-api, javax.servlet.jsp-api, com.sun.el.javax.el, com.sun.jsftemplating, org.glassfish.main.admingui.dataprovider, com.sun.pkg.client "/>
                                     </manifest>
                                 </jar>
-                                <delete dir="target/temp" />
+                                <delete dir="target/temp"/>
 
                             </target>
                         </configuration>

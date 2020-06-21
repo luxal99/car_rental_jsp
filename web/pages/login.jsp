@@ -24,25 +24,27 @@
     <title>Title</title>
 </head>
 <body>
-  <div class="login-header">
-      <div class="row text-center">
-          <div class="col-sm-4"></div>
-          <div class="col-sm login-col">
-              <form method="post" action="${pageContext.request.contextPath}/login">
-                  <div class="form-group text-left" >
-                      <label >Username</label>
-                      <input type="" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="Enter email">
-                  </div>
-                  <div class="form-group text-left">
-                      <label>Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn login-btn">Submit</button>
-              </form>
-          </div>
-          <div class="col-sm-4"></div>
+<div class="login-header">
+    <div class="row text-center">
+        <div class="col-sm-4"></div>
+        <div class="col-sm login-col">
+            <form method="post" action="${pageContext.request.contextPath}/login">
+                <div class="form-group text-left">
+                    <label>Username</label>
+                    <input type="" class="form-control" id="exampleInputEmail1" name="username"
+                           aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group text-left">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+                           placeholder="Password">
+                </div>
+                <button type="submit" class="btn login-btn">Submit</button>
+            </form>
+        </div>
+        <div class="col-sm-4"></div>
 
-      </div>
-  </div>
+    </div>
+</div>
 </body>
 </html>

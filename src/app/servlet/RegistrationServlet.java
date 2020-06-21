@@ -21,32 +21,32 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-            System.out.println(req.getParameter("fullname"));
-            Client client = new Client();
-            client.setFullName(req.getParameter("fullname"));
-            client.setEmail(req.getParameter("email"));
+        System.out.println(req.getParameter("fullname"));
+        Client client = new Client();
+        client.setFullName(req.getParameter("fullname"));
+        client.setEmail(req.getParameter("email"));
 
 
-            ClientDAO clientService = new ClientDAO(Client.class);
-            Client savedClient = clientService.save(client);
+        ClientDAO clientService = new ClientDAO(Client.class);
+        Client savedClient = clientService.save(client);
 
-            RoleDAO userTypeService = new RoleDAO(Role.class);
-            Role userType = userTypeService.findById(1);
+        RoleDAO userTypeService = new RoleDAO(Role.class);
+        Role userType = userTypeService.findById(1);
 
-            User user = new User();
-            user.setUsername(req.getParameter("username"));
+        User user = new User();
+        user.setUsername(req.getParameter("username"));
 
-            String hashedPassword = HashPassword.encrypt(req.getParameter("password"));
+        String hashedPassword = HashPassword.encrypt(req.getParameter("password"));
 
-            user.setPassword(hashedPassword);
-            user.setRole(userType);
-            user.setIdClient(savedClient);
+        user.setPassword(hashedPassword);
+        user.setRole(userType);
+        user.setIdClient(savedClient);
 
-            UserDAO userService = new UserDAO(User.class);
-            userService.save(user);
+        UserDAO userService = new UserDAO(User.class);
+        userService.save(user);
 
 
-            resp.sendRedirect(req.getContextPath() + "/pages/login.jsp");
+        resp.sendRedirect(req.getContextPath() + "/pages/login.jsp");
 
     }
 }

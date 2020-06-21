@@ -42,7 +42,7 @@
 #
 # Message Queue Broker init.d script
 #
-# This script starts/stops the Message Queue broker process as part of 
+# This script starts/stops the Message Queue broker process as part of
 # normal UNIX system operation based on the value of the
 # AUTOSTART in the /etc/imq/imqbrokerd.conf file.
 #
@@ -103,127 +103,123 @@ CONF_FILE=$IMQ_ETCHOME/imqbrokerd.conf
 
 EXECUTABLE=imqbrokerd
 
-
 # error "description"
-error () {
+error() {
   echo $0: $* 2>&1
   exit 1
 }
 
 # find the named process(es)
 findproc() {
-  pid=`/usr/bin/ps -ef |
-  /usr/bin/grep -w $1 | 
-  /usr/bin/grep -v grep |
-  /usr/bin/awk '{print $2}'`
+  pid=$(/usr/bin/ps -ef |
+    /usr/bin/grep -w $1 |
+    /usr/bin/grep -v grep |
+    /usr/bin/awk '{print $2}')
   echo $pid
 }
 
 # kill the named process(es) (borrowed from S15nfs.server)
 killproc() {
-   pid=`findproc $1`
-   [ "$pid" != "" ] && kill $pid
+  pid=$(findproc $1)
+  [ "$pid" != "" ] && kill $pid
 }
 
 #
 # require /usr/bin and Message Queue
 #
 if [ ! -d /usr/bin ]; then
-   error "Cannot find /usr/bin."
+  error "Cannot find /usr/bin."
 
 elif [ ! -d "$IMQ_HOME" ]; then
-   error "Cannot find Message Queue in IMQ_HOME ($IMQ_HOME)."
+  error "Cannot find Message Queue in IMQ_HOME ($IMQ_HOME)."
 fi
-
-
-
 
 #
 # Start/stop Message Queue Broker
 #
 case "$1" in
 'start')
-         if [ -f $CONF_FILE ] ; then 
-            AUTOSTART=`grep -v "^#" $CONF_FILE | grep AUTOSTART | cut -c11-`
-            RESTART=`grep -v "^#" $CONF_FILE | grep RESTART | cut -c9-`
-            ARGS=`grep -v "^#" $CONF_FILE | grep ARGS | cut -c6-`
-            if [ $AUTOSTART ] ; then 
-                if [ $AUTOSTART = "YES" -o $AUTOSTART = "Yes" -o $AUTOSTART = "yes" -o $AUTOSTART = "Y" -o $AUTOSTART = "y" ] ; then
-                    START=1
-                    REASON="The AUTOSTART property is turned on (set to $AUTOSTART) in  $CONF_FILE. The ARGS property is set to \"$ARGS\""
+  if [ -f $CONF_FILE ]; then
+    AUTOSTART=$(grep -v "^#" $CONF_FILE | grep AUTOSTART | cut -c11-)
+    RESTART=$(grep -v "^#" $CONF_FILE | grep RESTART | cut -c9-)
+    ARGS=$(grep -v "^#" $CONF_FILE | grep ARGS | cut -c6-)
+    if [ $AUTOSTART ]; then
+      if [ $AUTOSTART = "YES" -o $AUTOSTART = "Yes" -o $AUTOSTART = "yes" -o $AUTOSTART = "Y" -o $AUTOSTART = "y" ]; then
+        START=1
+        REASON="The AUTOSTART property is turned on (set to $AUTOSTART) in  $CONF_FILE. The ARGS property is set to \"$ARGS\""
 
-                elif [ $AUTOSTART = "NO" -o $AUTOSTART = "No" -o $AUTOSTART = "no" -o $AUTOSTART = "N" -o $AUTOSTART = "n" ] ; then
-                    START=0
-                    REASON="The AUTOSTART property is turned off (set to $AUTOSTART) in $CONF_FILE"
-                else
-                    START=0
-                    REASON="The AUTOSTART property is not set to an expected value (value is $AUTOSTART)"
-                fi
-            else 
-                START=0
-                REASON="AUTOSTART was not set in $CONF_FILE"
-            fi
-         else
-            START=0
-            REASON="$CONF_FILE, the configuration file, was not found"
-         fi
+      elif [ $AUTOSTART = "NO" -o $AUTOSTART = "No" -o $AUTOSTART = "no" -o $AUTOSTART = "N" -o $AUTOSTART = "n" ]; then
+        START=0
+        REASON="The AUTOSTART property is turned off (set to $AUTOSTART) in $CONF_FILE"
+      else
+        START=0
+        REASON="The AUTOSTART property is not set to an expected value (value is $AUTOSTART)"
+      fi
+    else
+      START=0
+      REASON="AUTOSTART was not set in $CONF_FILE"
+    fi
+  else
+    START=0
+    REASON="$CONF_FILE, the configuration file, was not found"
+  fi
 
-         # Handle restart option
-         if [ ! -z "$RESTART" ]; then
-             if [ $RESTART = "YES" ]; then
-                BROKER_OPTIONS="-autorestart $BROKER_OPTIONS"
-             fi
-         fi
+  # Handle restart option
+  if [ ! -z "$RESTART" ]; then
+    if [ $RESTART = "YES" ]; then
+      BROKER_OPTIONS="-autorestart $BROKER_OPTIONS"
+    fi
+  fi
 
-         if [ $START -eq 0 ] ; then
-             if [ $DEBUG ] ; then
-                 echo $IMQ_HOME/bin/$EXECUTABLE is not being started because [ $REASON ]
-             fi
-             exit 0
-         else
-             if [ $DEBUG ] ; then
-                 echo $IMQ_HOME/bin/$EXECUTABLE is starting because [ $REASON ]
-             fi
-         fi
+  if [ $START -eq 0 ]; then
+    if [ $DEBUG ]; then
+      echo $IMQ_HOME/bin/$EXECUTABLE is not being started because [ $REASON ]
+    fi
+    exit 0
+  else
+    if [ $DEBUG ]; then
+      echo $IMQ_HOME/bin/$EXECUTABLE is starting because [ $REASON ]
+    fi
+  fi
 
-         if [ $DEBUG ] ; then 
-	     echo "Command \c"
-	     echo "$IMQ_HOME/bin/$EXECUTABLE -bgnd $BROKER_OPTIONS  $ARGS... \c"
-         fi
-	 cd $IMQ_HOME
+  if [ $DEBUG ]; then
+    echo "Command \c"
+    echo "$IMQ_HOME/bin/$EXECUTABLE -bgnd $BROKER_OPTIONS  $ARGS... \c"
+  fi
+  cd $IMQ_HOME
 
-	 # Check if the server is already running.
-	 if [ -n "`findproc $EXECUTABLE`" ]; then
-             if [ $DEBUG ] ; then 
-	        echo "$EXECUTABLE is already running."
-             fi
-	     exit 0
-	 fi
+  # Check if the server is already running.
+  if [ -n "$(findproc $EXECUTABLE)" ]; then
+    if [ $DEBUG ]; then
+      echo "$EXECUTABLE is already running."
+    fi
+    exit 0
+  fi
 
-	 bin/$EXECUTABLE -bgnd $BROKER_OPTIONS $ARGS &
-         if [ $DEBUG ] ; then 
-  	     echo "done"
-         fi
+  bin/$EXECUTABLE -bgnd $BROKER_OPTIONS $ARGS &
+  if [ $DEBUG ]; then
+    echo "done"
+  fi
 
-	;;
+  ;;
 
 'stop')
-        if [ $DEBUG ] ; then
-	    echo "Stopping $EXECUTABLE ... \c"
-        fi
-	if [ -z "`findproc $EXECUTABLE`" ]; then
-            if [ $DEBUG ] ; then
-	        echo "$EXECUTABLE is not running."
-            fi
-	   exit 0
-	fi
-	killproc $EXECUTABLE
-        if [ $DEBUG ] ; then
-	    echo "done"
-        fi
-	;;
+  if [ $DEBUG ]; then
+    echo "Stopping $EXECUTABLE ... \c"
+  fi
+  if [ -z "$(findproc $EXECUTABLE)" ]; then
+    if [ $DEBUG ]; then
+      echo "$EXECUTABLE is not running."
+    fi
+    exit 0
+  fi
+  killproc $EXECUTABLE
+  if [ $DEBUG ]; then
+    echo "done"
+  fi
+  ;;
 
 *)
-	echo "Usage: $0 { start | stop }"
-	;;
+  echo "Usage: $0 { start | stop }"
+  ;;
 esac

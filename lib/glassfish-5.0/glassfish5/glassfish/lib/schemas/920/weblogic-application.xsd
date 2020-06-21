@@ -1,57 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="http://www.bea.com/ns/weblogic/90" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wls="http://www.bea.com/ns/weblogic/90" xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" elementFormDefault="qualified" attributeFormDefault="unqualified">
-  <include schemaLocation="http://www.bea.com/ns/weblogic/90/weblogic-j2ee.xsd"/>
-  <import namespace="http://java.sun.com/xml/ns/j2ee" 
-    schemaLocation="http://java.sun.com/xml/ns/j2ee/j2ee_1_4.xsd"/>
-	<element name="weblogic-application" type="wls:weblogic-applicationType"/>
-	<complexType name="weblogic-applicationType">
-		<sequence>
-			<element name="ejb" type="wls:ejbType" minOccurs="0"/>
-			<element name="xml" type="wls:xmlType" minOccurs="0"/>
-			<element name="jdbc-connection-pool" type="wls:jdbc-connection-poolType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="security" type="wls:securityType" minOccurs="0"/>
-			<element name="application-param" type="wls:application-paramType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="classloader-structure" type="wls:classloader-structureType" minOccurs="0"/>
-			<element name="listener" type="wls:listenerType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="singleton-service" type="wls:singletonServiceType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="startup" type="wls:startupType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="shutdown" type="wls:shutdownType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="module" type="wls:weblogic-moduleType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="library-ref" type="wls:library-refType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="fair-share-request" type="wls:fair-share-request-classType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="response-time-request" type="wls:response-time-request-classType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="context-request" type="wls:context-request-classType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="max-threads-constraint" type="wls:max-threads-constraintType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="min-threads-constraint" type="wls:min-threads-constraintType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="capacity" type="wls:capacityType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="work-manager" type="wls:work-managerType" minOccurs="0" maxOccurs="unbounded"/>
-      <!-- Configure the number of stuck threads needed to bring the app into admin mode -->
-      <element name="application-admin-mode-trigger" type="wls:application-admin-mode-triggerType" minOccurs="0" maxOccurs="1"/>
+<schema targetNamespace="http://www.bea.com/ns/weblogic/90" xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:wls="http://www.bea.com/ns/weblogic/90" xmlns:j2ee="http://java.sun.com/xml/ns/j2ee"
+        elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <include schemaLocation="http://www.bea.com/ns/weblogic/90/weblogic-j2ee.xsd"/>
+    <import namespace="http://java.sun.com/xml/ns/j2ee"
+            schemaLocation="http://java.sun.com/xml/ns/j2ee/j2ee_1_4.xsd"/>
+    <element name="weblogic-application" type="wls:weblogic-applicationType"/>
+    <complexType name="weblogic-applicationType">
+        <sequence>
+            <element name="ejb" type="wls:ejbType" minOccurs="0"/>
+            <element name="xml" type="wls:xmlType" minOccurs="0"/>
+            <element name="jdbc-connection-pool" type="wls:jdbc-connection-poolType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="security" type="wls:securityType" minOccurs="0"/>
+            <element name="application-param" type="wls:application-paramType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="classloader-structure" type="wls:classloader-structureType" minOccurs="0"/>
+            <element name="listener" type="wls:listenerType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="singleton-service" type="wls:singletonServiceType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="startup" type="wls:startupType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="shutdown" type="wls:shutdownType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="module" type="wls:weblogic-moduleType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="library-ref" type="wls:library-refType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="fair-share-request" type="wls:fair-share-request-classType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="response-time-request" type="wls:response-time-request-classType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="context-request" type="wls:context-request-classType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="max-threads-constraint" type="wls:max-threads-constraintType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="min-threads-constraint" type="wls:min-threads-constraintType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="capacity" type="wls:capacityType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="work-manager" type="wls:work-managerType" minOccurs="0" maxOccurs="unbounded"/>
+            <!-- Configure the number of stuck threads needed to bring the app into admin mode -->
+            <element name="application-admin-mode-trigger" type="wls:application-admin-mode-triggerType" minOccurs="0"
+                     maxOccurs="1"/>
 
-      <element name="session-descriptor" type="wls:session-descriptorType" minOccurs="0" />
-      <element name="library-context-root-override" type="wls:library-context-root-overrideType" minOccurs="0" maxOccurs="unbounded"/>
-      <element name="prefer-application-packages" type="wls:prefer-application-packagesType" minOccurs="0" maxOccurs="1"/>
-			<!-- The ejb element contains information that is specific to the EJB
+            <element name="session-descriptor" type="wls:session-descriptorType" minOccurs="0"/>
+            <element name="library-context-root-override" type="wls:library-context-root-overrideType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <element name="prefer-application-packages" type="wls:prefer-application-packagesType" minOccurs="0"
+                     maxOccurs="1"/>
+            <!-- The ejb element contains information that is specific to the EJB
           modules that are part of a WebLogic application.  Currently, one can
           use the ejb element to specify one or more application level caches
           that can be used by the application's entity beans.
 
           Used in: weblogic-application
         -->
-			<!-- The xml element contains information about parsers, and entity mappings
+            <!-- The xml element contains information about parsers, and entity mappings
           for xml processing that is specific to this application.
         -->
-			<!-- The jdbc-connection-pool element is the root element for an 
+            <!-- The jdbc-connection-pool element is the root element for an
           application scoped JDBC pool declaration.
         -->
-			<!-- The jms element specifies the URI of a JMS destination group module-->
-		</sequence>
-	</complexType>
-	<complexType name="ejbType">
-		<sequence>
-			<element name="entity-cache" type="wls:application-entity-cacheType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="start-mdbs-with-application" type="wls:true-falseType" minOccurs="0"/>
-			<!--
+            <!-- The jms element specifies the URI of a JMS destination group module-->
+        </sequence>
+    </complexType>
+    <complexType name="ejbType">
+        <sequence>
+            <element name="entity-cache" type="wls:application-entity-cacheType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="start-mdbs-with-application" type="wls:true-falseType" minOccurs="0"/>
+            <!--
         The entity-cache element is used to define a named application level
         cache that will be used to cache entity EJB instances at runtime.
         Individual entity beans refer to the application level cache that they
@@ -80,7 +90,7 @@
         </entity-cache>
 
       -->
-			<!--
+            <!--
         This allows user to configure ejb container to start mdbs with
         application.  If set to "true", container starts mdbs as part of
         application.  If set to "false" container keeps mdbs in a queue and
@@ -90,16 +100,16 @@
         <start-mdbs-with-application>true</start-mdbs-with-application>
 
       -->
-		</sequence>
-	</complexType>
-	<complexType name="application-entity-cacheType">
-		<sequence>
-			<element name="entity-cache-name" type="string"/>
-			<choice minOccurs="0">
-				<element name="max-beans-in-cache" type="int"/>
+        </sequence>
+    </complexType>
+    <complexType name="application-entity-cacheType">
+        <sequence>
+            <element name="entity-cache-name" type="string"/>
+            <choice minOccurs="0">
+                <element name="max-beans-in-cache" type="int"/>
 
-				<element name="max-cache-size" type="wls:max-cache-sizeType"/>
-				<!--
+                <element name="max-cache-size" type="wls:max-cache-sizeType"/>
+                <!--
                   Maximum number of entity beans that are allowed in the cache.  If the
                   limit is reached, beans may be passivated.  If 0 is specified, then
                   there is no limit.  This mechanism does not take into account the
@@ -109,7 +119,7 @@
 
                   Default value: 1000
                   -->
-				<!--
+                <!--
               The max-cache-size element is used to specify a limit on the size of
               an entity cache in terms of memory size, expressed either in terms of
               bytes or megabytes.  A bean provider should provide an estimate of the
@@ -120,10 +130,10 @@
 
               Used in: entity-cache
          -->
-			</choice>
-			<element name="max-queries-in-cache" type="int" minOccurs="0"/>
-			<element name="caching-strategy" type="string" minOccurs="0"/>
-			<!--
+            </choice>
+            <element name="max-queries-in-cache" type="int" minOccurs="0"/>
+            <element name="caching-strategy" type="string" minOccurs="0"/>
+            <!--
       The entity-cache-name element specifies a unique name for an entity
       bean cache.  The name must be unique within an ear file and may not
       be the empty string.
@@ -133,7 +143,7 @@
       Example:
         <entity-cache-name>ExclusiveCache</entity-cache-name>
     -->
-			<!-- 
+            <!--
           The caching-strategy element specifies the general strategy that the
           EJB container uses to manage entity bean instances in a particular
           application level cache.  A cache buffers entity bean instances in
@@ -157,34 +167,34 @@
           Example:
           <caching-strategy>Exclusive</caching-strategy>
         -->
-		</sequence>
-	</complexType>
-	<complexType name="max-cache-sizeType">
-		<choice>
-			<element name="bytes" type="int"/>
-			<element name="megabytes" type="int"/>
-			<!--
+        </sequence>
+    </complexType>
+    <complexType name="max-cache-sizeType">
+        <choice>
+            <element name="bytes" type="int"/>
+            <element name="megabytes" type="int"/>
+            <!--
         The bytes element is used to specify the maximum size of an 
         application level entity cache in bytes.  
 
         Example:
         <bytes>15000000</bytes>
        -->
-			<!--
+            <!--
          The megabytes element is used to specify the maximum size of an entity
          bean cache in megabytes.
        -->
-		</choice>
-	</complexType>
-	<!-- 
+        </choice>
+    </complexType>
+    <!--
        xml element contains information about parsers, and entity mappings
        for xml processing that is specific to this application.
      -->
-	<complexType name="xmlType">
-		<sequence>
-			<element name="parser-factory" type="wls:parser-factoryType" minOccurs="0"/>
-			<element name="entity-mapping" type="wls:entity-mappingType" minOccurs="0" maxOccurs="unbounded"/>
-			<!--
+    <complexType name="xmlType">
+        <sequence>
+            <element name="parser-factory" type="wls:parser-factoryType" minOccurs="0"/>
+            <element name="entity-mapping" type="wls:entity-mappingType" minOccurs="0" maxOccurs="unbounded"/>
+            <!--
          The parser-factory element is used to configure factory classes 
          for both SAX and DOM style parsing and for XSLT transformations 
          for the enterprise application
@@ -197,107 +207,107 @@
            </parser-factory>
 
         -->
-			<!--
+            <!--
            This element is used to specify entity mapping.  This mapping
            determines alternative entityuri for given public / system id.
            Default place to look for these entityuri is "lib/xml/registry"
            directory.
          -->
-		</sequence>
-	</complexType>
-	<complexType name="parser-factoryType">
-		<sequence>
-			<element name="saxparser-factory" type="string" minOccurs="0"/>
-			<element name="document-builder-factory" type="string" minOccurs="0"/>
-			<element name="transformer-factory" type="string" minOccurs="0"/>
-		</sequence>
-	</complexType>
-	<complexType name="entity-mappingType">
-		<sequence>
-			<element name="entity-mapping-name" type="string"/>
-			<element name="public-id" type="string" minOccurs="0"/>
-			<element name="system-id" type="string" minOccurs="0"/>
-			<element name="entity-uri" type="string" minOccurs="0"/>
-			<element name="when-to-cache" type="string" minOccurs="0"/>
-			<element name="cache-timeout-interval" type="int" minOccurs="0"/>
-			<!--
+        </sequence>
+    </complexType>
+    <complexType name="parser-factoryType">
+        <sequence>
+            <element name="saxparser-factory" type="string" minOccurs="0"/>
+            <element name="document-builder-factory" type="string" minOccurs="0"/>
+            <element name="transformer-factory" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="entity-mappingType">
+        <sequence>
+            <element name="entity-mapping-name" type="string"/>
+            <element name="public-id" type="string" minOccurs="0"/>
+            <element name="system-id" type="string" minOccurs="0"/>
+            <element name="entity-uri" type="string" minOccurs="0"/>
+            <element name="when-to-cache" type="string" minOccurs="0"/>
+            <element name="cache-timeout-interval" type="int" minOccurs="0"/>
+            <!--
         This element specifies the name for this entity mapping.
         -->
-			<!--
+            <!--
         This element specifies the public id of the mapped entity.
         -->
-			<!--
+            <!--
         This element specifies the system id of the mapped entity.
         -->
-			<!--
+            <!--
         This element specifies the entityuri for the mapped entity.
         -->
-			<!--
+            <!--
         This element specifies the  when-to-cache for the mapped entity.
         -->
-			<!--
+            <!--
         This element specifies cache time out interval  for the mapped entity.
         -->
-		</sequence>
-	</complexType>
-	<!-- 
+        </sequence>
+    </complexType>
+    <!--
           The jdbc-connection-pool element is the root element for an 
           application scoped JDBC pool declaration.
         -->
-	<complexType name="jdbc-connection-poolType">
-		<sequence>
-			<element name="data-source-jndi-name" type="string"/>
-			<element name="connection-factory" type="wls:connection-factoryType"/>
-			<element name="pool-params" type="wls:application-pool-paramsType" minOccurs="0"/>
-			<element name="driver-params" type="wls:driver-paramsType" minOccurs="0"/>
-			<element name="acl-name" type="string" minOccurs="0"/>
-			<!-- A JNDI name in the application specific JNDI tree -->
-			<!-- 
+    <complexType name="jdbc-connection-poolType">
+        <sequence>
+            <element name="data-source-jndi-name" type="string"/>
+            <element name="connection-factory" type="wls:connection-factoryType"/>
+            <element name="pool-params" type="wls:application-pool-paramsType" minOccurs="0"/>
+            <element name="driver-params" type="wls:driver-paramsType" minOccurs="0"/>
+            <element name="acl-name" type="string" minOccurs="0"/>
+            <!-- A JNDI name in the application specific JNDI tree -->
+            <!--
         Defines initialization parameters for a connection factory which is
         used to construct connection pools.
         -->
-			<!--
+            <!--
           DEPRECATED: The acl-name is deprecated
          -->
-		</sequence>
-	</complexType>
-	<complexType name="connection-factoryType">
-		<sequence>
-			<element name="factory-name" type="string" minOccurs="0"/>
-			<element name="connection-properties" type="wls:connection-propertiesType" minOccurs="0"/>
-			<!-- 
+        </sequence>
+    </complexType>
+    <complexType name="connection-factoryType">
+        <sequence>
+            <element name="factory-name" type="string" minOccurs="0"/>
+            <element name="connection-properties" type="wls:connection-propertiesType" minOccurs="0"/>
+            <!--
         The name of a JDBCDataSourceFactoryMBean in config.xml 
         -->
-			<!-- 
+            <!--
         The connection params define overrides for default connection factory
         settings
         -->
-		</sequence>
-	</complexType>
-	<complexType name="connection-propertiesType">
-		<sequence>
-			<element name="user-name" type="string" minOccurs="0"/>
-			<element name="password" type="string" minOccurs="0"/>
-			<element name="url" type="string" minOccurs="0"/>
-			<element name="driver-class-name" type="string" minOccurs="0"/>
-			<element name="connection-params" type="wls:connection-paramsType" minOccurs="0" maxOccurs="unbounded"/>
-			<!-- 
+        </sequence>
+    </complexType>
+    <complexType name="connection-propertiesType">
+        <sequence>
+            <element name="user-name" type="string" minOccurs="0"/>
+            <element name="password" type="string" minOccurs="0"/>
+            <element name="url" type="string" minOccurs="0"/>
+            <element name="driver-class-name" type="string" minOccurs="0"/>
+            <element name="connection-params" type="wls:connection-paramsType" minOccurs="0" maxOccurs="unbounded"/>
+            <!--
         user-name is an optional element which is used to override UserName in
         the JDBCDataSourceFactoryMBean.
         -->
-			<!-- 
+            <!--
         password is an optional element which is used to override Password in
         the JDBCDataSourceFactoryMBean.
         -->
-			<!-- 
+            <!--
         url is an optional element which is used to override URL in the
         JDBCDataSourceFactoryMBean.
         -->
-			<!-- 
+            <!--
         driver-class-name is an optional element which is used to override
         DriverName in the JDBCDataSourceFactoryMBean
         -->
-			<!--
+            <!--
           The connection-params element is used to set parameters which will be 
           passed to the driver when making a connection.
         
@@ -309,132 +319,132 @@
             </parameter>
         
           -->
-		</sequence>
-	</complexType>
-	<complexType name="connection-paramsType">
-		<sequence>
-			<element name="parameter" type="wls:parameterType" minOccurs="0" maxOccurs="unbounded"/>
-		</sequence>
-	</complexType>
-	<complexType name="parameterType">
-		<sequence>
-			<element name="description" type="string" minOccurs="0"/>
-			<element name="param-name" type="string"/>
-			<element name="param-value" type="string"/>
-			<!--
+        </sequence>
+    </complexType>
+    <complexType name="connection-paramsType">
+        <sequence>
+            <element name="parameter" type="wls:parameterType" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="parameterType">
+        <sequence>
+            <element name="description" type="string" minOccurs="0"/>
+            <element name="param-name" type="string"/>
+            <element name="param-value" type="string"/>
+            <!--
           The param-name is the description of a parameter that is passed to one
           of the application components. 
         
           Used in: connection-params/parameter and application-param
         -->
-			<!--
+            <!--
           The param-name is the name of a parameter that is passed to one
           of the application components. 
         
           Used in: connection-params/parameter and application-param
         -->
-			<!--
+            <!--
           The param-name is the value of a parameter that is passed to one
           of the application components. 
         
           Used in: connection-params/parameter and application-param
           -->
-		</sequence>
-	</complexType>
-	<!-- 
+        </sequence>
+    </complexType>
+    <!--
         The pool-params element defines parameters that affect the behavior of
         the pool
         -->
-	<complexType name="application-pool-paramsType">
-		<sequence>
-			<element name="size-params" type="wls:size-paramsType" minOccurs="0"/>
-			<element name="xa-params" type="wls:xa-paramsType" minOccurs="0"/>
-			<element name="login-delay-seconds" type="int" minOccurs="0"/>
-			<element name="leak-profiling-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="connection-check-params" type="wls:connection-check-paramsType" minOccurs="0"/>
-			<element name="jdbcxa-debug-level" type="int" minOccurs="0"/>
-			<element name="remove-infected-connections-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<!--
+    <complexType name="application-pool-paramsType">
+        <sequence>
+            <element name="size-params" type="wls:size-paramsType" minOccurs="0"/>
+            <element name="xa-params" type="wls:xa-paramsType" minOccurs="0"/>
+            <element name="login-delay-seconds" type="int" minOccurs="0"/>
+            <element name="leak-profiling-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="connection-check-params" type="wls:connection-check-paramsType" minOccurs="0"/>
+            <element name="jdbcxa-debug-level" type="int" minOccurs="0"/>
+            <element name="remove-infected-connections-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <!--
           Defines a login delay for connection requests. This is used to 
           prevent rapid requests for JDBC connections from overwhelming
           the DBMS server.
         -->
-			<!--
+            <!--
           If set to true, the system will print exceptions to the log file 
           when code using a connection pool fails to return the connection
           to the pool before dereferencing it.
         -->
-			<!--
+            <!--
           This is an internal setting
         -->
-			<!--
+            <!--
           If set to true, connection will be removed from pool if application
           asks for the underlying vendor connection object.
         -->
-		</sequence>
-	</complexType>
-	<!--
+        </sequence>
+    </complexType>
+    <!--
         The size-params element defines parameters that affect the number of
         connections in the pool
         -->
-	<complexType name="size-paramsType">
-		<sequence>
-			<element name="initial-capacity" type="int" minOccurs="0"/>
-			<element name="max-capacity" type="int" minOccurs="0"/>
-			<element name="capacity-increment" type="int" minOccurs="0"/>
-			<element name="shrinking-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="shrink-period-minutes" type="int" minOccurs="0"/>
-			<element name="shrink-frequency-seconds" type="int" minOccurs="0"/>
-			<element name="highest-num-waiters" type="int" minOccurs="0"/>
-			<element name="highest-num-unavailable" type="int" minOccurs="0"/>
-			<!--
+    <complexType name="size-paramsType">
+        <sequence>
+            <element name="initial-capacity" type="int" minOccurs="0"/>
+            <element name="max-capacity" type="int" minOccurs="0"/>
+            <element name="capacity-increment" type="int" minOccurs="0"/>
+            <element name="shrinking-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="shrink-period-minutes" type="int" minOccurs="0"/>
+            <element name="shrink-frequency-seconds" type="int" minOccurs="0"/>
+            <element name="highest-num-waiters" type="int" minOccurs="0"/>
+            <element name="highest-num-unavailable" type="int" minOccurs="0"/>
+            <!--
           An integer value representing the initial size of the pool
         -->
-			<!--
+            <!--
           An integer value representing the maximum size of the pool
         -->
-			<!-- 
+            <!--
           An integer value representing the number of connections that
           will be added to a pool when a request is made to a pool
           that has no available connections. 
         -->
-			<!--
+            <!--
           This can be set to true|false. If set to true, then
           the pool having more than the initial capacity of
           connections will shrink back towards the initial size
           when connections become unused.
         -->
-			<!--
+            <!--
           Number of seconds to wait before shrinking a
           connection pool that has incrementally increased to meet demand.
         -->
-			<!--
+            <!--
           defines the maximum number of threads that will wait for a connection
           before an exception is thrown to the requestor.
           -->
-			<!--
+            <!--
           defines the maximum number of connections being refreshed
         -->
-		</sequence>
-	</complexType>
-	<!-- params for XA data sources -->
-	<complexType name="xa-paramsType">
-		<sequence>
-			<element name="debug-level" type="int" minOccurs="0"/>
-			<element name="keep-conn-until-tx-complete-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="end-only-once-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="recover-only-once-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="tx-context-on-close-needed" type="wls:true-falseType" minOccurs="0"/>
-			<element name="new-conn-for-commit-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="prepared-statement-cache-size" type="int" minOccurs="0"/>
-			<element name="keep-logical-conn-open-on-release" type="wls:true-falseType" minOccurs="0"/>
-			<element name="local-transaction-supported" type="wls:true-falseType" minOccurs="0"/>
-			<element name="resource-health-monitoring-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="xa-set-transaction-timeout" type="wls:true-falseType" minOccurs="0"/>
-			<element name="xa-transaction-timeout" type="int" minOccurs="0"/>
-			<element name="rollback-localtx-upon-connclose" type="wls:true-falseType" minOccurs="0"/>
-			<!-- These are all translated from JDBCConnectionPoolMBean -->
-			<!--
+        </sequence>
+    </complexType>
+    <!-- params for XA data sources -->
+    <complexType name="xa-paramsType">
+        <sequence>
+            <element name="debug-level" type="int" minOccurs="0"/>
+            <element name="keep-conn-until-tx-complete-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="end-only-once-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="recover-only-once-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="tx-context-on-close-needed" type="wls:true-falseType" minOccurs="0"/>
+            <element name="new-conn-for-commit-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="prepared-statement-cache-size" type="int" minOccurs="0"/>
+            <element name="keep-logical-conn-open-on-release" type="wls:true-falseType" minOccurs="0"/>
+            <element name="local-transaction-supported" type="wls:true-falseType" minOccurs="0"/>
+            <element name="resource-health-monitoring-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="xa-set-transaction-timeout" type="wls:true-falseType" minOccurs="0"/>
+            <element name="xa-transaction-timeout" type="int" minOccurs="0"/>
+            <element name="rollback-localtx-upon-connclose" type="wls:true-falseType" minOccurs="0"/>
+            <!-- These are all translated from JDBCConnectionPoolMBean -->
+            <!--
           Sets the Debug Level for XA Drivers
           Default value: 0
           Example: 
@@ -442,7 +452,7 @@
         
           Since: WLS 7.0
         -->
-			<!--
+            <!--
         
           Determines whether the XA connection pool associates the same XA
           connection with the distributed transaction until the transaction
@@ -458,7 +468,7 @@
             </keep-conn-until-tx-complete-enabled>
           Since: WLS 7.0
         -->
-			<!--
+            <!--
         
           Determines whether XAResource.end() will be called only once for
           each pending XAResource.start().  e.g. the XA driver will not be
@@ -479,7 +489,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
         
           Declares whether JTA TM should call recover on the resource once
           only.
@@ -498,7 +508,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
         
           Defines whether the XA driver requires a distributed transaction
           context when closing various JDBC objects, e.g. result sets,
@@ -518,7 +528,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
         
           Defines whether a dedicated XA connection is used for
           commit/rollback processing of a particular distributed transaction.
@@ -537,7 +547,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
         
           The maximum number of prepared statements cached by this particular
           XA connection pool.  If the value is 0, caching is turned off.
@@ -555,7 +565,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
           Default value: 
           Used in: xa-params
           Example:
@@ -565,7 +575,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
           Default value: 
           Used in: xa-params
           Example: 
@@ -575,7 +585,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
           Default value: 
           Used in: xa-params
           Example:
@@ -585,7 +595,7 @@
           Since: WLS 7.0
         
         -->
-			<!--
+            <!--
           Default value: 
           Used in: xa-params
           Example:
@@ -595,7 +605,7 @@
           Since: WLS 8.1
         
         -->
-			<!--
+            <!--
           When the xa-set-transaction-timeout value is set to true,
           the TM will invoke setTransactionTimeout on the resource before
           calling XAResource.start.  The TM will pass the global transaction
@@ -611,7 +621,7 @@
           Since: WLS 8.1
         
         -->
-			<!--
+            <!--
           When the rollback-localtx-upon-connclose element is true,
           WLS connection pool will call rollback() on the connection
           before putting it back in the pool.
@@ -625,78 +635,78 @@
           Since: WLS 8.1
         
         -->
-		</sequence>
-	</complexType>
-	<!-- 
+        </sequence>
+    </complexType>
+    <!--
         The connection-check-params define whether, when and how connections
         in a pool will be checked to make sure they are still alive.
         -->
-	<complexType name="connection-check-paramsType">
-		<sequence>
-			<element name="table-name" type="string" minOccurs="0"/>
-			<element name="check-on-reserve-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="check-on-release-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="refresh-minutes" type="int" minOccurs="0"/>
-			<element name="check-on-create-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="connection-reserve-timeout-seconds" type="int" minOccurs="0"/>
-			<element name="connection-creation-retry-frequency-seconds" type="int" minOccurs="0"/>
-			<element name="inactive-connection-timeout-seconds" type="int" minOccurs="0"/>
-			<element name="test-frequency-seconds" type="int" minOccurs="0"/>
-			<element name="init-sql" type="string" minOccurs="0"/>
-			<!-- table-name defines a table in the schema that can be queried -->
-			<!-- 
+    <complexType name="connection-check-paramsType">
+        <sequence>
+            <element name="table-name" type="string" minOccurs="0"/>
+            <element name="check-on-reserve-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="check-on-release-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="refresh-minutes" type="int" minOccurs="0"/>
+            <element name="check-on-create-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="connection-reserve-timeout-seconds" type="int" minOccurs="0"/>
+            <element name="connection-creation-retry-frequency-seconds" type="int" minOccurs="0"/>
+            <element name="inactive-connection-timeout-seconds" type="int" minOccurs="0"/>
+            <element name="test-frequency-seconds" type="int" minOccurs="0"/>
+            <element name="init-sql" type="string" minOccurs="0"/>
+            <!-- table-name defines a table in the schema that can be queried -->
+            <!--
         If on-reserve is "true", then the connection will be tested each time
         before its handed out to a user.
         -->
-			<!-- 
+            <!--
         If on-release is "true", then the connection will be tested each time
         a user returns a connection to the pool.
         -->
-			<!-- 
+            <!--
         If refresh-minutes is defined then a trigger will be fired
         periodically (based on the number of minutes specified). This trigger
         will check each connection in the pool to make sure it is still valid.
         -->
-			<!-- 
+            <!--
         If on-create is "true", then the connection will be tested when it is
         created.
         -->
-			<!-- 
+            <!--
         Number of seconds after which the call to reserve a connection from the
         pool will timeout.
         -->
-			<!-- 
+            <!--
         The frequency of retry attempts by the pool to establish connections
         to the database.
         -->
-			<!-- 
+            <!--
         # seconds of inactivity after which reserved connections will forcibly
         be released back into the pool.
         -->
-			<!-- 
+            <!--
         The number of seconds between database connection tests. After every
         test-frequency-seconds interval, unused database connections are tested
         using table-name. Connections that do not pass the test will be closed
         and reopened to re-establish a valid physical database connection. If
         table-name is not set, the test will not be performed.
         -->
-			<!-- init-sql defines a sql query that will run when a connection
+            <!-- init-sql defines a sql query that will run when a connection
         is created
         -->
-		</sequence>
-	</complexType>
-	<!-- 
+        </sequence>
+    </complexType>
+    <!--
         the driver params are used to set behavior on weblogic drivers 
         -->
-	<complexType name="driver-paramsType">
-		<sequence>
-			<element name="statement" type="wls:statementType" minOccurs="0"/>
-			<element name="prepared-statement" type="wls:prepared-statementType" minOccurs="0"/>
-			<element name="row-prefetch-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="row-prefetch-size" type="int" minOccurs="0"/>
-			<element name="stream-chunk-size" type="int" minOccurs="0"/>
-			<!-- These are all translated from JDBCConnectionPoolMBean -->
-			<!--
+    <complexType name="driver-paramsType">
+        <sequence>
+            <element name="statement" type="wls:statementType" minOccurs="0"/>
+            <element name="prepared-statement" type="wls:prepared-statementType" minOccurs="0"/>
+            <element name="row-prefetch-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="row-prefetch-size" type="int" minOccurs="0"/>
+            <element name="stream-chunk-size" type="int" minOccurs="0"/>
+            <!-- These are all translated from JDBCConnectionPoolMBean -->
+            <!--
            Controls row prefetching between a client and WebLogic
            Server for each ResultSet.  When an external client accesses
            a database using JDBC through Weblogic Server, row prefetching improves
@@ -705,7 +715,7 @@
            this setting and not use row prefetching when the client and
            WebLogic Server are in the same JVM.
           -->
-			<!--
+            <!--
            The number of result set rows to prefetch for a client. The optimal value
            depends on the particulars of the query.  In general, increasing
            this number will increase performance, until a particular value
@@ -717,15 +727,15 @@
            The default for this setting is 48
            The range for this setting is 2 to 65536
           -->
-			<!--
+            <!--
           Data chunk size for steaming datatypes.  Streaming datatypes (for
           app resulting from a call to <code>getBinaryStream()</code>)
           will be pulled in StreamChunkSize sized chunks from WebLogic
           Server to the client as needed.
           -->
-		</sequence>
-	</complexType>
-	<!--
+        </sequence>
+    </complexType>
+    <!--
           Default value: 
           Used in: driver-params
           Example:
@@ -735,12 +745,12 @@
           Since: WLS 7.0
         
         -->
-	<complexType name="statementType">
-		<sequence>
-			<element name="profiling-enabled" type="wls:true-falseType" minOccurs="0"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="statementType">
+        <sequence>
+            <element name="profiling-enabled" type="wls:true-falseType" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <!--
           Default value: 
           Used in: driver-params
           Example:
@@ -753,31 +763,32 @@
           Since: WLS 7.0
         
         -->
-	<complexType name="prepared-statementType">
-		<sequence>
-			<element name="profiling-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="cache-profiling-threshold" type="int" minOccurs="0"/>
-			<element name="cache-size" type="int" minOccurs="0"/>
-			<element name="parameter-logging-enabled" type="wls:true-falseType" minOccurs="0"/>
-			<element name="max-parameter-length" type="int" minOccurs="0"/>
-			<element name="cache-type" type="int" minOccurs="0"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="prepared-statementType">
+        <sequence>
+            <element name="profiling-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="cache-profiling-threshold" type="int" minOccurs="0"/>
+            <element name="cache-size" type="int" minOccurs="0"/>
+            <element name="parameter-logging-enabled" type="wls:true-falseType" minOccurs="0"/>
+            <element name="max-parameter-length" type="int" minOccurs="0"/>
+            <element name="cache-type" type="int" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <!--
         This element specifies security information for the application
         -->
-	<complexType name="securityType">
-		<sequence>
-			<element name="realm-name" type="string" minOccurs="0"/>
-			<element name="security-role-assignment" type="wls:application-security-role-assignmentType" minOccurs="0" maxOccurs="unbounded"/>
-			<!-- 
+    <complexType name="securityType">
+        <sequence>
+            <element name="realm-name" type="string" minOccurs="0"/>
+            <element name="security-role-assignment" type="wls:application-security-role-assignmentType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+            <!--
         This element names a security realm that will be used by the
         application. If no specified, then the system default realm will be
         used
         -->
-		</sequence>
-	</complexType>
-	<!--
+        </sequence>
+    </complexType>
+    <!--
         The security-role-assigment declares a mapping between an application wide
         security role and one or more principals in the WebLogic server. You can also use it to mark a given role as an externally-defined role.
         
@@ -805,26 +816,26 @@
         
         Used in: security
         -->
-	<complexType name="application-security-role-assignmentType">
-		<sequence>
-			<element name="role-name" type="string"/>
-      <choice>
-        <element name="principal-name" type="string" maxOccurs="unbounded"/>
-        <element name="externally-defined" type="j2ee:emptyType"/>
-      </choice>
-			<!--
+    <complexType name="application-security-role-assignmentType">
+        <sequence>
+            <element name="role-name" type="string"/>
+            <choice>
+                <element name="principal-name" type="string" maxOccurs="unbounded"/>
+                <element name="externally-defined" type="j2ee:emptyType"/>
+            </choice>
+            <!--
         The role-name element contains the name of a security role.
         
         Used in: security-role-assignment
         -->
-			<!--
+            <!--
         The principal-name element contains the name of a principal.
         
         Used in: security-role-assignment
         -->
-		</sequence>
-	</complexType>
-	<!--
+        </sequence>
+    </complexType>
+    <!--
           The application-param element is used to specify untyped parameters that affect
           the behavior of container instances related to the application. Currently, the
           following parameters are supported:
@@ -862,14 +873,14 @@
         
         
          -->
-	<complexType name="application-paramType">
-		<sequence>
-			<element name="description" type="string" minOccurs="0"/>
-			<element name="param-name" type="string"/>
-			<element name="param-value" type="string"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="application-paramType">
+        <sequence>
+            <element name="description" type="string" minOccurs="0"/>
+            <element name="param-name" type="string"/>
+            <element name="param-value" type="string"/>
+        </sequence>
+    </complexType>
+    <!--
           A classloader-structure element allows you to define the organization
           of classloaders for this application. The declaration represents a
           tree structure which represents the classloader hierarchy and associates
@@ -907,18 +918,19 @@
         is restricted to three levels.
         
         -->
-	<complexType name="classloader-structureType">
-		<sequence>
-			<element name="module-ref" type="wls:module-refType" minOccurs="0" maxOccurs="unbounded"/>
-			<element name="classloader-structure" type="wls:classloader-structureType" minOccurs="0" maxOccurs="unbounded"/>
-		</sequence>
-	</complexType>
-	<complexType name="module-refType">
-		<sequence>
-			<element name="module-uri" type="string"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="classloader-structureType">
+        <sequence>
+            <element name="module-ref" type="wls:module-refType" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="classloader-structure" type="wls:classloader-structureType" minOccurs="0"
+                     maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="module-refType">
+        <sequence>
+            <element name="module-uri" type="string"/>
+        </sequence>
+    </complexType>
+    <!--
           The listener element is used to register user defined application lifecycle
           listeners. These are classes that extend the abstract base class
           weblogic.application.ApplicationLifecycleListener. The listener-class
@@ -934,14 +946,14 @@
             </listener>
         
           -->
-	<complexType name="listenerType">
-		<sequence>
-			<element name="listener-class" type="string"/>
-			<element name="listener-uri" type="string" minOccurs="0"/>
-			<element name="run-as-principal-name" type="string" minOccurs="0"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="listenerType">
+        <sequence>
+            <element name="listener-class" type="string"/>
+            <element name="listener-uri" type="string" minOccurs="0"/>
+            <element name="run-as-principal-name" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <!--
           The singleton service element is used to register user defined singleton services. 
           These are classes that implement the interface weblogic.cluster.singleton.SingletonService. 
           The class-name element is the name of the users implementation of SingletonService.
@@ -956,14 +968,14 @@
             </singleton-service>
         
           -->
-	<complexType name="singletonServiceType">
-		<sequence>
-			<element name="class-name" type="string" minOccurs="1" maxOccurs="1"/>
-			<element name="name" type="string" minOccurs="1" maxOccurs="1"/>
-			<element name="singleton-uri" type="string" minOccurs="0"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="singletonServiceType">
+        <sequence>
+            <element name="class-name" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="name" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="singleton-uri" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <!--
           The startup element is used to register user defined startup classes.
           The startup-class element is used to define the name of the class
           intended to be run when the application is being deployed. The 
@@ -981,13 +993,13 @@
             </startup>
         
           -->
-	<complexType name="startupType">
-		<sequence>
-			<element name="startup-class" type="string"/>
-			<element name="startup-uri" type="string" minOccurs="0"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="startupType">
+        <sequence>
+            <element name="startup-class" type="string"/>
+            <element name="startup-uri" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <!--
           The shutdown element is used to register user defined shutdown classes.
           The shutdown-class element is used to define the name of the class
           intended to be run when the application is being undeployed. The 
@@ -1005,32 +1017,32 @@
             </shutdown>
         
           -->
-	<complexType name="shutdownType">
-		<sequence>
-			<element name="shutdown-class" type="string"/>
-			<element name="shutdown-uri" type="string" minOccurs="0"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="shutdownType">
+        <sequence>
+            <element name="shutdown-class" type="string"/>
+            <element name="shutdown-uri" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <!--
         The module element represents a single WebLogic application module and contains a
         jdbc or jms element.
         -->
-	<complexType name="weblogic-moduleType">
-		<sequence>
-			<element name="name" type="string"/>
-			<element name="type">
-				<simpleType>
-					<restriction base="string">
-						<enumeration value="JMS"/>
-						<enumeration value="JDBC"/>
-						<enumeration value="Interception"/>
-					</restriction>
-				</simpleType>
-			</element>
-			<element name="path" type="string"/>
-		</sequence>
-	</complexType>
-	<!--
+    <complexType name="weblogic-moduleType">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="type">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="JMS"/>
+                        <enumeration value="JDBC"/>
+                        <enumeration value="Interception"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="path" type="string"/>
+        </sequence>
+    </complexType>
+    <!--
      This element references a J2EE library that is required by the application.
        
       Example:
@@ -1042,211 +1054,211 @@
              <exact-match>false</exact-match>
            </library-ref>
   -->
-	<complexType name="library-refType">
-		<sequence>
-			<element name="library-name" type="string" minOccurs="1" maxOccurs="1"/>
-			<element name="specification-version" type="string" minOccurs="0" maxOccurs="1"/>
-			<element name="implementation-version" type="string" minOccurs="0" maxOccurs="1"/>
-			<element name="exact-match" type="boolean" minOccurs="0" maxOccurs="1"/>
-			<element name="context-root" type="string" minOccurs="0" maxOccurs="1"/>
-			<!--
+    <complexType name="library-refType">
+        <sequence>
+            <element name="library-name" type="string" minOccurs="1" maxOccurs="1"/>
+            <element name="specification-version" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="implementation-version" type="string" minOccurs="0" maxOccurs="1"/>
+            <element name="exact-match" type="boolean" minOccurs="0" maxOccurs="1"/>
+            <element name="context-root" type="string" minOccurs="0" maxOccurs="1"/>
+            <!--
         The name of the referenced library (required).
       -->
-			<!--
+            <!--
         The minimum specification-version required (optional).  
       -->
-      <!--
-        The minimum implementation-version requited (optional).
-      -->
-			<!--
+            <!--
+              The minimum implementation-version requited (optional).
+            -->
+            <!--
         Controls "match highest version" behavior. Default is false (optional).
       -->
-      <!-- 
-        For webapp libraries, allows setting their context-root (optional).
-      -->
-		</sequence>
-	</complexType>
+            <!--
+              For webapp libraries, allows setting their context-root (optional).
+            -->
+        </sequence>
+    </complexType>
 
-  <!--
-  The sesson-descriptor specifies a list of configuration params
-  for servlet sessions.
-  -->
-  <complexType name="session-descriptorType">
-    <sequence>
-      <!-- session timeout; default=3600 secs -->
-      <element name="timeout-secs" type="j2ee:xsdIntegerType" minOccurs="0" />
+    <!--
+    The sesson-descriptor specifies a list of configuration params
+    for servlet sessions.
+    -->
+    <complexType name="session-descriptorType">
+        <sequence>
+            <!-- session timeout; default=3600 secs -->
+            <element name="timeout-secs" type="j2ee:xsdIntegerType" minOccurs="0"/>
 
-      <!-- invalidation trigger interval in seconds; default=60 secs -->
-      <element name="invalidation-interval-secs" type="j2ee:xsdIntegerType"
-        minOccurs="0" />
+            <!-- invalidation trigger interval in seconds; default=60 secs -->
+            <element name="invalidation-interval-secs" type="j2ee:xsdIntegerType"
+                     minOccurs="0"/>
 
-      <!-- debugging for http sessions; default=false -->
-      <element name="debug-enabled" type="wls:true-falseType" minOccurs="0" />
+            <!-- debugging for http sessions; default=false -->
+            <element name="debug-enabled" type="wls:true-falseType" minOccurs="0"/>
 
-      <!-- session id length; default=52 -->
-      <element name="id-length" type="j2ee:xsdIntegerType" minOccurs="0" />
+            <!-- session id length; default=52 -->
+            <element name="id-length" type="j2ee:xsdIntegerType" minOccurs="0"/>
 
-      <!-- session tracking enabled between http requests; default=true -->
-      <element name="tracking-enabled" type="wls:true-falseType" minOccurs="0" />
+            <!-- session tracking enabled between http requests; default=true -->
+            <element name="tracking-enabled" type="wls:true-falseType" minOccurs="0"/>
 
-      <!-- cache size for jdbc and file persistent sessions; default=1028 -->
-      <element name="cache-size" type="j2ee:xsdIntegerType" minOccurs="0" />
+            <!-- cache size for jdbc and file persistent sessions; default=1028 -->
+            <element name="cache-size" type="j2ee:xsdIntegerType" minOccurs="0"/>
 
-      <!-- max sessions limit for memory/replicated sessions; default=-1 (unlimited) -->
-      <element name="max-in-memory-sessions" type="j2ee:xsdIntegerType" minOccurs="0" />
+            <!-- max sessions limit for memory/replicated sessions; default=-1 (unlimited) -->
+            <element name="max-in-memory-sessions" type="j2ee:xsdIntegerType" minOccurs="0"/>
 
-      <!-- Should the webapp container set cookies in the response; default=true -->
-      <element name="cookies-enabled" type="wls:true-falseType" minOccurs="0" />
+            <!-- Should the webapp container set cookies in the response; default=true -->
+            <element name="cookies-enabled" type="wls:true-falseType" minOccurs="0"/>
 
-      <!-- Session tracking cookie name; default="JSESSIONID" -->
-      <element name="cookie-name" type="string" minOccurs="0" />
+            <!-- Session tracking cookie name; default="JSESSIONID" -->
+            <element name="cookie-name" type="string" minOccurs="0"/>
 
-      <!-- Session tracking cookie path; default="/" -->
-      <element name="cookie-path" type="string" minOccurs="0" />
+            <!-- Session tracking cookie path; default="/" -->
+            <element name="cookie-path" type="string" minOccurs="0"/>
 
-      <!-- Session tracking cookie domain; default=null -->
-      <element name="cookie-domain" type="string" minOccurs="0" />
+            <!-- Session tracking cookie domain; default=null -->
+            <element name="cookie-domain" type="string" minOccurs="0"/>
 
-      <!-- Session tracking cookie comment; default=null -->
-      <element name="cookie-comment" type="string" minOccurs="0" />
+            <!-- Session tracking cookie comment; default=null -->
+            <element name="cookie-comment" type="string" minOccurs="0"/>
 
-      <!-- Mark session tracking cookie secure; default=false -->
-      <element name="cookie-secure" type="wls:true-falseType" minOccurs="0" />
+            <!-- Mark session tracking cookie secure; default=false -->
+            <element name="cookie-secure" type="wls:true-falseType" minOccurs="0"/>
 
-      <!-- Session tracking cookie max-age; default=-1 (unlimited) -->
-      <element name="cookie-max-age-secs" type="j2ee:xsdIntegerType" minOccurs="0" />
+            <!-- Session tracking cookie max-age; default=-1 (unlimited) -->
+            <element name="cookie-max-age-secs" type="j2ee:xsdIntegerType" minOccurs="0"/>
 
-      <!-- Mark the session cooke as HttpOnly; default=false -->
-      <!-- Support Since WebLogic 10.0.2.0 -->
-      <element name="cookie-http-only" type="wls:true-falseType" minOccurs="0" />
+            <!-- Mark the session cooke as HttpOnly; default=false -->
+            <!-- Support Since WebLogic 10.0.2.0 -->
+            <element name="cookie-http-only" type="wls:true-falseType" minOccurs="0"/>
 
-      <!--
-      Session Persistence Storage type. Legal values:
-        1. "memory" (default)
-        2. "replicated" (requires clustering)
-        3. "replicated_if_clustered" (defaults to memory in non-clustered case)
-        4. "file"
-        5. "jdbc"
-        6. "cookie"
-      -->
-      <element name="persistent-store-type" type="string" minOccurs="0" />
+            <!--
+            Session Persistence Storage type. Legal values:
+              1. "memory" (default)
+              2. "replicated" (requires clustering)
+              3. "replicated_if_clustered" (defaults to memory in non-clustered case)
+              4. "file"
+              5. "jdbc"
+              6. "cookie"
+            -->
+            <element name="persistent-store-type" type="string" minOccurs="0"/>
 
-      <!--
-      Cookie name which holds the attribute name and values for "cookie" based
-      persistence; default="WLCOOKIE"
-      -->
-      <element name="persistent-store-cookie-name" type="string" minOccurs="0" />
+            <!--
+            Cookie name which holds the attribute name and values for "cookie" based
+            persistence; default="WLCOOKIE"
+            -->
+            <element name="persistent-store-cookie-name" type="string" minOccurs="0"/>
 
-      <!--
-      The storage dir used for "file" based persistence
-      default: "session_db" (relative to the temp dir for the webapp)
-      -->
-      <element name="persistent-store-dir" type="string" minOccurs="0" />
+            <!--
+            The storage dir used for "file" based persistence
+            default: "session_db" (relative to the temp dir for the webapp)
+            -->
+            <element name="persistent-store-dir" type="string" minOccurs="0"/>
 
-      <!-- jdbc connection pool name used for "jdbc" based persistence -->
-      <element name="persistent-store-pool" type="string" minOccurs="0" />
+            <!-- jdbc connection pool name used for "jdbc" based persistence -->
+            <element name="persistent-store-pool" type="string" minOccurs="0"/>
 
-      <!--
-      database table name used to store "jdbc" based persistent sessions
-      default: "wl_servlet_sessions"
-      -->
-      <element name="persistent-store-table" type="string" minOccurs="0"/>
+            <!--
+            database table name used to store "jdbc" based persistent sessions
+            default: "wl_servlet_sessions"
+            -->
+            <element name="persistent-store-table" type="string" minOccurs="0"/>
 
-      <!--
-      Alternative name for the "wl_max_inactive_interval" colum name. Applies only
-      to "jdbc" based persistence. Required for certain databases which don't
-      support long column names
-      -->
-      <element name="jdbc-column-name-max-inactive-interval" type="string"
-        minOccurs="0" />
+            <!--
+            Alternative name for the "wl_max_inactive_interval" colum name. Applies only
+            to "jdbc" based persistence. Required for certain databases which don't
+            support long column names
+            -->
+            <element name="jdbc-column-name-max-inactive-interval" type="string"
+                     minOccurs="0"/>
 
-      <!-- DEPRECATED; default=120 -->
-      <element name="jdbc-connection-timeout-secs" type="j2ee:xsdIntegerType"
-        minOccurs="0" />
+            <!-- DEPRECATED; default=120 -->
+            <element name="jdbc-connection-timeout-secs" type="j2ee:xsdIntegerType"
+                     minOccurs="0"/>
 
-      <!-- default: true; -->
-      <element name="url-rewriting-enabled" type="wls:true-falseType"
-        minOccurs="0" />
-      <!--
-      When this flag is set to false, WebLogic will add following header with the response:
-        "Cache-control: no-cache=set-cookie"
-      So that the proxy caches do not cache the cookies. default: true
-      -->
-      <element name="http-proxy-caching-of-cookies" type="wls:true-falseType"
-        minOccurs="0" />
+            <!-- default: true; -->
+            <element name="url-rewriting-enabled" type="wls:true-falseType"
+                     minOccurs="0"/>
+            <!--
+            When this flag is set to false, WebLogic will add following header with the response:
+              "Cache-control: no-cache=set-cookie"
+            So that the proxy caches do not cache the cookies. default: true
+            -->
+            <element name="http-proxy-caching-of-cookies" type="wls:true-falseType"
+                     minOccurs="0"/>
 
-      <!--
-      Servlet spec requires the containers to encode the session id in path params. There
-      are some webservers which do not work well with path params. In such a case this
-      parameter needs to be turned on; default=false
-      -->
-      <element name="encode-session-id-in-query-params" type="wls:true-falseType"
-        minOccurs="0" />
+            <!--
+            Servlet spec requires the containers to encode the session id in path params. There
+            are some webservers which do not work well with path params. In such a case this
+            parameter needs to be turned on; default=false
+            -->
+            <element name="encode-session-id-in-query-params" type="wls:true-falseType"
+                     minOccurs="0"/>
 
-      <!--
-      The monitoring-attribute-name element is useful for tagging session
-      runtime information for different sessions. For app, you can set it
-      to "username", if you have an "username" attribute which is guarenteed to
-      be unique.
+            <!--
+            The monitoring-attribute-name element is useful for tagging session
+            runtime information for different sessions. For app, you can set it
+            to "username", if you have an "username" attribute which is guarenteed to
+            be unique.
 
-      This element is used for the following:
+            This element is used for the following:
 
-      1. In the WebAppComponentRuntimeBean.getSessionIds() method. If this
-         attribute is set it returns an array of session attributes values with
-         this name. If this attribute is not set then it will return an array of
-         randomly generated Strings, which is not the same as session IDs for
-         security reasons.
+            1. In the WebAppComponentRuntimeBean.getSessionIds() method. If this
+               attribute is set it returns an array of session attributes values with
+               this name. If this attribute is not set then it will return an array of
+               randomly generated Strings, which is not the same as session IDs for
+               security reasons.
 
-      2. In the deprecated ServletSessionRuntimeMBean. The getMainAttribute()
-         of the ServletSessionRuntimeMBean returns the session attribute value
-         using this String as a key.
-      -->
-      <element name="monitoring-attribute-name" type="string" minOccurs="0" />
+            2. In the deprecated ServletSessionRuntimeMBean. The getMainAttribute()
+               of the ServletSessionRuntimeMBean returns the session attribute value
+               using this String as a key.
+            -->
+            <element name="monitoring-attribute-name" type="string" minOccurs="0"/>
 
-      <!--
-        Enable sharing of http sessions across webapps; default=false
-      -->
-      <element name="sharing-enabled" type="wls:true-falseType" minOccurs="0" />
+            <!--
+              Enable sharing of http sessions across webapps; default=false
+            -->
+            <element name="sharing-enabled" type="wls:true-falseType" minOccurs="0"/>
 
-    </sequence>
-    <attribute name="id" type="ID"/>
-  </complexType>
+        </sequence>
+        <attribute name="id" type="ID"/>
+    </complexType>
 
-  <!--
-     The library-context-root-override element is used to override the context-root
-     of a web module specified in deployment descriptor of a Library referenced by this application.
-     Only referencing applications can provide overrides by this mechanism. The snippet
-     shown below results in the final context-root of a web module with context-path webapp
-     to point to mywebapp.  
+    <!--
+       The library-context-root-override element is used to override the context-root
+       of a web module specified in deployment descriptor of a Library referenced by this application.
+       Only referencing applications can provide overrides by this mechanism. The snippet
+       shown below results in the final context-root of a web module with context-path webapp
+       to point to mywebapp.
 
-     <library-context-root-override>
-       <library-context-root>webapp</library-context-root>
-       <override-value>mywebapp</override-value>
-     </library-context-root-override>
-  -->
-  <complexType name="library-context-root-overrideType">
-    <sequence>
-      <element name="context-root" type="string"/>
-      <element name="override-value" type="string"/>
-    </sequence>
-  </complexType>
+       <library-context-root-override>
+         <library-context-root>webapp</library-context-root>
+         <override-value>mywebapp</override-value>
+       </library-context-root-override>
+    -->
+    <complexType name="library-context-root-overrideType">
+        <sequence>
+            <element name="context-root" type="string"/>
+            <element name="override-value" type="string"/>
+        </sequence>
+    </complexType>
 
 
-  <!--
-     A list of packages for classes that must always be loaded from the application.
-     Even if the listed classes are found in the System Class Loader, they are loaded
-     by the Application Class Loader providing a way for an application to use classes
-     from a different version of the same classes.
-     <prefer-application-packages>
-      <package-name>antlr.*</package-name>
-      <package-name>org.apache.struts.*</package-name>
-     </use-application-packages>
-  -->
-  <complexType name="prefer-application-packagesType">
-    <sequence>
-      <element name="package-name" type="string" minOccurs="0" maxOccurs="unbounded" />
-    </sequence>
-  </complexType>
+    <!--
+       A list of packages for classes that must always be loaded from the application.
+       Even if the listed classes are found in the System Class Loader, they are loaded
+       by the Application Class Loader providing a way for an application to use classes
+       from a different version of the same classes.
+       <prefer-application-packages>
+        <package-name>antlr.*</package-name>
+        <package-name>org.apache.struts.*</package-name>
+       </use-application-packages>
+    -->
+    <complexType name="prefer-application-packagesType">
+        <sequence>
+            <element name="package-name" type="string" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
 
 
 </schema>

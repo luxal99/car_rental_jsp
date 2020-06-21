@@ -25,7 +25,7 @@ h4 {
     color: #FF4C16;
 }
 
-.h3-brand{
+.h3-brand {
     font-family: 'Archivo Black', sans-serif;
 }
 
@@ -56,7 +56,7 @@ a {
     box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
 }
 
-.most-used-container{
+.most-used-container {
     padding-left: 5em !important;
     padding-right: 5em !important;
 }
@@ -70,7 +70,8 @@ a {
     background: #FF4C16;
     border-radius: 10px;
 }
-.car-col:hover{
+
+.car-col:hover {
     transition: .5s;
     padding: 1em;
     -webkit-box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
@@ -78,12 +79,12 @@ a {
     box-shadow: 16px 31px 37px -20px rgba(0, 0, 0, 0.75) !important;
 }
 
-.row{
+.row {
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
 
-.white-btn{
+.white-btn {
     background-color: #E3E3E3;
     color: #FF4C16;
     border: 0 !important;

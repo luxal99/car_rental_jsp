@@ -21,16 +21,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author luxal
  */
 @Entity
 @Table(name = "reservation_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ReservationStatus.findAll", query = "SELECT r FROM ReservationStatus r"),
-    @NamedQuery(name = "ReservationStatus.findById", query = "SELECT r FROM ReservationStatus r WHERE r.id = :id"),
-    @NamedQuery(name = "ReservationStatus.findByTitle", query = "SELECT r FROM ReservationStatus r WHERE r.title = :title")})
+        @NamedQuery(name = "ReservationStatus.findAll", query = "SELECT r FROM ReservationStatus r"),
+        @NamedQuery(name = "ReservationStatus.findById", query = "SELECT r FROM ReservationStatus r WHERE r.id = :id"),
+        @NamedQuery(name = "ReservationStatus.findByTitle", query = "SELECT r FROM ReservationStatus r WHERE r.title = :title")})
 public class ReservationStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -100,5 +99,5 @@ public class ReservationStatus implements Serializable {
     public String toString() {
         return "com.mycompany.mavenproject5.ReservationStatus[ id=" + id + " ]";
     }
-    
+
 }

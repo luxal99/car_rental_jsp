@@ -41,7 +41,8 @@
 
 -->
 
-<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN" "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
+<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN"
+        "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
 
 <!--
     i-net Oracle driver for Oracle Databases
@@ -66,10 +67,10 @@
 -->
 
 <resources>
-    <jdbc-connection-pool 
-        name="oracle_inet_pool" 
-        datasource-classname="com.inet.ora.OraDataSource"
-        res-type="javax.sql.DataSource">
+    <jdbc-connection-pool
+            name="oracle_inet_pool"
+            datasource-classname="com.inet.ora.OraDataSource"
+            res-type="javax.sql.DataSource">
         <property name="user" value="DB_USER"/>
         <property name="password" value="DB_PASSWORD"/>
         <property name="serviceName" value="DATABASE_NAME"/>
@@ -77,9 +78,9 @@
         <property name="port" value="1521"/>
     </jdbc-connection-pool>
 
-    <jdbc-resource 
-        enabled="true" 
-        jndi-name="jdbc/oracle_inet_resource" 
-        object-type="user" 
-        pool-name="oracle_inet_pool"/>
+    <jdbc-resource
+            enabled="true"
+            jndi-name="jdbc/oracle_inet_resource"
+            object-type="user"
+            pool-name="oracle_inet_pool"/>
 </resources> 

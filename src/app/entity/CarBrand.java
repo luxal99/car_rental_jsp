@@ -21,16 +21,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author luxal
  */
 @Entity
 @Table(name = "car_brand")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CarBrand.findAll", query = "SELECT c FROM CarBrand c"),
-    @NamedQuery(name = "CarBrand.findById", query = "SELECT c FROM CarBrand c WHERE c.id = :id"),
-    @NamedQuery(name = "CarBrand.findByTitle", query = "SELECT c FROM CarBrand c WHERE c.title = :title")})
+        @NamedQuery(name = "CarBrand.findAll", query = "SELECT c FROM CarBrand c"),
+        @NamedQuery(name = "CarBrand.findById", query = "SELECT c FROM CarBrand c WHERE c.id = :id"),
+        @NamedQuery(name = "CarBrand.findByTitle", query = "SELECT c FROM CarBrand c WHERE c.title = :title")})
 public class CarBrand implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -100,5 +99,5 @@ public class CarBrand implements Serializable {
     public String toString() {
         return "com.mycompany.mavenproject5.CarBrand[ id=" + id + " ]";
     }
-    
+
 }

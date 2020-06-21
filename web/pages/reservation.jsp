@@ -74,7 +74,7 @@
                 if (cookie.getName().equals("id")) {
                     carModel = carModelDAO.findById(Integer.valueOf(cookie.getValue()));
                     idCarModel = carModel.getId();
-                } else if (cookie.getName().equals("startDate"))    {
+                } else if (cookie.getName().equals("startDate")) {
                     request.setAttribute("startDate", cookie.getValue());
                     t1 = startDate.parse(cookie.getValue()).toInstant();
 

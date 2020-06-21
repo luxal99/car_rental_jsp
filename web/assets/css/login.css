@@ -11,17 +11,17 @@
     margin: 0 !important;
 }
 
-.login-btn{
+.login-btn {
     width: 100%;
     background-color: #eee;
     margin-top: 1em;
 }
 
-label{
+label {
     color: #e1e1e1;
 }
 
-.login-header{
+.login-header {
     background-color: #121212;
     height: 100vh;
 }

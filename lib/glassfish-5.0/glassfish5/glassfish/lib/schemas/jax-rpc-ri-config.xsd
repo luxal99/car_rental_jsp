@@ -47,18 +47,18 @@
 
     <xsd:annotation>
         <xsd:documentation>
-        This is the schema for wscompile configuration files.
-        The only allowed top-level element is "configuration".
+            This is the schema for wscompile configuration files.
+            The only allowed top-level element is "configuration".
         </xsd:documentation>
     </xsd:annotation>
 
     <xsd:element name="configuration">
         <xsd:annotation>
             <xsd:documentation>
-            The top-level element. It must contain one out of three possible elements,
-            corresponding to three different ways to feed service information to the tool.
-            
-            Elements: (mutually exclusive)
+                The top-level element. It must contain one out of three possible elements,
+                corresponding to three different ways to feed service information to the tool.
+
+                Elements: (mutually exclusive)
                 "service" - a service description based on a set of service endpoint interfaces;
                 "wsdl" - a WSDL document to import and process;
                 "modelfile" - a previously saved model file (-model option in wscompile).
@@ -71,7 +71,7 @@
                     <xsd:element name="service" type="tns:serviceType"/>
                     <xsd:element name="wsdl" type="tns:wsdlType"/>
                     <xsd:element name="modelfile" type="tns:modelfileType"/>
-			  <xsd:element name="j2eeMappingFile" type="tns:j2eeMappingFileType"/>
+                    <xsd:element name="j2eeMappingFile" type="tns:j2eeMappingFileType"/>
                 </xsd:choice>
             </xsd:sequence>
         </xsd:complexType>
@@ -80,16 +80,16 @@
     <xsd:complexType name="serviceType">
         <xsd:annotation>
             <xsd:documentation>
-            A description of a service based on a set of Java interfaces (called "service endpoint
-            interfaces" in the spec).
-            
-            Attributes:
+                A description of a service based on a set of Java interfaces (called "service endpoint
+                interfaces" in the spec).
+
+                Attributes:
                 "name" - service name;
                 "targetNamespace" - target namespace for the generated WSDL document;
                 "typeNamespace" - target namespace for the XML Schema embedded in the generated WSDL document;
                 "packageName" - name of the Java package to use by default.
-                
-            Elements:
+
+                Elements:
                 "interface"* - a sequence of service endpoint interface descriptions;
                 "typeMappingRegistry"? - the type mapping registry to use for this service;
                 "handlerChains"? - default handler chains for the endpoints in this service;
@@ -112,17 +112,17 @@
     <xsd:complexType name="interfaceType">
         <xsd:annotation>
             <xsd:documentation>
-            An endpoint definition based on a service endpoint interface.
-            
-            Attributes:
+                An endpoint definition based on a service endpoint interface.
+
+                Attributes:
                 "name" - name of the service endpoint interface (a Java interface);
                 "servantName" (optional) - name of the service endpoint implementation class;
                 "soapAction" (optional) - SOAPAction string to use for all operations in the interface;
                 "soapActionBase" (optional) - base URI for the SOAPAction string; the SOAPAction for
-                    a given operation will be obtained by appending the operation name to the value provided
-                    here; this attribute is exclusive with the "soapAction" one.
-                    
-            Elements:
+                a given operation will be obtained by appending the operation name to the value provided
+                here; this attribute is exclusive with the "soapAction" one.
+
+                Elements:
                 "handlerChains" - specifies the handler chains for this endpoint.
             </xsd:documentation>
         </xsd:annotation>
@@ -139,13 +139,13 @@
     <xsd:complexType name="wsdlType">
         <xsd:annotation>
             <xsd:documentation>
-            A description of a service based on an existing WSDL document.
-            
-            Attributes:
+                A description of a service based on an existing WSDL document.
+
+                Attributes:
                 "location" - URL of the WSDL document;
                 "packageName" - name of the Java package to use by default.
-                
-            Elements:
+
+                Elements:
                 "typeMappingRegistry"? - the type mapping registry to use for this service;
                 "handlerChains"? - default handler chains for the endpoints in this service;
                 "namespaceMappingRegistry"? - XML namespace to Java package mapping information.
@@ -164,9 +164,9 @@
     <xsd:complexType name="modelfileType">
         <xsd:annotation>
             <xsd:documentation>
-            A description of a service based on an existing model file.
-            
-            Attributes:
+                A description of a service based on an existing model file.
+
+                Attributes:
                 "location" - URL of the model file (typically ending in .xml.gz);
             </xsd:documentation>
         </xsd:annotation>
@@ -179,11 +179,11 @@
     <xsd:complexType name="j2eeMappingFileType">
         <xsd:annotation>
             <xsd:documentation>
-            
-            Attirbutes:
+
+                Attirbutes:
                 "location" - the J2EE mapping file URL
                 "wsdlLocation" - the wsdl file URL
-                
+
             </xsd:documentation>
         </xsd:annotation>
 
@@ -195,7 +195,7 @@
     <xsd:complexType name="handlerChainsType">
         <xsd:annotation>
             <xsd:documentation>
-            A set of handlerChains.
+                A set of handlerChains.
             </xsd:documentation>
         </xsd:annotation>
 
@@ -207,13 +207,13 @@
     <xsd:complexType name="chainType">
         <xsd:annotation>
             <xsd:documentation>
-            A handler chain.
-            
-            Attributes:
+                A handler chain.
+
+                Attributes:
                 "runAt" - specifies whether the chain must run on the client or the server;
                 "roles" - the SOAP roles for the chain.
-                
-            Elements:
+
+                Elements:
                 "handler"* - a sequence of handlers that form this chain.
             </xsd:documentation>
         </xsd:annotation>
@@ -228,7 +228,7 @@
     <xsd:simpleType name="roleListType">
         <xsd:annotation>
             <xsd:documentation>
-            A list of SOAP roles, i.e. a list of URIs.
+                A list of SOAP roles, i.e. a list of URIs.
             </xsd:documentation>
         </xsd:annotation>
 
@@ -238,13 +238,13 @@
     <xsd:complexType name="handlerType">
         <xsd:annotation>
             <xsd:documentation>
-            A handler description.
-            
-            Attributes:
+                A handler description.
+
+                Attributes:
                 "className" - the name of the handler's class;
                 "headers" - the names of the headers consumed by this handler.
-            
-            Elements:
+
+                Elements:
                 "property"* - initialization properties for this handler.
             </xsd:documentation>
         </xsd:annotation>
@@ -259,7 +259,7 @@
     <xsd:simpleType name="headerListType">
         <xsd:annotation>
             <xsd:documentation>
-            A list of header names, i.e. a list of QNames.
+                A list of header names, i.e. a list of QNames.
             </xsd:documentation>
         </xsd:annotation>
 
@@ -269,9 +269,9 @@
     <xsd:complexType name="propertyType">
         <xsd:annotation>
             <xsd:documentation>
-            An initialization property for a handler.
-            
-            Attributes:
+                An initialization property for a handler.
+
+                Attributes:
                 "name" - the name of the property;
                 "value" - its value.
             </xsd:documentation>
@@ -283,10 +283,10 @@
         <xsd:attribute name="value" type="xsd:string" use="required"/>
     </xsd:complexType>
 
-    <xsd:simpleType name ="runAtType">
+    <xsd:simpleType name="runAtType">
         <xsd:annotation>
             <xsd:documentation>
-            The places a handler chain can run at, one of "client" or "server".
+                The places a handler chain can run at, one of "client" or "server".
             </xsd:documentation>
         </xsd:annotation>
 
@@ -299,13 +299,13 @@
     <xsd:complexType name="typeMappingRegistryType">
         <xsd:annotation>
             <xsd:documentation>
-            A type mapping registry.
-            
-            Elements:
+                A type mapping registry.
+
+                Elements:
                 "import"? - a list of XML Schema documents that describe user-defined types.
                 "typeMapping"* - a sequence of type mappings, one per encoding.
                 "additionalTypes"? - a list of additional Java types that should be processed even if
-                    don't appear in the interfaces for the service.
+                don't appear in the interfaces for the service.
             </xsd:documentation>
         </xsd:annotation>
 
@@ -317,12 +317,12 @@
     </xsd:complexType>
 
     <xsd:complexType name="importType">
-            <xsd:annotation>
+        <xsd:annotation>
             <xsd:documentation>
-            A list of schema documents to import, usually describing schema types used
-            by pluggable serializers.
-            
-            Elements:
+                A list of schema documents to import, usually describing schema types used
+                by pluggable serializers.
+
+                Elements:
                 "schema"* - a list of schema documents to import.
             </xsd:documentation>
         </xsd:annotation>
@@ -335,8 +335,8 @@
     <xsd:complexType name="schemaType">
         <xsd:annotation>
             <xsd:documentation>
-            One schema document to be imported.
-            Attributes:
+                One schema document to be imported.
+                Attributes:
                 "namespace" - the namespace that the document describes;
                 "location" - a URL pointing to the schema document.
             </xsd:documentation>
@@ -351,12 +351,12 @@
     <xsd:complexType name="typeMappingType">
         <xsd:annotation>
             <xsd:documentation>
-            A type mapping for a particular encoding.
-            
-            Attributes:
+                A type mapping for a particular encoding.
+
+                Attributes:
                 "encodingStyle" - the URI denoting the encoding.
-            
-            Elements:
+
+                Elements:
                 "entry"* - a list of type mapping entries.
             </xsd:documentation>
         </xsd:annotation>
@@ -370,9 +370,9 @@
     <xsd:complexType name="entryType">
         <xsd:annotation>
             <xsd:documentation>
-            An entry in a type mapping.
-            
-            Attributes:
+                An entry in a type mapping.
+
+                Attributes:
                 "schemaType" - the name of a schema type;
                 "javaType" - the name of the corresponding Java class;
                 "serializerFactory" - the name of the serializer factory class to use for this type;
@@ -391,9 +391,9 @@
     <xsd:complexType name="additionalTypesType">
         <xsd:annotation>
             <xsd:documentation>
-            A list of additional Java types to be processed by the tool..
-            
-            Elements:
+                A list of additional Java types to be processed by the tool..
+
+                Elements:
                 "class"* - a list of classes to be processed.
             </xsd:documentation>
         </xsd:annotation>
@@ -406,9 +406,9 @@
     <xsd:complexType name="classType">
         <xsd:annotation>
             <xsd:documentation>
-            A Java class description.
-            
-            Attributes:
+                A Java class description.
+
+                Attributes:
                 "class" - the name of the class.
             </xsd:documentation>
         </xsd:annotation>
@@ -421,13 +421,13 @@
     <xsd:complexType name="namespaceMappingRegistryType">
         <xsd:annotation>
             <xsd:documentation>
-            A registry mapping XML namespace to/from Java packages.
-            
-            Elements:
+                A registry mapping XML namespace to/from Java packages.
+
+                Elements:
                 "namespaceMapping"* - a list of mappings.
             </xsd:documentation>
         </xsd:annotation>
-        
+
         <xsd:sequence>
             <xsd:element name="namespaceMapping" type="tns:namespaceMappingType" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
@@ -436,9 +436,9 @@
     <xsd:complexType name="namespaceMappingType">
         <xsd:annotation>
             <xsd:documentation>
-            One XML namespace to/from Java package mapping.
-            
-            Attributes:
+                One XML namespace to/from Java package mapping.
+
+                Attributes:
                 "namespace" - XML namespace name;
                 "packageName" - Java package name.
             </xsd:documentation>

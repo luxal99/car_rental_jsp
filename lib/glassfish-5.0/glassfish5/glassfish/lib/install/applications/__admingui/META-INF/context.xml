@@ -43,6 +43,6 @@
 
 <Context>
     <Valve className="org.apache.catalina.authenticator.FormAuthenticator"
-	   changeSessionIdOnAuthentication="true"/>
+           changeSessionIdOnAuthentication="true"/>
 </Context>
 

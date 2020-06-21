@@ -41,7 +41,8 @@
 
 -->
 
-<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN" "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
+<!DOCTYPE resources PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.0 Domain//EN"
+        "*<install directory>/lib/dtds/sun-resources_1_3.dtd*">
 
 <!--
     JDBC driver for Microsoft SQLServer 2005 database
@@ -65,10 +66,10 @@
 -->
 
 <resources>
-    <jdbc-connection-pool 
-        name="microsoft_sqlserver2005_pool" 
-        datasource-classname="com.microsoft.sqlserver.jdbc.SQLServerDataSource"
-        res-type="javax.sql.DataSource">
+    <jdbc-connection-pool
+            name="microsoft_sqlserver2005_pool"
+            datasource-classname="com.microsoft.sqlserver.jdbc.SQLServerDataSource"
+            res-type="javax.sql.DataSource">
         <property name="user" value="DB_USER"/>
         <property name="password" value="DB_PASSWORD"/>
         <property name="serverName" value="DB_HOSTNAME"/>
@@ -76,9 +77,9 @@
         <property name="databaseName" value="DATABASE_NAME"/>
     </jdbc-connection-pool>
 
-    <jdbc-resource 
-        enabled="true" 
-        jndi-name="jdbc/microsoft_sqlserver2005_resource" 
-        object-type="user" 
-        pool-name="microsoft_sqlserver2005_pool"/>
+    <jdbc-resource
+            enabled="true"
+            jndi-name="jdbc/microsoft_sqlserver2005_resource"
+            object-type="user"
+            pool-name="microsoft_sqlserver2005_pool"/>
 </resources> 

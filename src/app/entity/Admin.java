@@ -21,16 +21,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author luxal
  */
 @Entity
 @Table(name = "admin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
-    @NamedQuery(name = "Admin.findById", query = "SELECT a FROM Admin a WHERE a.id = :id"),
-    @NamedQuery(name = "Admin.findByFullName", query = "SELECT a FROM Admin a WHERE a.fullName = :fullName")})
+        @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
+        @NamedQuery(name = "Admin.findById", query = "SELECT a FROM Admin a WHERE a.id = :id"),
+        @NamedQuery(name = "Admin.findByFullName", query = "SELECT a FROM Admin a WHERE a.fullName = :fullName")})
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -100,5 +99,5 @@ public class Admin implements Serializable {
     public String toString() {
         return "com.mycompany.mavenproject3.Admin[ id=" + id + " ]";
     }
-    
+
 }
