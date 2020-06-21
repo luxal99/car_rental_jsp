@@ -74,7 +74,7 @@
                 if (cookie.getName().equals("id")) {
                     carModel = carModelDAO.findById(Integer.valueOf(cookie.getValue()));
                     idCarModel = carModel.getId();
-                } else if (cookie.getName().equals("startDate")) {
+                } else if (cookie.getName().equals("startDate"))    {
                     request.setAttribute("startDate", cookie.getValue());
                     t1 = startDate.parse(cookie.getValue()).toInstant();
 
@@ -177,13 +177,7 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/client.jsp">Profile</a>
                 </li>
             </ul>
         </div>

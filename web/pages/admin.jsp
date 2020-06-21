@@ -141,6 +141,10 @@
 
 
 %>
+
+<%
+    reservationDAO.closeExpiredReservation();
+%>
 <div class="row">
     <div class="col-3 menu">
         <div style="padding-top: 2em">
@@ -354,7 +358,8 @@
                             <form method="get" action="">
                                 <button class="edit-btn" type="submit">Select vehicle
                                 </button>
-                                <input type="hidden" name="idReservation" value="<%=reservation.getId()%>" form="approve-form">
+                                <input type="hidden" name="idReservation" value="<%=reservation.getId()%>"
+                                       form="approve-form">
                                 <button class="delete-btn" type="submit" form="approve-form">Approve
                                 </button>
                                 <input type="hidden" name="idVehicle" value="<%=reservation.getId()%>"/>

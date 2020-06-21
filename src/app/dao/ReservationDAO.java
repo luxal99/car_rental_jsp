@@ -5,10 +5,13 @@ import app.dto.MostReservedVehicleDTO;
 import app.entity.Reservation;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ReservationDAO extends AbstractDAOImpl<Reservation> {
@@ -110,5 +113,20 @@ public class ReservationDAO extends AbstractDAOImpl<Reservation> {
             }
         }
         return isValid;
+    }
+
+    public void closeExpiredReservation() {
+        Long duration = null;
+        for (Reservation reservation : getAll()) {
+            try {
+                duration = ChronoUnit.DAYS.between(new SimpleDateFormat("yyyy-mm-dd").parse(LocalDate.now().toString()).toInstant(), new SimpleDateFormat("yyyy-mm-dd").parse(reservation.getEndDate()).toInstant());
+                if (duration == 0) {
+                    reservation.getStatus().setId(2);
+                    update(reservation);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
