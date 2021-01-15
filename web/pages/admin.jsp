@@ -274,10 +274,12 @@
                 <table class="table text-right">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Account Number</th>
-                        <th scope="col">Client</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Power</th>
+                        <th scope="col">Mileage</th>
+                        <th scope="col">Reg No.</th>
+                        <th scope="col">Price per day</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -304,8 +306,6 @@
                             </button>
                             <form method="get" action="">
                                 <button class="edit-btn" type="submit">Select vehiclesk
-                                </button>
-                                <button class="delete-btn" type="submit">Change account
                                 </button>
                                 <input type="hidden" name="idVehicle" value="<%=vehicle.getId()%>"/>
                             </form>

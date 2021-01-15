@@ -53,6 +53,7 @@ public class ClientDAO extends AbstractDAOImpl<Client> {
 
             clientDTOList.add(clientDTO);
         }
+        session.close();
         return clientDTOList;
     }
 }

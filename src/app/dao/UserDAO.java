@@ -36,6 +36,7 @@ public class UserDAO extends AbstractDAOImpl<User> {
         org.hibernate.query.Query query = session.createNamedQuery("User.findByUsername");
         query.setString("username", username);
         User user = (User) query.getResultList().get(0);
+        session.close();
         return user;
     }
 }
